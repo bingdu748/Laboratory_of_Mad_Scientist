@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<feed xmlns="http://www.w3.org/2005/Atom"><id>https://github.com/bingdu748/calculations-project</id><title>RSS feed of bingdu748's calculations-project</title><updated>2024-04-12T09:09:28.360185+00:00</updated><author><name>bingdu748</name><email>502487460@qq.com</email></author><link href="https://github.com/bingdu748/calculations-project"/><link href="https://raw.githubusercontent.com/bingdu748/calculations-project/master/feed.xml" rel="self"/><generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator><entry><id>https://github.com/bingdu748/calculations-project/issues/3</id><title>2024·April</title><updated>2024-04-12T09:09:28.516983+00:00</updated><content type="html"><![CDATA[<table>
+<feed xmlns="http://www.w3.org/2005/Atom"><id>https://github.com/bingdu748/calculations-project</id><title>RSS feed of bingdu748's calculations-project</title><updated>2024-04-12T09:10:50.250267+00:00</updated><author><name>bingdu748</name><email>502487460@qq.com</email></author><link href="https://github.com/bingdu748/calculations-project"/><link href="https://raw.githubusercontent.com/bingdu748/calculations-project/master/feed.xml" rel="self"/><generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator><entry><id>https://github.com/bingdu748/calculations-project/issues/3</id><title>2024·April</title><updated>2024-04-12T09:10:50.528905+00:00</updated><content type="html"><![CDATA[<table>
 <thead>
 <tr>
 <th align="left">Date</th>
@@ -158,6 +158,138 @@
 <td align="left"></td>
 <td align="left"></td>
 </tr>
-</tbody></table>]]></content><link href="https://github.com/bingdu748/calculations-project/issues/3"/><category term="Diary"/><published>2024-04-12T03:59:45+00:00</published></entry><entry><id>https://github.com/bingdu748/calculations-project/issues/2</id><title>2024-04-12（金）</title><updated>2024-04-12T09:09:28.620802+00:00</updated><content type="html"><![CDATA[<p>金曜日，晴转多云，17~29℃</p>
-]]></content><link href="https://github.com/bingdu748/calculations-project/issues/2"/><published>2024-04-11T16:16:35+00:00</published></entry><entry><id>https://github.com/bingdu748/calculations-project/issues/1</id><title>2024·January</title><updated>2024-04-12T09:09:28.698363+00:00</updated><content type="html"><![CDATA[<p>木曜日，多云转晴 14~25℃</p>
+</tbody></table>]]></content><link href="https://github.com/bingdu748/calculations-project/issues/3"/><category term="Diary"/><published>2024-04-12T03:59:45+00:00</published></entry><entry><id>https://github.com/bingdu748/calculations-project/issues/2</id><title>2024-04-12（金）</title><updated>2024-04-12T09:10:50.677510+00:00</updated><content type="html"><![CDATA[<p>金曜日，晴转多云，17~29℃</p>
+]]></content><link href="https://github.com/bingdu748/calculations-project/issues/2"/><published>2024-04-11T16:16:35+00:00</published></entry><entry><id>https://github.com/bingdu748/calculations-project/issues/1</id><title>2024·January</title><updated>2024-04-12T09:10:50.825369+00:00</updated><content type="html"><![CDATA[<table>
+<thead>
+<tr>
+<th align="center">Date</th>
+<th align="left">Event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">3.01.金</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.02.土</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.03.日</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.04.月</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.05.火</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.06.水</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.07.木</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.08.金</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.09.土</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.10.日</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.11.月</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.12.火</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.13.水</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.14.木</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.15.金</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.16.土</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.17.日</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.18.月</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.19.火</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.20.水</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.21.木</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.22.金</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.23.土</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.24.日</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.25.月</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.26.火</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.27.水</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.28.木</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.29.金</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.30.土</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3.31.日</td>
+<td align="left"></td>
+</tr>
+</tbody></table><p>木曜日，多云转晴 14~25℃</p>
 ]]></content><link href="https://github.com/bingdu748/calculations-project/issues/1"/><category term="Diary"/><published>2024-04-11T09:25:42+00:00</published></entry></feed>
