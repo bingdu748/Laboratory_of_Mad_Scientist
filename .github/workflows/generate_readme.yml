@@ -11,7 +11,7 @@ on:
       - main
     paths:
       - main.py
-eny:
+env:
   GITHUB_NAME: bingdu748
   GITHUB_EMAIL: 502487460@qq.com
 
@@ -40,7 +40,7 @@ jobs:
       - name: Generate new md
         run: |
           source venv/bin/activate
-          python main.py ${{ secrets.G_T }} ${{ github.repository }} --issue_number '${{ github.event.issue.number }}'
+          python main.py ${{ secrets.C_P }} ${{ github.repository }} --issue_number '${{ github.event.issue.number }}'
 
       - name: Push README
         run: |
