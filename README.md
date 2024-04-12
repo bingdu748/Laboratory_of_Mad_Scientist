@@ -1,17 +1,7 @@
 ## [Gitblog](https://yihong0618.github.io/gitblog/)
-My personal blog（[About Me](https://github.com/yihong0618/gitblog/issues/282)）using issues and GitHub Actions（随意转载，无需署名）
-[RSS Feed](https://raw.githubusercontent.com/yihong0618/gitblog/master/feed.xml)
+My personal blog([About Me](https://github.com/yihong0618/gitblog/issues/282)) using issues and GitHub Actions (随意转载，无需署名)
+[RSS Feed](https://raw.githubusercontent.com/bingdu748/calculations-project/master/feed.xml)
 
-## 置顶文章
-
-## 一些记录
-
-<details><summary>显示更多</summary>
-
-</details>
-
-## 日记
-
-<details><summary>显示更多</summary>
-
-</details>
+## 最近更新
+- [2024·April](https://github.com/bingdu748/calculations-project/issues/3)--2024-04-12
+- [2024-04-12（金）](https://github.com/bingdu748/calculations-project/issues/2)--2024-04-11
