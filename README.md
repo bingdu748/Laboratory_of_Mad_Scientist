@@ -14,4 +14,5 @@ My personal blog（[About Me](https://github.com/yihong0618/gitblog/issues/282)�
 - [2024·February](https://github.com/bingdu748/c_d-project/issues/2)--2024-04-11
 - [2024·January](https://github.com/bingdu748/c_d-project/issues/1)--2024-04-11
 ## 草稿
+- [C-P 模板](https://github.com/bingdu748/c_d-project/issues/6)--2024-04-13
 - [【C-P】000-099](https://github.com/bingdu748/c_d-project/issues/5)--2024-04-13
