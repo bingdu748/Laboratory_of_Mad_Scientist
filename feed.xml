@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<feed xmlns="http://www.w3.org/2005/Atom"><id>https://github.com/bingdu748/c_d-project</id><title>RSS feed of bingdu748's c_d-project</title><updated>2024-04-13T12:32:45.490373+00:00</updated><author><name>bingdu748</name><email>502487460@qq.com</email></author><link href="https://github.com/bingdu748/c_d-project"/><link href="https://raw.githubusercontent.com/bingdu748/c_d-project/master/feed.xml" rel="self"/><generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator><entry><id>https://github.com/bingdu748/c_d-project/issues/6</id><title>C-P 模板</title><updated>2024-04-13T12:32:45.682877+00:00</updated><content type="html"><![CDATA[<p>设计了一个表格模板，如下：
+<feed xmlns="http://www.w3.org/2005/Atom"><id>https://github.com/bingdu748/c_d-project</id><title>RSS feed of bingdu748's c_d-project</title><updated>2024-04-15T00:52:45.784565+00:00</updated><author><name>bingdu748</name><email>502487460@qq.com</email></author><link href="https://github.com/bingdu748/c_d-project"/><link href="https://raw.githubusercontent.com/bingdu748/c_d-project/master/feed.xml" rel="self"/><generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator><entry><id>https://github.com/bingdu748/c_d-project/issues/6</id><title>C-P 模板</title><updated>2024-04-15T00:52:45.958646+00:00</updated><content type="html"><![CDATA[<p>设计了一个表格模板，如下：
 c0/5 | c1/6 | c2/7 | c3/8 | c4/9
 :-: |  :-: |  :-: |  :-: | :-:
 0|1|2|3|4
 5|6|7|8|9</p>
-]]></content><link href="https://github.com/bingdu748/c_d-project/issues/6"/><category term="草稿"/><published>2024-04-13T10:46:40+00:00</published></entry><entry><id>https://github.com/bingdu748/c_d-project/issues/5</id><title>【C-P】000-099</title><updated>2024-04-13T12:32:45.773539+00:00</updated><content type="html"><![CDATA[<details><summary>000~009</summary>
+]]></content><link href="https://github.com/bingdu748/c_d-project/issues/6"/><category term="草稿计划"/><published>2024-04-13T10:46:40+00:00</published></entry><entry><id>https://github.com/bingdu748/c_d-project/issues/5</id><title>【C-P】000-099</title><updated>2024-04-15T00:52:46.035307+00:00</updated><content type="html"><![CDATA[<details><summary>000~009</summary>
 <table>
 <thead>
 <tr>
@@ -273,7 +273,7 @@ c0/5 | c1/6 | c2/7 | c3/8 | c4/9
 <td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/664d01b2-8616-48dc-b504-5f68f510c435" alt="098" />098</td>
 <td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/0df66c6d-75ec-458d-80e6-301a7e192a27" alt="099" />099</td>
 </tr>
-</tbody></table></details>]]></content><link href="https://github.com/bingdu748/c_d-project/issues/5"/><category term="草稿"/><published>2024-04-13T00:15:40+00:00</published></entry><entry><id>https://github.com/bingdu748/c_d-project/issues/4</id><title>2024·April</title><updated>2024-04-13T12:32:45.875821+00:00</updated><content type="html"><![CDATA[<table>
+</tbody></table></details>]]></content><link href="https://github.com/bingdu748/c_d-project/issues/5"/><category term="草稿计划"/><published>2024-04-13T00:15:40+00:00</published></entry><entry><id>https://github.com/bingdu748/c_d-project/issues/4</id><title>2024·April</title><updated>2024-04-15T00:52:46.131112+00:00</updated><content type="html"><![CDATA[<table>
 <thead>
 <tr>
 <th align="center">Date</th>
@@ -344,7 +344,7 @@ c0/5 | c1/6 | c2/7 | c3/8 | c4/9
 </tr>
 <tr>
 <td align="center">04.13.土</td>
-<td align="left"></td>
+<td align="left">去小区与设计师详细沟通，主要设计柜子的外观，尺寸，以及茶几、床、垫子等这些家居的询问，壁布的挑选，接着又去房子里实地测量尺寸，设计师说根据实际尺寸把面积算出来；然后准备回去的时候突然电闪雷鸣，下起了大雨，好傢伙没有任何预兆，直接就像一盆水浇下来一般，早上出门前忘记拿伞，现在下去肯定得淋得一身，准备在屋子里避一避，随后隔壁02号房主来了，应该是一家三口，人家也是男孩纸，比我小俩岁，父母说是从汉中过来，感觉陕西这边很多地方距离不远，也许是在新疆待久了，每去一个市区都要跑个几百公里，我们这几家好像都是给男孩纸准备的房子，现在的社会已经成这样了吗。避了会雨，雨势小了下来，赶紧往车站跑，刚跑到小区门口雨势感觉又大起来了，也没功夫管那么多，好在不算大，一会就躲到了车站，然后车来得也快，很快就坐了回去，就近找了一家酸菜鱼店吃了午饭兼晚饭。回去后就没什么事了，我则继续更新Github，毕竟前两天刚搭建好，趁此设计个方案出来。</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -432,7 +432,7 @@ c0/5 | c1/6 | c2/7 | c3/8 | c4/9
 <td align="left"></td>
 <td align="left"></td>
 </tr>
-</tbody></table>]]></content><link href="https://github.com/bingdu748/c_d-project/issues/4"/><category term="日记"/><published>2024-04-12T09:18:00+00:00</published></entry><entry><id>https://github.com/bingdu748/c_d-project/issues/3</id><title>2024·March</title><updated>2024-04-13T12:32:45.973186+00:00</updated><content type="html"><![CDATA[<table>
+</tbody></table>]]></content><link href="https://github.com/bingdu748/c_d-project/issues/4"/><category term="日记系列"/><published>2024-04-12T09:18:00+00:00</published></entry><entry><id>https://github.com/bingdu748/c_d-project/issues/3</id><title>2024·March</title><updated>2024-04-15T00:52:46.202796+00:00</updated><content type="html"><![CDATA[<table>
 <thead>
 <tr>
 <th align="center">Date</th>
@@ -564,8 +564,8 @@ c0/5 | c1/6 | c2/7 | c3/8 | c4/9
 <td align="center">03.31.日</td>
 <td align="left"></td>
 </tr>
-</tbody></table>]]></content><link href="https://github.com/bingdu748/c_d-project/issues/3"/><category term="日记"/><published>2024-04-12T03:59:45+00:00</published></entry><entry><id>https://github.com/bingdu748/c_d-project/issues/2</id><title>2024·February</title><updated>2024-04-13T12:32:46.077946+00:00</updated><content type="html"><![CDATA[<p>金曜日，晴转多云，17~29℃</p>
-]]></content><link href="https://github.com/bingdu748/c_d-project/issues/2"/><category term="日记"/><published>2024-04-11T16:16:35+00:00</published></entry><entry><id>https://github.com/bingdu748/c_d-project/issues/1</id><title>2024·January</title><updated>2024-04-13T12:32:46.174839+00:00</updated><content type="html"><![CDATA[<table>
+</tbody></table>]]></content><link href="https://github.com/bingdu748/c_d-project/issues/3"/><category term="日记系列"/><published>2024-04-12T03:59:45+00:00</published></entry><entry><id>https://github.com/bingdu748/c_d-project/issues/2</id><title>2024·February</title><updated>2024-04-15T00:52:46.280872+00:00</updated><content type="html"><![CDATA[<p>金曜日，晴转多云，17~29℃</p>
+]]></content><link href="https://github.com/bingdu748/c_d-project/issues/2"/><category term="日记系列"/><published>2024-04-11T16:16:35+00:00</published></entry><entry><id>https://github.com/bingdu748/c_d-project/issues/1</id><title>2024·January</title><updated>2024-04-15T00:52:46.357021+00:00</updated><content type="html"><![CDATA[<table>
 <thead>
 <tr>
 <th align="center">Date</th>
@@ -697,4 +697,4 @@ c0/5 | c1/6 | c2/7 | c3/8 | c4/9
 <td align="center">01.31.水</td>
 <td align="left"></td>
 </tr>
-</tbody></table>]]></content><link href="https://github.com/bingdu748/c_d-project/issues/1"/><category term="日记"/><published>2024-04-11T09:25:42+00:00</published></entry></feed>
+</tbody></table>]]></content><link href="https://github.com/bingdu748/c_d-project/issues/1"/><category term="日记系列"/><published>2024-04-11T09:25:42+00:00</published></entry></feed>
