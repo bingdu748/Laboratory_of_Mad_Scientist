@@ -3,9 +3,9 @@ name: Generate GitBlog README
 on:
   workflow_dispatch:
   issues:
-    types: [opened, edited]
+    types: [opened, edited, closed, reopened, labeled, unlabeled]
   issue_comment:
-    types: [created, edited]
+    types: [created, edited, deleted]
   push:
     branches:
       - master

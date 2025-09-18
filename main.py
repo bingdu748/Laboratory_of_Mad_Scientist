@@ -113,7 +113,29 @@ def get_issues_from_label(repo, label):
 
 def add_issue_info(issue, md):
     time = format_time(issue.updated_at)  # 使用更新时间而不是创建时间
+    
+    # 添加issue标题和链接（修复Markdown格式）
     md.write(f"- [{issue.title}]({issue.html_url})--{time}\n")
+    
+    # 如果issue有内容且内容不是太长，添加内容摘要
+    if issue.body:
+        # 获取issue内容的前几行作为摘要
+        summary_lines = issue.body.split('\n')[:3]  # 取前3行
+        # 过滤掉空行和太短的行
+        summary_lines = [line.strip() for line in summary_lines if line.strip()]
+        
+        if summary_lines:
+            # 简单处理Markdown格式，移除标题标记等
+            for line in summary_lines:
+                if line.startswith('#'):
+                    # 移除标题标记
+                    line = line.lstrip('#').strip()
+                # 限制行长度
+                if len(line) > 50:
+                    line = line[:50] + '...'
+                # 添加缩进和内容
+                md.write(f"  - {line}\n")
+            md.write("\n")  # 添加空行分隔
 
 
 def add_md_todo(repo, md, me):
@@ -211,10 +233,16 @@ def add_md_recent(repo, md, me, limit=5):
             print(str(e))
 
 
+from datetime import datetime
+
 def add_md_header(md, repo_name):
+    # 获取当前时间作为更新时间戳
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
     with open(md, "w", encoding="utf-8") as md:
         md.write(MD_HEAD.format(repo_name=repo_name))
-        md.write("\n")
+        # 添加最后更新时间
+        md.write(f"**最后更新时间**: {current_time}\n\n")
 
 
 def add_md_label(repo, md, me):
