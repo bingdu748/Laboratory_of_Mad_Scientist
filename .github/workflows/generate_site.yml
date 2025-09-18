@@ -32,17 +32,20 @@ jobs:
       ISITE_VERSION: v0.1.3
       ZOLA_VERSION: v0.17.2
       USER: ${{ github.repository_owner }}
-      REPO: ${{ github.event.repository.name }}
-      BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+      REPO: ${{ github.event.repository.name || github.event.repository.full_name.split('/')[1] }}
+      BASE_URL: https://${{ github.repository_owner }}.github.io
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Generate markdown
         run: |
-          gh release download $ISITE_VERSION --repo kemingy/isite -p '*Linux_x86_64*' --output isite.tar.gz
+          # 下载并安装isite
+          curl -L -o isite.tar.gz "https://github.com/kemingy/isite/releases/download/${ISITE_VERSION}/isite_Linux_x86_64.tar.gz"
           tar zxf isite.tar.gz && mv isite /usr/local/bin
           isite generate --user $USER --repo $REPO
-          gh release download $ZOLA_VERSION --repo getzola/zola -p '*linux*' --output zola.tar.gz
+          
+          # 下载并安装zola
+          curl -L -o zola.tar.gz "https://github.com/getzola/zola/releases/download/${ZOLA_VERSION}/zola-${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
           tar zxf zola.tar.gz && mv zola /usr/local/bin
           cd output && zola build --base-url $BASE_URL
       - name: Setup Pages

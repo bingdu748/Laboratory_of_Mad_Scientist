@@ -301,6 +301,11 @@ def main(token, repo_name, issue_number=None, dir_name=BACKUP_DIR):
         func(repo, "README.md", me)
 
     generate_rss_feed(repo, "feed.xml", me)
+    
+    # 处理issue_number，确保它不是空字符串
+    if issue_number == '':
+        issue_number = None
+        
     to_generate_issues = get_to_generate_issues(repo, dir_name, issue_number)
 
     # save md files to backup folder

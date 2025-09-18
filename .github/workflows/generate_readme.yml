@@ -8,7 +8,7 @@ on:
     types: [created, edited]
   push:
     branches:
-      - main
+      - master
     paths:
       - main.py
 env:
@@ -19,7 +19,7 @@ jobs:
   sync:
     name: Generate README
     runs-on: ubuntu-latest
-    if: github.repository_owner_id == github.event.issue.user.id || github.event_name == 'push'
+    if: github.event_name != 'issues' || github.repository_owner_id == github.event.issue.user.id
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -40,7 +40,7 @@ jobs:
       - name: Generate new md
         run: |
           source venv/bin/activate
-          python main.py ${{ secrets.C_P }} ${{ github.repository }} --issue_number '${{ github.event.issue.number }}'
+          python main.py ${{ secrets.GITHUB_TOKEN || secrets.C_P }} ${{ github.repository }} --issue_number '${{ github.event.issue.number || '' }}'
 
       - name: Push README
         run: |
