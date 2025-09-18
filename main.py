@@ -329,7 +329,9 @@ def main(token, repo_name, issue_number=None, dir_name=BACKUP_DIR):
         # 添加各个部分
         functions = [add_md_firends, add_md_top, add_md_recent, add_md_label, add_md_todo]
         for func in functions:
-            logger.info(f"正在执行: {func.__name__}")
+            # 安全地获取函数名称
+            func_name = getattr(func, "__name__", str(func))
+            logger.info(f"正在执行: {func_name}")
             func(repo, "README.md", me)
         
         # 生成RSS feed
