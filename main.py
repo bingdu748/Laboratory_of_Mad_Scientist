@@ -2,6 +2,17 @@
 import argparse
 import os
 import re
+import sys
+import traceback
+import logging
+
+# 配置日志
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    stream=sys.stdout
+)
+logger = logging.getLogger(__name__)
 
 import markdown
 from feedgen.feed import FeedGenerator
@@ -292,25 +303,63 @@ def generate_rss_feed(repo, filename, me):
 
 
 def main(token, repo_name, issue_number=None, dir_name=BACKUP_DIR):
-    user = login(token)
-    me = get_me(user)
-    repo = get_repo(user, repo_name)
-    # add to readme one by one, change order here
-    add_md_header("README.md", repo_name)
-    for func in [add_md_firends, add_md_top, add_md_recent, add_md_label, add_md_todo]:
-        func(repo, "README.md", me)
-
-    generate_rss_feed(repo, "feed.xml", me)
-    
-    # 处理issue_number，确保它不是空字符串
-    if issue_number == '':
-        issue_number = None
+    try:
+        logger.info(f"开始执行main函数，仓库: {repo_name}, issue_number: {issue_number}")
         
-    to_generate_issues = get_to_generate_issues(repo, dir_name, issue_number)
-
-    # save md files to backup folder
-    for issue in to_generate_issues:
-        save_issue(issue, me, dir_name)
+        # 检查备份目录是否存在
+        if not os.path.exists(dir_name):
+            logger.info(f"创建备份目录: {dir_name}")
+            os.makedirs(dir_name)
+            
+        # 登录GitHub
+        logger.info("正在登录GitHub...")
+        user = login(token)
+        me = get_me(user)
+        logger.info(f"登录成功，用户: {me}")
+        
+        # 获取仓库
+        logger.info(f"正在获取仓库: {repo_name}")
+        repo = get_repo(user, repo_name)
+        logger.info(f"获取仓库成功: {repo.full_name}")
+        
+        # 添加README头部
+        logger.info("正在生成README.md头部...")
+        add_md_header("README.md", repo_name)
+        
+        # 添加各个部分
+        functions = [add_md_firends, add_md_top, add_md_recent, add_md_label, add_md_todo]
+        for func in functions:
+            logger.info(f"正在执行: {func.__name__}")
+            func(repo, "README.md", me)
+        
+        # 生成RSS feed
+        logger.info("正在生成RSS feed...")
+        generate_rss_feed(repo, "feed.xml", me)
+        
+        # 处理issue_number
+        logger.info(f"处理issue_number: {issue_number}")
+        if issue_number == '':
+            issue_number = None
+            logger.info("issue_number为空字符串，已设置为None")
+        
+        # 获取待生成的issues
+        logger.info("获取待生成的issues...")
+        to_generate_issues = get_to_generate_issues(repo, dir_name, issue_number)
+        logger.info(f"找到{len(to_generate_issues)}个待生成的issue")
+        
+        # 保存issue到备份文件夹
+        logger.info("开始保存issue到备份文件夹...")
+        for issue in to_generate_issues:
+            logger.info(f"保存issue: #{issue.number} - {issue.title}")
+            save_issue(issue, me, dir_name)
+        
+        logger.info("main函数执行完成")
+        
+    except Exception as e:
+        logger.error(f"执行过程中发生错误: {str(e)}")
+        logger.error(traceback.format_exc())
+        # 重新抛出异常，以便GitHub Actions能够捕获到错误
+        raise
 
 
 def save_issue(issue, me, dir_name=BACKUP_DIR):
@@ -328,13 +377,34 @@ def save_issue(issue, me, dir_name=BACKUP_DIR):
 
 
 if __name__ == "__main__":
-    if not os.path.exists(BACKUP_DIR):
-        os.mkdir(BACKUP_DIR)
-    parser = argparse.ArgumentParser()
-    parser.add_argument("github_token", help="github_token")
-    parser.add_argument("repo_name", help="repo_name")
-    parser.add_argument(
-        "--issue_number", help="issue_number", default=None, required=False
-    )
-    options = parser.parse_args()
-    main(options.github_token, options.repo_name, options.issue_number)
+    try:
+        # 确保BACKUP_DIR存在
+        if not os.path.exists(BACKUP_DIR):
+            logger.info(f"创建备份目录: {BACKUP_DIR}")
+            os.makedirs(BACKUP_DIR)
+            
+        # 解析命令行参数
+        parser = argparse.ArgumentParser(description='生成GitBlog README和备份文件')
+        parser.add_argument("github_token", help="GitHub访问令牌")
+        parser.add_argument("repo_name", help="GitHub仓库名称，格式为owner/repo")
+        parser.add_argument(
+            "--issue_number", help="指定要处理的issue编号（可选）", default=None, required=False
+        )
+        parser.add_argument(
+            "--dir_name", help="备份目录名称（可选）", default=BACKUP_DIR, required=False
+        )
+        
+        options = parser.parse_args()
+        logger.info(f"解析命令行参数完成: {options}")
+        
+        # 执行主函数
+        main(options.github_token, options.repo_name, options.issue_number, options.dir_name)
+        
+    except argparse.ArgumentError as e:
+        logger.error(f"参数解析错误: {str(e)}")
+        parser.print_help()
+        sys.exit(1)
+    except Exception as e:
+        logger.error(f"程序执行失败: {str(e)}")
+        logger.error(traceback.format_exc())
+        sys.exit(1)

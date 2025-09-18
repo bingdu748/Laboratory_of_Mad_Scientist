@@ -40,7 +40,16 @@ jobs:
       - name: Generate new md
         run: |
           source venv/bin/activate
-          python main.py ${{ secrets.GITHUB_TOKEN || secrets.C_P }} ${{ github.repository }} --issue_number '${{ github.event.issue.number || '' }}'
+          # 运行main.py并显示详细日志
+          set -x  # 启用命令回显
+          python -u main.py ${{ secrets.GITHUB_TOKEN || secrets.C_P }} ${{ github.repository }} --issue_number '${{ github.event.issue.number || '' }}' 2>&1 | tee main.py.log
+          set +x  # 禁用命令回显
+          # 检查命令是否成功执行
+          if [ $? -ne 0 ]; then
+            echo "main.py执行失败，显示日志内容："
+            cat main.py.log
+            exit 1
+          fi
 
       - name: Push README
         run: |
