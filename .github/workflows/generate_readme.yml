@@ -19,7 +19,7 @@ jobs:
   sync:
     name: Generate README
     runs-on: ubuntu-latest
-    if: github.event_name != 'issues' || github.repository_owner_id == github.event.issue.user.id
+    # 移除限制，让所有issue相关事件都能触发工作流
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -64,7 +64,14 @@ jobs:
           source venv/bin/activate
           # 运行main.py并显示详细日志
           set -x  # 启用命令回显
-          python -u main.py ${{ secrets.GITHUB_TOKEN || secrets.C_P }} ${{ github.repository }} --issue_number '${{ github.event.issue.number || '' }}' 2>&1 | tee main.py.log
+          # 构建命令参数，根据事件类型决定是否传递issue_number
+          if [ "${{ github.event_name }}" = "issues" ] && [ -n "${{ github.event.issue.number }}" ]; then
+            python -u main.py ${{ secrets.GITHUB_TOKEN || secrets.C_P }} ${{ github.repository }} --issue_number ${{ github.event.issue.number }} 2>&1 | tee main.py.log
+          elif [ "${{ github.event_name }}" = "issue_comment" ] && [ -n "${{ github.event.issue.number }}" ]; then
+            python -u main.py ${{ secrets.GITHUB_TOKEN || secrets.C_P }} ${{ github.repository }} --issue_number ${{ github.event.issue.number }} 2>&1 | tee main.py.log
+          else
+            python -u main.py ${{ secrets.GITHUB_TOKEN || secrets.C_P }} ${{ github.repository }} 2>&1 | tee main.py.log
+          fi
           set +x  # 禁用命令回显
           # 检查命令是否成功执行
           if [ $? -ne 0 ]; then
