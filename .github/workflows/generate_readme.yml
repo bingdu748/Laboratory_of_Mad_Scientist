@@ -80,10 +80,28 @@ jobs:
             head -n 10 README.md
           fi
 
-      - name: Push README
+      - name: Push README and changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add BACKUP/*.md
-          git commit -a -m 'update new blog' || echo "nothing to commit"
-          git push || echo "nothing to push"
+          
+          # 添加所有可能修改的文件
+          git add BACKUP/*.md README.md
+          
+          # 检查是否有任何更改
+          if git diff --quiet --staged; then
+            echo "没有需要提交的更改"
+          else
+            echo "检测到更改，准备提交..."
+            git status
+            git commit -m "自动更新README和issue备份文件 - 触发事件: ${{ github.event_name }}" 
+            echo "提交成功，准备推送..."
+            git push || {
+              echo "推送失败，尝试使用--force选项..."
+              git push --force || echo "强制推送也失败"
+            }
+          fi
+          
+          # 显示最终状态
+          echo "推送完成，当前分支状态："
+          git status

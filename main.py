@@ -287,18 +287,22 @@ def add_md_label(repo, md, me):
 
 
 def get_to_generate_issues(repo, dir_name, issue_number=None):
-    md_files = os.listdir(dir_name)
-    generated_issues_numbers = [
-        int(i.split("_")[0]) for i in md_files if i.split("_")[0].isdigit()
-    ]
-    to_generate_issues = [
-        i
-        for i in list(repo.get_issues())
-        if int(i.number) not in generated_issues_numbers
-    ]
+    # 首先获取所有issue
+    all_issues = list(repo.get_issues())
+    
+    # 如果提供了issue_number，只处理指定的issue
     if issue_number:
-        to_generate_issues.append(repo.get_issue(int(issue_number)))
-    return to_generate_issues
+        logger.info(f"指定了issue_number: {issue_number}，将只处理该issue")
+        try:
+            target_issue = repo.get_issue(int(issue_number))
+            return [target_issue]
+        except Exception as e:
+            logger.error(f"获取指定issue失败: {str(e)}")
+            return []
+    
+    # 如果没有提供issue_number，处理所有issue
+    logger.info(f"未指定issue_number，将处理所有issue")
+    return all_issues
 
 
 def generate_rss_feed(repo, filename, me):
@@ -393,17 +397,46 @@ def main(token, repo_name, issue_number=None, dir_name=BACKUP_DIR):
 
 
 def save_issue(issue, me, dir_name=BACKUP_DIR):
-    md_name = os.path.join(
-        dir_name, f"{issue.number}_{issue.title.replace('/', '-').replace(' ', '.')}.md"
-    )
-    with open(md_name, "w") as f:
-        f.write(f"# [{issue.title}]({issue.html_url})\n\n")
-        f.write(issue.body or "")
-        if issue.comments:
-            for c in issue.get_comments():
-                if is_me(c, me):
-                    f.write("\n\n---\n\n")
-                    f.write(c.body or "")
+    # 生成文件名，替换可能导致问题的字符
+    safe_title = issue.title.replace('/', '-').replace(' ', '.').replace('\\', '-')
+    md_name = os.path.join(dir_name, f"{issue.number}_{safe_title}.md")
+    
+    # 检查文件是否已存在
+    file_existed = os.path.exists(md_name)
+    
+    try:
+        with open(md_name, "w", encoding="utf-8") as f:
+            # 写入issue标题和链接
+            f.write(f"# [{issue.title}]({issue.html_url})\n\n")
+            
+            # 写入issue内容
+            f.write("## 内容\n\n")
+            f.write(issue.body or "(无内容)")
+            
+            # 写入评论（如果有）
+            comments = list(issue.get_comments())
+            if comments:
+                logger.info(f"处理issue #{issue.number} 的 {len(comments)} 条评论")
+                f.write("\n\n## 评论\n\n")
+                
+                for c in comments:
+                    # 只保存自己的评论或者所有评论（根据需求）
+                    # 这里保留原逻辑，只保存自己的评论
+                    if is_me(c, me):
+                        comment_time = format_time(c.created_at)
+                        f.write(f"### 评论 ({comment_time})\n\n")
+                        f.write(c.body or "(无评论内容)")
+                        f.write("\n\n---\n\n")
+        
+        # 记录文件保存状态
+        if file_existed:
+            logger.info(f"更新已存在的issue文件: {md_name}")
+        else:
+            logger.info(f"创建新的issue文件: {md_name}")
+            
+    except Exception as e:
+        logger.error(f"保存issue #{issue.number} 到 {md_name} 失败: {str(e)}")
+        raise
 
 
 if __name__ == "__main__":
