@@ -47,25 +47,6 @@ def is_hearted_by_me(comment, me):
     return False
 
 
-def _make_friend_table_string(s):
-    info_dict = FRIENDS_INFO_DICT.copy()
-    try:
-        string_list = s.splitlines()
-        # drop empty line
-        string_list = [l for l in string_list if l and not l.isspace()]
-        for l in string_list:
-            string_info_list = re.split("：", l)
-            if len(string_info_list) < 2:
-                continue
-            info_dict[string_info_list[0]] = string_info_list[1]
-        return FRIENDS_TABLE_TEMPLATE.format(
-            name=info_dict["名字"], link=info_dict["链接"], desc=info_dict["描述"]
-        )
-    except Exception as e:
-        print(str(e))
-        return
-
-
 # help to covert xml vaild string
 def _valid_xml_char_ordinal(c):
     codepoint = ord(c)
@@ -120,7 +101,7 @@ def get_issues_from_label(repo, label):
 
 
 def add_issue_info(issue, md):
-    time = format_time(issue.created_at)
+    time = format_time(issue.updated_at)  # 使用更新时间而不是创建时间
     md.write(f"- [{issue.title}]({issue.html_url})--{time}\n")
 
 
@@ -128,6 +109,8 @@ def add_md_todo(repo, md, me):
     todo_issues = list(get_todo_issues(repo))
     if not TODO_ISSUES_LABELS or not todo_issues:
         return
+    # 按更新时间排序
+    todo_issues = sorted(todo_issues, key=lambda x: x.updated_at, reverse=True)
     with open(md, "a+", encoding="utf-8") as md:
         md.write("## TODO\n")
         for issue in todo_issues:
@@ -144,6 +127,8 @@ def add_md_top(repo, md, me):
     top_issues = list(get_top_issues(repo))
     if not TOP_ISSUES_LABELS or not top_issues:
         return
+    # 按更新时间排序
+    top_issues = sorted(top_issues, key=lambda x: x.updated_at, reverse=True)
     with open(md, "a+", encoding="utf-8") as md:
         md.write("## 置顶文章\n")
         for issue in top_issues:
@@ -177,13 +162,35 @@ def add_md_firends(repo, md, me):
         md.write("\n\n")
 
 
+# help to make friend table string
+def _make_friend_table_string(s):
+    info_dict = FRIENDS_INFO_DICT.copy()
+    try:
+        string_list = s.splitlines()
+        # drop empty line
+        string_list = [l for l in string_list if l and not l.isspace()]
+        for l in string_list:
+            string_info_list = re.split("：", l)
+            if len(string_info_list) < 2:
+                continue
+            info_dict[string_info_list[0]] = string_info_list[1]
+        return FRIENDS_TABLE_TEMPLATE.format(
+            name=info_dict["名字"], link=info_dict["链接"], desc=info_dict["描述"]
+        )
+    except Exception as e:
+        print(str(e))
+        return
+
+
 def add_md_recent(repo, md, me, limit=5):
     count = 0
     with open(md, "a+", encoding="utf-8") as md:
         # one the issue that only one issue and delete (pyGitHub raise an exception)
         try:
             md.write("## 最近更新\n")
-            for issue in repo.get_issues():
+            # 按更新时间排序，确保最新更新的issue在最前面
+            all_issues = sorted(repo.get_issues(), key=lambda x: x.updated_at, reverse=True)
+            for issue in all_issues:
                 if is_me(issue, me):
                     add_issue_info(issue, md)
                     count += 1
@@ -223,7 +230,8 @@ def add_md_label(repo, md, me):
             issues = get_issues_from_label(repo, label)
             if issues.totalCount:
                 md.write("## " + label.name + "\n")
-                issues = sorted(issues, key=lambda x: x.created_at, reverse=True)
+                # 按更新时间排序，确保最新更新的issue在最前面
+                issues = sorted(issues, key=lambda x: x.updated_at, reverse=True)
             i = 0
             for issue in issues:
                 if not issue:
@@ -266,7 +274,9 @@ def generate_rss_feed(repo, filename, me):
         href=f"https://raw.githubusercontent.com/{repo.full_name}/master/{filename}",
         rel="self",
     )
-    for issue in repo.get_issues():
+    # 按更新时间排序
+    sorted_issues = sorted(repo.get_issues(), key=lambda x: x.updated_at, reverse=True)
+    for issue in sorted_issues:
         if not issue.body or not is_me(issue, me) or issue.pull_request:
             continue
         item = generator.add_entry(order="append")
