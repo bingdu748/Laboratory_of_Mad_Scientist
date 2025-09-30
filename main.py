@@ -154,28 +154,9 @@ def add_issue_info(issue, md):
         time = format_time(issue.updated_at)  # 使用更新时间而不是创建时间
         logger.debug(f"添加issue信息: #{issue.number} - {issue.title} - {time}")
         
-        # 添加issue标题和链接（修复Markdown格式）
+        # 只添加issue标题和链接，不添加内容摘要
         md.write(f"- [{issue.title}]({issue.html_url})--{time}\n")
         
-        # 如果issue有内容且内容不是太长，添加内容摘要
-        if issue.body:
-            # 获取issue内容的前几行作为摘要
-            summary_lines = issue.body.split('\n')[:MAX_SUMMARY_LINES]  # 取前几行
-            # 过滤掉空行和太短的行
-            summary_lines = [line.strip() for line in summary_lines if line.strip()]
-            
-            if summary_lines:
-                # 简单处理Markdown格式，移除标题标记等
-                for line in summary_lines:
-                    if line.startswith('#'):
-                        # 移除标题标记
-                        line = line.lstrip('#').strip()
-                    # 限制行长度
-                    if len(line) > MAX_SUMMARY_LENGTH:
-                        line = line[:MAX_SUMMARY_LENGTH] + '...'
-                    # 添加缩进和内容
-                    md.write(f"  - {line}\n")
-                md.write("\n")  # 添加空行分隔
     except Exception as e:
         logger.error(f"添加issue信息失败 #{issue.number}: {str(e)}")
 
@@ -469,6 +450,7 @@ def regenerate_readme(repo, repo_name, me):
 def push_to_backup_branch(dir_name=BACKUP_DIR):
     """将备份文件推送到backup分支
     在GitHub Actions环境中，这个功能由工作流处理，避免重复操作
+    只推送md文件到分支根目录，不创建文件夹
     """
     try:
         # 检查是否在GitHub Actions环境中运行
@@ -500,9 +482,46 @@ def push_to_backup_branch(dir_name=BACKUP_DIR):
         logger.info("切换到backup分支...")
         subprocess.run(["git", "checkout", "backup"], check=True)
         
-        # 添加备份目录中的所有文件
-        logger.info(f"添加{dir_name}目录中的文件...")
-        subprocess.run(["git", "add", f"{dir_name}/*"], check=True)
+        # 清理旧的备份文件（只保留当前备份的md文件）
+        logger.info("清理旧的备份文件...")
+        import glob
+        import shutil
+        
+        # 创建临时目录存放当前md文件
+        temp_dir = os.path.join(os.getcwd(), "temp_backup")
+        if os.path.exists(temp_dir):
+            shutil.rmtree(temp_dir)
+        os.makedirs(temp_dir)
+        
+        # 复制当前备份目录中的md文件到临时目录
+        md_files = glob.glob(os.path.join(dir_name, "*.md"))
+        for md_file in md_files:
+            shutil.copy2(md_file, temp_dir)
+        
+        # 清理backup分支上的所有文件（保留.git目录）
+        logger.info("彻底清理backup分支上的所有文件...")
+        for item in os.listdir():
+            # 跳过.git目录和README.md
+            if item == ".git" or item == "README.md":
+                continue
+            
+            item_path = os.path.join(os.getcwd(), item)
+            if os.path.isfile(item_path):
+                os.remove(item_path)
+            elif os.path.isdir(item_path):
+                shutil.rmtree(item_path)
+        
+        # 将临时目录中的md文件复制到根目录
+        temp_md_files = glob.glob(os.path.join(temp_dir, "*.md"))
+        for md_file in temp_md_files:
+            shutil.copy2(md_file, os.getcwd())
+        
+        # 清理临时目录
+        shutil.rmtree(temp_dir)
+        
+        # 添加根目录中的md文件
+        logger.info("添加md文件到根目录...")
+        subprocess.run(["git", "add", "*.md"], check=True)
         
         # 提交更改
         commit_message = f"备份issue文件 - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
