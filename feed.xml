@@ -1,568 +1,169 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<feed xmlns="http://www.w3.org/2005/Atom"><id>https://github.com/bingdu748/c_d-project</id><title>RSS feed of bingdu748's c_d-project</title><updated>2024-07-09T06:55:46.356465+00:00</updated><author><name>bingdu748</name><email>502487460@qq.com</email></author><link href="https://github.com/bingdu748/c_d-project"/><link href="https://raw.githubusercontent.com/bingdu748/c_d-project/master/feed.xml" rel="self"/><generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator><entry><id>https://github.com/bingdu748/c_d-project/issues/7</id><title>About Me</title><updated>2024-07-09T06:55:46.633277+00:00</updated><content type="html"><![CDATA[<p>似乎每个博客都有个关于博主的介绍，那么我就在这里做个简单的介绍吧。</p>
-<ul>
-<li>马甲非常多，而且经常更换</li>
-<li>喜欢百合、音游、ACGN、读书、电影，以及奇奇怪怪的东西</li>
-<li>写了很多年的日记，一部分丢失，另一部分保存在笔记软件上</li>
-<li>能背下整个元素周期表</li>
-</ul>
-]]></content><link href="https://github.com/bingdu748/c_d-project/issues/7"/><published>2024-04-15T00:57:06+00:00</published></entry><entry><id>https://github.com/bingdu748/c_d-project/issues/6</id><title>「C-P」1000 to 1999</title><updated>2024-07-09T06:55:46.763126+00:00</updated><content type="html"><![CDATA[<p>设计了一个表格模板，如下：
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+    <title>Laboratory_of_Mad_Scientist Blog</title>
+    <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist</link>
+    <description>Blog generated from GitHub issues</description>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 30 Sep 2025 09:20:18 GMT</lastBuildDate>
+
+    <item>
+        <title>「Diary」2024·八月</title>
+        <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/11</link>
+        <description>日期 | 内容 | 其他
+:-: | - | -
+7.1.月 | 今日无事。 | 哈哈哈哈
+7.2.火 |777777777 |</description>
+        <pubDate>Fri, 19 Sep 2025 01:10:44 GMT</pubDate>
+        <guid>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/11</guid>
+    </item>
+
+    <item>
+        <title>「Diary」2024·May</title>
+        <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/8</link>
+        <description>日期 | 内容
+- | -
+5.1</description>
+        <pubDate>Fri, 19 Sep 2025 01:08:58 GMT</pubDate>
+        <guid>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/8</guid>
+    </item>
+
+    <item>
+        <title>「Diary」2024·July</title>
+        <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/10</link>
+        <description>日期 | 内容 | 其他
+:-: | - | -
+7.1.月 | 今日无事。 | 哈哈哈哈
+7.2.火 |777777777 |</description>
+        <pubDate>Thu, 18 Sep 2025 12:06:22 GMT</pubDate>
+        <guid>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/10</guid>
+    </item>
+
+    <item>
+        <title>「Diary」2024·June</title>
+        <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/9</link>
+        <description>日期 | 内容 | 其他
+:-: | - | -
+9.1.月 | 今日无事。 | 哈哈哈哈
+9.2.火 | |</description>
+        <pubDate>Thu, 18 Sep 2025 09:25:50 GMT</pubDate>
+        <guid>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/9</guid>
+    </item>
+
+    <item>
+        <title>「C-P」000 to 999</title>
+        <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/5</link>
+        <description>设计了一个表格，如下：
 c0/5 | c1/6 | c2/7 | c3/8 | c4/9
-:-: |  :-: |  :-: |  :-: | :-:
+ :-: |  :-: |  :-: |  :-: | :-:
 0|1|2|3|4
-5|6|7|8|9</p>
-]]></content><link href="https://github.com/bingdu748/c_d-project/issues/6"/><category term="草稿计划"/><published>2024-04-13T10:46:40+00:00</published></entry><entry><id>https://github.com/bingdu748/c_d-project/issues/5</id><title>「C-P」000 to 999</title><updated>2024-07-09T06:55:46.877374+00:00</updated><content type="html"><![CDATA[<p>设计了一个表格，如下：
-c0/5 | c1/6 | c2/7 | c3/8 | c4/9
-:-: |  :-: |  :-: |  :-: | :-:
-0|1|2|3|4
-5|6|7|8|9</p>
+5|6|7|8|9
+
 <details><summary>000~009</summary>
-<table>
-<thead>
-<tr>
-<th align="center">c0/5</th>
-<th align="center">c1/6</th>
-<th align="center">c2/7</th>
-<th align="center">c3/8</th>
-<th align="center">c4/9</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/4433d9f6-062e-4d6b-a11d-bc90ffb750a8" alt="000" />000</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/98cf2657-fd2e-427d-bf2a-245f7ba4b287" alt="001" />001</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/4fda1a67-d57b-437b-8b50-76d9c2efc760" alt="002" />002</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/b40119e2-38c2-42ca-95ed-b9bf2c011bb3" alt="003" />003</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/fb18a275-c04e-4b2b-b1cf-48630215ea54" alt="004" />004</td>
-</tr>
-<tr>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/b0e7371a-40f0-4af9-9c3f-db3086243f26" alt="005" />005</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/d909f532-4525-4aa7-b1f6-74183517356f" alt="006" />006</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/e3dc1f20-dd06-45b8-b592-a4e196349016" alt="007" />007</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/cf1cbd09-ca8f-4aec-ac26-5d2a6a977fcf" alt="008" />008</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/5a555661-479d-4357-ada6-49875fe279b3" alt="009" />009</td>
-</tr>
-</tbody></table></details>
-<details><summary>010~019</summary>
-<table>
-<thead>
-<tr>
-<th align="center">c0/5</th>
-<th align="center">c1/6</th>
-<th align="center">c2/7</th>
-<th align="center">c3/8</th>
-<th align="center">c4/9</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/0a7d99e4-4f2d-4f39-8675-4ce837720842" alt="010" />010</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/409acd10-82b7-40a0-934a-866dd292d2e8" alt="011" />011</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/b390f754-8609-4c4f-b3ee-ea387e77e3e2" alt="012" />012</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/9fcbc115-9daa-4ff5-8c2f-597992fc8485" alt="013" />013</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/69f2dcac-3a44-4f62-90aa-7454461251b8" alt="014" />014</td>
-</tr>
-<tr>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/278074df-391d-4de3-a012-adb4edb12148" alt="015" />015</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/52b1df2f-0055-44f5-b5fa-34ee5e295b30" alt="016" />016</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/0288108c-f5c3-4948-8bef-b1be09d531bc" alt="017" />017</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/efdf037f-13c0-4d82-85ed-56d2975bc4c0" alt="018" />018</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/9a1a1e6a-e2ea-41ab-a1f9-ee18d6d36033" alt="019" />019</td>
-</tr>
-</tbody></table></details>
-<details><summary>020~029</summary>
-<table>
-<thead>
-<tr>
-<th align="center">c0/5</th>
-<th align="center">c1/6</th>
-<th align="center">c2/7</th>
-<th align="center">c3/8</th>
-<th align="center">c4/9</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/338c1cc1-8fea-437b-988c-fb836a50d0b9" alt="020" />020</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/77150640-3bd6-4b66-910c-086fac516427" alt="021" />021</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/71b443bd-846d-4779-8739-05c691881a9d" alt="022" />022</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/869638f8-fae3-4eb6-a476-9cb4fb78deb2" alt="023" />023</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/43625505-1191-4fd6-9420-13f9b727e5d4" alt="024" />024</td>
-</tr>
-<tr>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/d0552c60-0c62-4910-9306-a0fe604b42c7" alt="025" />025</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/5872b445-dc1d-41a7-9743-668aed799629" alt="026" />026</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/bbfe4e96-c12d-41f8-a1c1-1ca96ce44301" alt="027" />027</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/cba9ffdb-2990-46ce-9144-6d6beba3f31b" alt="028" />028</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/2e207fde-afcd-4617-a405-51a09a639892" alt="029" />029</td>
-</tr>
-</tbody></table></details>
-<details><summary>030~039</summary>
-<table>
-<thead>
-<tr>
-<th align="center">c0/5</th>
-<th align="center">c1/6</th>
-<th align="center">c2/7</th>
-<th align="center">c3/8</th>
-<th align="center">c4/9</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/c2e188dd-49b7-46d7-aecf-11bacfe57bec" alt="030" />030</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/6cbc0686-17a2-491f-b6c9-5ee13c1defc0" alt="031" />031</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/f775fd5d-0d6a-4a4b-86ea-1a630e74b9ce" alt="032" />032</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/f780801e-a065-4319-82b1-5e89e0fd63eb" alt="033" />033</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/176e8698-f518-4362-8272-11f5a8097f72" alt="034" />034</td>
-</tr>
-<tr>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/59eb8e57-bdae-4081-889e-098bd454164a" alt="035" />035</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/96dd6b73-15f7-48f7-83f4-9437da911163" alt="036" />036</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/a8b32a89-7c60-466a-a952-c3b417847ffa" alt="037" />037</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/a5c9701f-c8c6-49b7-8bbf-2de9494a2177" alt="038" />038</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/1d59abc8-a1ac-4327-88b1-a4f1e76d826b" alt="039" />039</td>
-</tr>
-</tbody></table></details>
-<details><summary>040~049</summary>
-<table>
-<thead>
-<tr>
-<th align="center">c0/5</th>
-<th align="center">c1/6</th>
-<th align="center">c2/7</th>
-<th align="center">c3/8</th>
-<th align="center">c4/9</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/a32c273f-479d-4ac5-971c-8bc861bf19f6" alt="040" />040</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/b4fec8d6-a6b8-4804-bdb3-547633663686" alt="041" />041</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/9a9166ce-3eb6-4f5d-a25d-02175531833e" alt="042" />042</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/c6f9b4ed-76f7-4d8f-9e82-e81343516ca4" alt="043" />043</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/68a3a93f-c5ce-4e53-9665-07f90c06ca33" alt="044" />044</td>
-</tr>
-<tr>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/60259b02-49b8-49b1-884b-70f6526b8bd8" alt="045" />045</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/a61ee494-ccb1-41c1-adf8-c308972e065e" alt="046" />046</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/830c9905-122d-4a91-ac63-ac277de56263" alt="047" />047</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/69b65ee3-4250-4849-ac15-7e33588e03cf" alt="048" />048</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/a584240a-67fc-4de4-9ea3-e86b2fbc2afc" alt="049" />049</td>
-</tr>
-</tbody></table></details>
-<details><summary>050~059</summary>
-<table>
-<thead>
-<tr>
-<th align="center">c0/5</th>
-<th align="center">c1/6</th>
-<th align="center">c2/7</th>
-<th align="center">c3/8</th>
-<th align="center">c4/9</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/133847e3-6eaa-43f4-b238-3a718d731fb3" alt="050" />050</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/1d9e234a-397d-4b49-817d-ca663b258759" alt="051" />051</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/cf4c1a7a-56d5-411e-9b2c-f6ba992f2113" alt="052" />052</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/503fbf61-e987-438d-a971-e1825b99b8c5" alt="053" />053</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/cc710b02-9136-4cfb-ba6f-79f86c2fb27e" alt="054" />054</td>
-</tr>
-<tr>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/10b0bb25-9982-472c-8b89-d2551c61a5cd" alt="055" />055</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/c31f650c-badc-480d-9437-204aa27a87e0" alt="056" />056</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/3baa6836-7ece-4780-8895-70dda141b709" alt="057" />057</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/2de42c00-d077-4e51-b626-069f29869df4" alt="058" />058</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/cc82a895-4e1b-49fd-a427-9a68574e3938" alt="059" />059</td>
-</tr>
-</tbody></table></details>
-<details><summary>060~069</summary>
-<table>
-<thead>
-<tr>
-<th align="center">c0/5</th>
-<th align="center">c1/6</th>
-<th align="center">c2/7</th>
-<th align="center">c3/8</th>
-<th align="center">c4/9</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/2dc4d780-397a-42d5-95f5-4198ed59552e" alt="060" />060</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/fa9c9f43-6e2c-46d8-b80a-b104536ca911" alt="061" />061</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/84dae26f-d3f1-41c4-803d-a8b3e998f3b6" alt="062" />062</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/c5638b2a-4b1c-4aeb-b33d-d90fa89766fb" alt="063" />063</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/5848f8f3-248f-4934-a552-4d7171be53cd" alt="064" />064</td>
-</tr>
-<tr>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/17169c1a-058e-43e3-96e3-62d1e82de8ca" alt="065" />065</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/48a0b0ec-f6bf-4fd7-a784-989ad8df9ce0" alt="066" />066</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/688e545a-afb5-4b4f-9da9-3f85e4d60657" alt="067" />067</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/dccf73e6-b6dd-4cd5-ab51-ea87542e749f" alt="068" />068</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/7f77edf1-b077-46d9-a177-e5357e7313be" alt="069" />069</td>
-</tr>
-</tbody></table></details>
-<details><summary>070~079</summary>
-<table>
-<thead>
-<tr>
-<th align="center">c0/5</th>
-<th align="center">c1/6</th>
-<th align="center">c2/7</th>
-<th align="center">c3/8</th>
-<th align="center">c4/9</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/675b485d-e10f-4a2e-a672-485f9f6805e2" alt="070" />070</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/943cfd2f-78c2-4541-aba9-d039c17b8b3c" alt="071" />071</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/78389100-d2bf-46d6-b2a6-1711c1f48916" alt="072" />072</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/4d549292-5928-422a-9802-2cc55da1bb37" alt="073" />073</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/1045387d-28ea-492d-866b-585783bd8d74" alt="074" />074</td>
-</tr>
-<tr>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/97756f3a-95da-496f-8f57-0ab891e94945" alt="075" />075</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/83c7824c-d0c6-4b9d-8eb7-fafd23b90264" alt="076" />076</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/8c18ea28-1ff7-4c54-844c-38d0fd108a03" alt="077" />077</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/ec1a0971-bc4d-4031-885f-3c45f782641d" alt="078" />078</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/43bd6dbb-e3a8-4151-985a-304d7c5840dd" alt="079" />079</td>
-</tr>
-</tbody></table></details>
-<details><summary>080~089</summary>
-<table>
-<thead>
-<tr>
-<th align="center">c0/5</th>
-<th align="center">c1/6</th>
-<th align="center">c2/7</th>
-<th align="center">c3/8</th>
-<th align="center">c4/9</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/5465b37e-8f4d-4c34-bcfc-061feae3435d" alt="080" />080</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/19308167-6477-4dfb-a5a1-74920f5ad772" alt="081" />081</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/b48ac592-4547-498f-a0c8-cc2c70c7175d" alt="082" />082</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/65899dae-42db-455f-a73b-f8068e1832a4" alt="083" />083</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/6be43b29-5b13-4a8c-9b74-256183deea65" alt="084" />084</td>
-</tr>
-<tr>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/8ae4cb97-2e51-48d2-858b-35bceea07796" alt="085" />085</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/c4c2a7d0-7842-49ee-bba1-fc39639dbaa9" alt="086" />086</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/40f8ad57-baee-426d-92f6-d750c120a94a" alt="087" />087</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/d09b50f4-16f6-435a-a610-d5b16aec8112" alt="088" />088</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/213c5efe-a21b-4fe5-b701-12ee6324df92" alt="089" />089</td>
-</tr>
-</tbody></table></details>
-<details><summary>090~099</summary>
-<table>
-<thead>
-<tr>
-<th align="center">c0/5</th>
-<th align="center">c1/6</th>
-<th align="center">c2/7</th>
-<th align="center">c3/8</th>
-<th align="center">c4/9</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/383753ed-757e-4213-baf8-42fc3213a0d6" alt="090" />090</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/da78e777-9ec1-4f9a-bf9e-628679f3eab3" alt="091" />091</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/6fe6226f-0220-4a60-8993-180d83ae4359" alt="092" />092</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/0e69475d-10fc-40a8-8b7a-1424ed6ee001" alt="093" />093</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/5511f1e8-1900-4bab-bf6f-74be97c96df0" alt="094" />094</td>
-</tr>
-<tr>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/47c021c4-c7b7-4b1c-917a-a74e52c13033" alt="095" />095</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/7b7cd50b-fd3c-4881-b54f-cb7345100e76" alt="096" />096</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/d5a78a6c-0c77-4b04-8f3d-2060c00a2ba1" alt="097" />097</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/664d01b2-8616-48dc-b504-5f68f510c435" alt="098" />098</td>
-<td align="center"><img src="https://github.com/bingdu748/c_d-project/assets/50004335/0df66c6d-75ec-458d-80e6-301a7e192a27" alt="099" />099</td>
-</tr>
-</tbody></table></details>]]></content><link href="https://github.com/bingdu748/c_d-project/issues/5"/><category term="草稿计划"/><published>2024-04-13T00:15:40+00:00</published></entry><entry><id>https://github.com/bingdu748/c_d-project/issues/4</id><title>「Diary」2024·April</title><updated>2024-07-09T06:55:47.024384+00:00</updated><content type="html"><![CDATA[<h1>2024-04-02（火）</h1>
+
+c0/5 | c1/6 | c2/7 | c3/8 | c4/9
+ :-: |  :-: |  :-: |  :...</description>
+        <pubDate>Wed, 17 Apr 2024 03:31:33 GMT</pubDate>
+        <guid>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/5</guid>
+    </item>
+
+    <item>
+        <title>「C-P」1000 to 1999</title>
+        <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/6</link>
+        <description>设计了一个表格模板，如下：
+c0/5 | c1/6 | c2/7 | c3/8 | c4/9
+ :-: |  :-: |  :-: |  :-: | :-:
+0|1|2|3|4
+5|6|7|8|9</description>
+        <pubDate>Tue, 16 Apr 2024 15:05:17 GMT</pubDate>
+        <guid>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/6</guid>
+    </item>
+
+    <item>
+        <title>「Diary」2024·April</title>
+        <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/4</link>
+        <description># 2024-04-02（火）
 <details><summary>显示图片</summary>
-<p><img src="https://github.com/bingdu748/c_d-project/assets/50004335/6136dc2c-483f-4f32-8170-19db34d73053" alt="2024.4.1" /></p>
+
+![2024.4.1](https://github.com/bingdu748/c_d-project/assets/50004335/6136dc2c-483f-4f32-8170-19db34d73053)
 </details>
 ---
-<h1>2024-04-08（月）</h1>
-<p>报名一级注册计量师考试</p>
-<ol>
-<li>身份信息已完成核查，结果为：通过</li>
-<li>学历信息已完成核查，结果为：通过</li>
-<li>已完成报名操作</li>
-<li>报考资格已核查</li>
-<li>已成功支付考试费用</li>
-<li>完成全部报名操作，按规定时间打印准考证参加考试</li>
-</ol>
-]]></content><link href="https://github.com/bingdu748/c_d-project/issues/4"/><category term="日记系列"/><published>2024-04-12T09:18:00+00:00</published></entry><entry><id>https://github.com/bingdu748/c_d-project/issues/3</id><title>「Diary」2024·March</title><updated>2024-07-09T06:55:47.159979+00:00</updated><content type="html"><![CDATA[<table>
-<thead>
-<tr>
-<th align="center">Date</th>
-<th align="left">Events</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">03.01.金</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.02.土</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.03.日</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.04.月</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.05.火</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.06.水</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.07.木</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.08.金</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.09.土</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.10.日</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.11.月</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.12.火</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.13.水</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.14.木</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.15.金</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.16.土</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.17.日</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.18.月</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.19.火</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.20.水</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.21.木</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.22.金</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.23.土</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.24.日</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.25.月</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.26.火</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.27.水</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.28.木</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.29.金</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.30.土</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">03.31.日</td>
-<td align="left"></td>
-</tr>
-</tbody></table>]]></content><link href="https://github.com/bingdu748/c_d-project/issues/3"/><category term="日记系列"/><published>2024-04-12T03:59:45+00:00</published></entry><entry><id>https://github.com/bingdu748/c_d-project/issues/2</id><title>「Diary」2024·February</title><updated>2024-07-09T06:55:47.297602+00:00</updated><content type="html"><![CDATA[<p>金曜日，晴转多云，17~29℃</p>
-]]></content><link href="https://github.com/bingdu748/c_d-project/issues/2"/><category term="日记系列"/><published>2024-04-11T16:16:35+00:00</published></entry><entry><id>https://github.com/bingdu748/c_d-project/issues/1</id><title>「Diary」2024·January</title><updated>2024-07-09T06:55:47.445324+00:00</updated><content type="html"><![CDATA[<table>
-<thead>
-<tr>
-<th align="center">Date</th>
-<th align="left">Event</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">01.01.月</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.02.火</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.03.水</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.04.木</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.05.金</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.06.土</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.07.日</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.08.月</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.09.火</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.10.水</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.11.木</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.12.金</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.13.土</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.14.日</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.15.月</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.16.火</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.17.水</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.18.木</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.19.金</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.20.土</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.21.日</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.22.月</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.23.火</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.24.水</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.25.木</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.26.金</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.27.土</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.28.日</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.29.月</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.30.火</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center">01.31.水</td>
-<td align="left"></td>
-</tr>
-</tbody></table>]]></content><link href="https://github.com/bingdu748/c_d-project/issues/1"/><category term="日记系列"/><published>2024-04-11T09:25:42+00:00</published></entry></feed>
+
+# 2024-04-08（月）
+报名一...</description>
+        <pubDate>Tue, 16 Apr 2024 15:04:46 GMT</pubDate>
+        <guid>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/4</guid>
+    </item>
+
+    <item>
+        <title>「Diary」2024·March</title>
+        <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/3</link>
+        <description>Date | Events
+:-: | :-
+03.01.金 | 
+03.02.土 | 
+03.03.日 | 
+03.04.月 | 
+03.05.火 | 
+03.06.水 | 
+03.07.木 | 
+03.08.金 | 
+03.09.土 | 
+03.10.日 | 
+03.11.月 | 
+03.12.火 | 
+03.13.水 | 
+03.14.木 | 
+03.15.金...</description>
+        <pubDate>Tue, 16 Apr 2024 15:04:39 GMT</pubDate>
+        <guid>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/3</guid>
+    </item>
+
+    <item>
+        <title>「Diary」2024·February</title>
+        <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/2</link>
+        <description>金曜日，晴转多云，17~29℃</description>
+        <pubDate>Tue, 16 Apr 2024 15:04:32 GMT</pubDate>
+        <guid>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/2</guid>
+    </item>
+
+    <item>
+        <title>「Diary」2024·January</title>
+        <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/1</link>
+        <description>Date | Event
+:-: | :-
+01.01.月 |
+01.02.火 |
+01.03.水 |
+01.04.木 |
+01.05.金 |
+01.06.土 |
+01.07.日 |
+01.08.月 |
+01.09.火 |
+01.10.水 |
+01.11.木 |
+01.12.金 |
+01.13.土 |
+01.14.日 |
+01.15.月 |
+01.16.火 |
+...</description>
+        <pubDate>Tue, 16 Apr 2024 15:04:07 GMT</pubDate>
+        <guid>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/1</guid>
+    </item>
+
+    <item>
+        <title>About Me</title>
+        <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/7</link>
+        <description>似乎每个博客都有个关于博主的介绍，那么我就在这里做个简单的介绍吧。
+- 马甲非常多，而且经常更换
+- 喜欢百合、音游、ACGN、读书、电影，以及奇奇怪怪的东西
+- 写了很多年的日记，一部分丢失，另一部分保存在笔记软件上
+- 能背下整个元素周期表</description>
+        <pubDate>Mon, 15 Apr 2024 01:08:55 GMT</pubDate>
+        <guid>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/7</guid>
+    </item>
+
+</channel>
+</rss>

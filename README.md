@@ -1,11 +1,60 @@
-# 测试仓库
-这是一个测试仓库，用于验证README更新功能。
-更新时间: 2025-09-19 09:01:14
+My personal blog（[About Me](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/7)）using issues and GitHub Actions (随意转载，无需署名)
+[RSS Feed](https://raw.githubusercontent.com/bingdu748/Laboratory_of_Mad_Scientist/master/feed.xml)
 
-## 测试标记
-**已成功处理issue #1**
-**修复验证时间**: 2025-09-19 09:01:14
+## 最近更新
+- [「Diary」2024·八月](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/11)--2025-09-19 01:10:44
+  - 日期 | 内容 | 其他
+  - :-: | - | -
+  - 7.1.月 | 今日无事。 | 哈哈哈哈
 
-### issue #1 内容
-这是测试issue #1的模拟内容。
-这个issue是在测试脚本中模拟的，用于验证README更新功能。
+- [「Diary」2024·May](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/8)--2025-09-19 01:08:58
+  - 日期 | 内容
+  - - | -
+  - 5.1
+
+- [「Diary」2024·July](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/10)--2025-09-18 12:06:22
+  - 日期 | 内容 | 其他
+  - :-: | - | -
+  - 7.1.月 | 今日无事。 | 哈哈哈哈
+
+- [「Diary」2024·June](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/9)--2025-09-18 09:25:50
+  - 日期 | 内容 | 其他
+  - :-: | - | -
+  - 9.1.月 | 今日无事。 | 哈哈哈哈
+
+- [「C-P」000 to 999](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/5)--2024-04-17 03:31:33
+  - 设计了一个表格，如下：
+  - c0/5 | c1/6 | c2/7 | c3/8 | c4/9
+  - :-: |  :-: |  :-: |  :-: | :-:
+
+- [「C-P」1000 to 1999](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/6)--2024-04-16 15:05:17
+  - 设计了一个表格模板，如下：
+  - c0/5 | c1/6 | c2/7 | c3/8 | c4/9
+  - :-: |  :-: |  :-: |  :-: | :-:
+
+- [「Diary」2024·April](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/4)--2024-04-16 15:04:46
+  - 2024-04-02（火）
+  - <details><summary>显示图片</summary>
+
+- [「Diary」2024·March](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/3)--2024-04-16 15:04:39
+  - Date | Events
+  - :-: | :-
+  - 03.01.金 |
+
+- [「Diary」2024·February](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/2)--2024-04-16 15:04:32
+  - 金曜日，晴转多云，17~29℃
+
+- [「Diary」2024·January](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/1)--2024-04-16 15:04:07
+  - Date | Event
+  - :-: | :-
+  - 01.01.月 |
+
+- [About Me](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/7)--2024-04-15 01:08:55
+  - 似乎每个博客都有个关于博主的介绍，那么我就在这里做个简单的介绍吧。
+  - - 马甲非常多，而且经常更换
+  - - 喜欢百合、音游、ACGN、读书、电影，以及奇奇怪怪的东西
+
+
+
+## 更新日志
+- 最后更新: 2025-09-30 09:20:17

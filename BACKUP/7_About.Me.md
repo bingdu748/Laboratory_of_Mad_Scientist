@@ -1,4 +1,11 @@
-# [About Me](https://github.com/bingdu748/c_d-project/issues/7)
+# [About Me](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/7)
+
+## 元信息
+
+- 创建时间: 2024-04-15 00:57:06
+- 更新时间: 2024-04-15 01:08:55
+
+## 内容
 
 似乎每个博客都有个关于博主的介绍，那么我就在这里做个简单的介绍吧。
 - 马甲非常多，而且经常更换
