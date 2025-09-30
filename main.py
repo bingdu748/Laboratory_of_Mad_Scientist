@@ -33,10 +33,24 @@ MAX_SUMMARY_LENGTH = 100  # 摘要行最大长度
 def get_me(user):
     """获取当前用户信息"""
     try:
+        # 检查是否在GitHub Actions环境中
+        if os.getenv("GITHUB_ACTIONS") == "true":
+            # 在GitHub Actions环境中，使用环境变量获取仓库所有者作为用户名
+            # 或者直接返回一个默认值，因为在Actions环境中用户信息不是必需的
+            repo_name = os.getenv("GITHUB_REPOSITORY", "")
+            if repo_name and '/' in repo_name:
+                owner = repo_name.split('/')[0]
+                logger.info(f"在GitHub Actions环境中，使用仓库所有者作为用户名: {owner}")
+                return owner
+            logger.info("在GitHub Actions环境中，使用默认用户名")
+            return "github-actions"
+        
+        # 非GitHub Actions环境，正常获取用户信息
         return user.get_user().login
     except Exception as e:
-        logger.error(f"获取当前用户信息失败: {str(e)}")
-        raise
+        logger.warning(f"获取当前用户信息失败，使用默认值: {str(e)}")
+        # 返回一个默认值，避免程序因用户信息获取失败而崩溃
+        return "unknown_user"
 
 def is_me(issue_or_comment, me):
     """判断issue或评论是否属于自己"""
@@ -49,7 +63,15 @@ def is_me(issue_or_comment, me):
 def login(token):
     """登录GitHub"""
     try:
-        return github.Github(token)
+        # 使用新的认证方法
+        try:
+            import github.Auth
+            auth = github.Auth.Token(token)
+            return github.Github(auth=auth)
+        except ImportError:
+            # 如果Auth模块不存在（旧版本PyGithub），则回退到旧方法
+            logger.warning("使用旧版本的PyGithub认证方法")
+            return github.Github(token)
     except Exception as e:
         logger.error(f"登录GitHub失败: {str(e)}")
         raise
