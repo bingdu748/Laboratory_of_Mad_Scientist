@@ -441,8 +441,17 @@ def regenerate_readme(repo, repo_name, me):
         raise
 
 def push_to_backup_branch(dir_name=BACKUP_DIR):
-    """将备份文件推送到backup分支"""
+    """将备份文件推送到backup分支
+    在GitHub Actions环境中，这个功能由工作流处理，避免重复操作
+    """
     try:
+        # 检查是否在GitHub Actions环境中运行
+        is_github_actions = os.getenv("GITHUB_ACTIONS") == "true"
+        
+        if is_github_actions:
+            logger.info("在GitHub Actions环境中运行，跳过备份分支推送操作（由工作流处理）")
+            return
+        
         logger.info("开始将备份文件推送到backup分支...")
         
         # 检查是否有git命令可用
@@ -606,6 +615,7 @@ def main(token, repo_name, issue_number=None, dir_name=BACKUP_DIR):
         regenerate_readme(repo, repo_name, me)
         
         # 将备份文件推送到backup分支
+        # 注意：在GitHub Actions环境中，此操作会被push_to_backup_branch函数跳过，由工作流处理
         try:
             push_to_backup_branch(dir_name)
         except Exception as e:
