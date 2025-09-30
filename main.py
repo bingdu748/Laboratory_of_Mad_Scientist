@@ -278,13 +278,17 @@ def add_md_label(repo, md, me):
                     continue
                 
                 issues = get_issues_from_label(repo, label)
-                if issues.totalCount:
+                
+                # 处理issues，无论是GitHub API对象还是列表
+                issues_list = list(issues)  # 转换为列表以确保可排序
+                
+                if issues_list:  # 检查列表是否非空
                     md_file.write(f"## {label.name}\n")
                     # 按更新时间排序，确保最新更新的issue在最前面
-                    issues = sorted(issues, key=lambda x: x.updated_at, reverse=True)
-                    logger.debug(f"标签 '{label.name}' 下有 {issues.totalCount} 个issue")
+                    issues_list = sorted(issues_list, key=lambda x: x.updated_at, reverse=True)
+                    logger.debug(f"标签 '{label.name}' 下有 {len(issues_list)} 个issue")
                 i = 0
-                for issue in issues:
+                for issue in issues_list:
                     if not issue:
                         continue
                     if is_me(issue, me):
