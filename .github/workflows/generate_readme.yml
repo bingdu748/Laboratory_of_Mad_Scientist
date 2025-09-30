@@ -14,93 +14,69 @@ on:
       - "BACKUP/**"
 
 jobs:
-  build:
+  generate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      # 1. 检出代码
+      - name: Checkout code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # 获取完整历史，确保能够切换分支
+          fetch-depth: 0  # 获取完整历史
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      # 2. 设置Python环境
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.8"
 
+      # 3. 安装依赖
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install PyGithub
 
-      - name: Generate README and Backup Issues
+      # 4. 生成README和备份Issues
+      - name: Generate content
+        id: generate
         run: |
-          # 执行main.py，它会：
-          # 1. 备份所有issue到BACKUP目录
-          # 2. 按标签分类更新README.md
-          # 3. 生成RSS feed
+          # 执行main.py生成内容
           python main.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }}
-          # 输出详细日志
-          echo "已完成README生成和issue备份"
-          ls -la BACKUP/ || echo "BACKUP目录不存在"
-          ls -la README.md || echo "README.md不存在"
+          
+          # 检查是否有文件更改
+          if git diff --exit-code README.md feed.xml BACKUP/ 2>/dev/null; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "没有文件变更，跳过提交"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "检测到文件变更，准备提交"
+          fi
 
-      - name: Configure Git and Push Changes
+      # 5. 只在有更改时执行git操作
+      - name: Commit and push changes
+        if: steps.generate.outputs.changed == 'true'
         run: |
-          # 确保使用正确的用户信息
+          # 配置Git用户信息
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # 详细日志
-          echo "检查Git状态："
-          git status
+          # 添加文件并提交
+          git add README.md feed.xml BACKUP/
+          git commit -m "Auto-update README and backup issues"
           
-          # 添加所有更改的文件
-          echo "添加更改的文件："
-          git add README.md feed.xml BACKUP/** || echo "添加文件可能失败，但继续执行"
+          # 推送更改到master分支
+          git push origin HEAD:master
           
-          # 检查是否有更改需要提交
-          if git diff-index --quiet HEAD --; then
-            echo "没有更改需要提交"
+          # 尝试更新backup分支（如果存在）
+          if git rev-parse --verify backup 2>/dev/null; then
+            echo "更新backup分支..."
+            git checkout backup
+            git merge master --no-edit || echo "合并失败，但继续执行"
+            git push origin backup
+            git checkout master
           else
-            # 提交更改
-            echo "提交更改..."
-            git commit -m "Auto-update README.md, feed.xml and backup issues"
-            
-            # 一次性推送所有更改到master分支
-            echo "推送到master分支..."
-            git push origin HEAD:master
+            echo "backup分支不存在，创建新分支..."
+            git checkout -b backup
+            git push -u origin backup
+            git checkout master
           fi
-          
-          # 检查backup分支是否存在，如果不存在则创建
-          if ! git rev-parse --verify backup 2>/dev/null; then
-            echo "backup分支不存在，正在创建..."
-            git branch backup
-          fi
-          
-          # 切换到backup分支
-          echo "切换到backup分支..."
-          git checkout backup
-          
-          # 尝试从master分支合并最新更改
-          echo "从master分支合并最新更改..."
-          git merge master --no-edit || echo "合并可能失败，但继续执行"
-          
-          # 添加BACKUP目录
-          git add BACKUP/** || echo "添加BACKUP目录可能失败，但继续执行"
-          
-          # 尝试提交更改
-          if git diff-index --quiet HEAD --; then
-            echo "backup分支没有更改需要提交"
-          else
-            echo "提交backup分支更改..."
-            git commit -m "Backup issues - $(date -u +"%Y-%m-%d %H:%M:%S UTC")"
-          fi
-          
-          # 推送到backup分支
-          echo "推送到backup分支..."
-          git push origin backup
-          
-          # 切换回master分支
-          echo "切换回master分支..."
-          git checkout master

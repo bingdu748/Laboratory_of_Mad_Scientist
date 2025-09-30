@@ -452,10 +452,15 @@ def push_to_backup_branch(dir_name=BACKUP_DIR):
             logger.info("在GitHub Actions环境中运行，跳过备份分支推送操作（由工作流处理）")
             return
         
-        logger.info("开始将备份文件推送到backup分支...")
-        
         # 检查是否有git命令可用
         import subprocess
+        try:
+            subprocess.run(["git", "--version"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        except (subprocess.CalledProcessError, FileNotFoundError):
+            logger.warning("git命令不可用，跳过备份分支推送操作")
+            return
+        
+        logger.info("开始将备份文件推送到backup分支...")
         
         # 检查backup分支是否存在，如果不存在则创建
         try:
