@@ -1,114 +1,90 @@
-name: Generate GitBlog README
+name: Generate README
 
 on:
-  workflow_dispatch:
   issues:
-    types: [opened, edited, closed, reopened, labeled, unlabeled]
+    types: [opened, edited, labeled, unlabeled, closed]
   issue_comment:
     types: [created, edited, deleted]
   push:
     branches:
       - master
-    paths:
-      - main.py
-env:
-  GITHUB_NAME: bingdu748
-  GITHUB_EMAIL: 502487460@qq.com
+    paths-ignore:
+      - "README.md"
+      - "feed.xml"
+      - "BACKUP/**"
 
 jobs:
-  sync:
-    name: Generate README
+  build:
     runs-on: ubuntu-latest
-    # 移除限制，让所有issue相关事件都能触发工作流
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      - name: Set up Python
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # 获取完整历史，确保能够切换分支
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.8
-          cache: pip
-          cache-dependency-path: "requirements.txt"
-
-      - name: 调试环境变量
-        run: |
-          echo "当前工作目录: $(pwd)"
-          echo "GitHub仓库: ${{ github.repository }}"
-          echo "事件名称: ${{ github.event_name }}"
-          echo "仓库所有者: ${{ github.repository_owner }}"
-          echo "分支名称: ${{ github.ref }}"
-          echo "issue编号: ${{ github.event.issue.number || '未设置' }}"
-          # 不要输出secrets的实际值，只检查是否存在
-          if [ -n "${{ secrets.GITHUB_TOKEN }}" ]; then
-            echo "GITHUB_TOKEN 存在"
-          fi
-          if [ -n "${{ secrets.C_P }}" ]; then
-            echo "C_P secret 存在"
-          fi
-          # 列出当前目录内容
-          ls -la
-          # 显示requirements.txt内容
-          cat requirements.txt
+          python-version: "3.8"
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m venv venv
-          source venv/bin/activate
-          pip install -r requirements.txt
-          # 显示已安装的包
-          pip list
+          pip install PyGithub
 
-      - name: Generate new md
+      - name: Generate README and Backup Issues
         run: |
-          source venv/bin/activate
-          # 运行main.py并显示详细日志
-          set -x  # 启用命令回显
-          # 构建命令参数，根据事件类型决定是否传递issue_number
-          if [ "${{ github.event_name }}" = "issues" ] && [ -n "${{ github.event.issue.number }}" ]; then
-            python -u main.py ${{ secrets.GITHUB_TOKEN || secrets.C_P }} ${{ github.repository }} --issue_number ${{ github.event.issue.number }} 2>&1 | tee main.py.log
-          elif [ "${{ github.event_name }}" = "issue_comment" ] && [ -n "${{ github.event.issue.number }}" ]; then
-            python -u main.py ${{ secrets.GITHUB_TOKEN || secrets.C_P }} ${{ github.repository }} --issue_number ${{ github.event.issue.number }} 2>&1 | tee main.py.log
-          else
-            python -u main.py ${{ secrets.GITHUB_TOKEN || secrets.C_P }} ${{ github.repository }} 2>&1 | tee main.py.log
-          fi
-          set +x  # 禁用命令回显
-          # 检查命令是否成功执行
-          if [ $? -ne 0 ]; then
-            echo "main.py执行失败，显示日志内容："
-            cat main.py.log
-            exit 1
-          fi
-          # 显示生成的文件
-          ls -la
-          # 如果README.md存在，显示其前几行
-          if [ -f README.md ]; then
-            echo "README.md前10行内容："
-            head -n 10 README.md
-          fi
+          # 执行main.py，它会：
+          # 1. 备份所有issue到BACKUP目录
+          # 2. 按标签分类更新README.md
+          # 3. 生成RSS feed
+          # 4. 自动将备份推送到backup分支
+          python main.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }}
 
-      - name: Push README and changes
+      - name: Push changes to master
         run: |
+          # 确保使用正确的用户信息
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # 添加所有可能修改的文件
-          git add BACKUP/*.md README.md
+          # 添加所有更改的文件
+          git add README.md feed.xml BACKUP/**
           
-          # 检查是否有任何更改
-          if git diff --quiet --staged; then
-            echo "没有需要提交的更改"
+          # 检查是否有更改需要提交
+          git status
+          if git diff-index --quiet HEAD --; then
+            echo "没有更改需要提交到master分支"
           else
-            echo "检测到更改，准备提交..."
-            git status
-            git commit -m "自动更新README和issue备份文件 - 触发事件: ${{ github.event_name }}" 
-            echo "提交成功，准备推送..."
-            git push || {
-              echo "推送失败，尝试使用--force选项..."
-              git push --force || echo "强制推送也失败"
-            }
+            # 提交更改到master分支
+            git commit -m "Auto-update README.md, feed.xml and backup issues"
+            git push origin master
+          fi
+
+      - name: Push changes to backup branch
+        run: |
+          # 检查backup分支是否存在，如果不存在则创建
+          if ! git rev-parse --verify backup 2>/dev/null; then
+            echo "backup分支不存在，正在创建..."
+            git branch backup
           fi
           
-          # 显示最终状态
-          echo "推送完成，当前分支状态："
+          # 切换到backup分支
+          git checkout backup
+          
+          # 添加BACKUP目录
+          git add BACKUP/**
+          
+          # 尝试提交更改
           git status
+          if git diff-index --quiet HEAD --; then
+            echo "没有更改需要提交到backup分支"
+          else
+            git commit -m "Backup issues - $(date -u +"%Y-%m-%d %H:%M:%S UTC")"
+          fi
+          
+          # 推送到backup分支
+          git push origin backup
+          
+          # 切换回master分支
+          git checkout master
