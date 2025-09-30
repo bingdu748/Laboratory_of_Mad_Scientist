@@ -39,30 +39,39 @@ jobs:
           # 1. 备份所有issue到BACKUP目录
           # 2. 按标签分类更新README.md
           # 3. 生成RSS feed
-          # 4. 自动将备份推送到backup分支
           python main.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }}
+          # 输出详细日志
+          echo "已完成README生成和issue备份"
+          ls -la BACKUP/ || echo "BACKUP目录不存在"
+          ls -la README.md || echo "README.md不存在"
 
-      - name: Push changes to master
+      - name: Configure Git and Push Changes
         run: |
           # 确保使用正确的用户信息
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
+          # 详细日志
+          echo "检查Git状态："
+          git status
+          
           # 添加所有更改的文件
-          git add README.md feed.xml BACKUP/**
+          echo "添加更改的文件："
+          git add README.md feed.xml BACKUP/** || echo "添加文件可能失败，但继续执行"
           
           # 检查是否有更改需要提交
-          git status
           if git diff-index --quiet HEAD --; then
-            echo "没有更改需要提交到master分支"
+            echo "没有更改需要提交"
           else
-            # 提交更改到master分支
+            # 提交更改
+            echo "提交更改..."
             git commit -m "Auto-update README.md, feed.xml and backup issues"
-            git push origin master
+            
+            # 一次性推送所有更改到master分支
+            echo "推送到master分支..."
+            git push origin HEAD:master
           fi
-
-      - name: Push changes to backup branch
-        run: |
+          
           # 检查backup分支是否存在，如果不存在则创建
           if ! git rev-parse --verify backup 2>/dev/null; then
             echo "backup分支不存在，正在创建..."
@@ -70,21 +79,28 @@ jobs:
           fi
           
           # 切换到backup分支
+          echo "切换到backup分支..."
           git checkout backup
           
+          # 尝试从master分支合并最新更改
+          echo "从master分支合并最新更改..."
+          git merge master --no-edit || echo "合并可能失败，但继续执行"
+          
           # 添加BACKUP目录
-          git add BACKUP/**
+          git add BACKUP/** || echo "添加BACKUP目录可能失败，但继续执行"
           
           # 尝试提交更改
-          git status
           if git diff-index --quiet HEAD --; then
-            echo "没有更改需要提交到backup分支"
+            echo "backup分支没有更改需要提交"
           else
+            echo "提交backup分支更改..."
             git commit -m "Backup issues - $(date -u +"%Y-%m-%d %H:%M:%S UTC")"
           fi
           
           # 推送到backup分支
+          echo "推送到backup分支..."
           git push origin backup
           
           # 切换回master分支
+          echo "切换回master分支..."
           git checkout master
