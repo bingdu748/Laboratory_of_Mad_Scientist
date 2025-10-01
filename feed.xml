@@ -5,7 +5,26 @@
     <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist</link>
     <description>Blog generated from GitHub issues</description>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 30 Sep 2025 14:28:11 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 01 Oct 2025 02:46:35 GMT</lastBuildDate>
+
+    <item>
+        <title>0000 to 0999</title>
+        <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/2</link>
+        <description>设计了一个表格，如下：
+c0/5 | c1/6 | c2/7 | c3/8 | c4/9
+ :-: |  :-: |  :-: |  :-: | :-:
+0|1|2|3|4
+5|6|7|8|9
+
+# 0000 to 0099
+
+<details><summary>000-009</summary>
+
+c0/5 | c1/6 | c2/7 | c3/8 | c4/9
+ :-: |  :-: |  :...</description>
+        <pubDate>Wed, 01 Oct 2025 02:46:07 GMT</pubDate>
+        <guid>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/2</guid>
+    </item>
 
     <item>
         <title>2000 to 2999</title>
@@ -19,7 +38,7 @@
 
 # 2024-04-08（月）
 报名一...</description>
-        <pubDate>Tue, 30 Sep 2025 14:28:06 GMT</pubDate>
+        <pubDate>Wed, 01 Oct 2025 02:23:35 GMT</pubDate>
         <guid>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/4</guid>
     </item>
 
@@ -27,16 +46,8 @@
         <title>1000 to 1999</title>
         <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/3</link>
         <description>1000-1099</description>
-        <pubDate>Tue, 30 Sep 2025 14:27:07 GMT</pubDate>
+        <pubDate>Wed, 01 Oct 2025 02:23:28 GMT</pubDate>
         <guid>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/3</guid>
-    </item>
-
-    <item>
-        <title>0000 to 0999</title>
-        <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/2</link>
-        <description>0000-0099</description>
-        <pubDate>Tue, 30 Sep 2025 14:21:26 GMT</pubDate>
-        <guid>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/2</guid>
     </item>
 
     <item>
