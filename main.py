@@ -328,11 +328,14 @@ def generate_rss_feed(repo, me):
         # 添加每个issue作为一个条目
         for issue in all_issues[:RECENT_ISSUE_LIMIT]:  # 只添加最近的20个
             pub_date = issue.updated_at.strftime('%a, %d %b %Y %H:%M:%S GMT')
+            # 处理issue.body为None的情况
+            body_content = issue.body if issue.body else ""
+            description = body_content[:200] + '...' if body_content and len(body_content) > 200 else body_content
             rss_content += f"""
     <item>
         <title>{issue.title}</title>
         <link>{issue.html_url}</link>
-        <description>{issue.body[:200] + '...' if len(issue.body) > 200 else issue.body}</description>
+        <description>{description}</description>
         <pubDate>{pub_date}</pubDate>
         <guid>{issue.html_url}</guid>
     </item>
