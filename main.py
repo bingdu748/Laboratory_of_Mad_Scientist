@@ -473,17 +473,42 @@ def push_to_backup_branch(dir_name=BACKUP_DIR):
         
         logger.info("开始将备份文件推送到backup分支...")
         
-        # 检查backup分支是否存在，如果不存在则创建
-        try:
-            subprocess.run(["git", "rev-parse", "--verify", "backup"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            logger.info("backup分支已存在")
-        except subprocess.CalledProcessError:
-            logger.info("backup分支不存在，正在创建...")
-            subprocess.run(["git", "branch", "backup"], check=True)
+        # 先fetch远程分支信息
+        logger.info("获取远程分支信息...")
+        subprocess.run(["git", "fetch", "origin"], check=True)
         
-        # 切换到backup分支
-        logger.info("切换到backup分支...")
-        subprocess.run(["git", "checkout", "backup"], check=True)
+        # 检查远程backup分支是否存在
+        result = subprocess.run(
+            ["git", "ls-remote", "--heads", "origin", "backup"],
+            capture_output=True, text=True
+        )
+        remote_backup_exists = "backup" in result.stdout
+        
+        # 检查本地backup分支是否存在
+        result = subprocess.run(
+            ["git", "rev-parse", "--verify", "backup"],
+            capture_output=True, text=True
+        )
+        local_backup_exists = result.returncode == 0
+        
+        if remote_backup_exists:
+            logger.info("远程backup分支已存在")
+            if local_backup_exists:
+                # 本地已有backup分支，切换并同步
+                logger.info("切换到本地backup分支并同步远程...")
+                subprocess.run(["git", "checkout", "backup"], check=True)
+                subprocess.run(["git", "pull", "origin", "backup", "--rebase"], check=False)
+            else:
+                # 本地没有backup分支，从远程检出
+                logger.info("从远程检出backup分支...")
+                subprocess.run(["git", "checkout", "-b", "backup", "origin/backup"], check=True)
+        else:
+            logger.info("远程backup分支不存在")
+            if not local_backup_exists:
+                # 创建新的backup分支
+                logger.info("创建新的backup分支...")
+                subprocess.run(["git", "branch", "backup"], check=True)
+            subprocess.run(["git", "checkout", "backup"], check=True)
         
         # 清理旧的备份文件（只保留当前备份的md文件）
         logger.info("清理旧的备份文件...")

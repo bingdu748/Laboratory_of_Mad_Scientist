@@ -71,15 +71,22 @@ jobs:
           # 推送更改到master分支
           git push origin HEAD:master
           
-          # 尝试更新backup分支（如果存在）
-          if git rev-parse --verify backup 2>/dev/null; then
-            echo "更新backup分支..."
+          # 更新backup分支
+          echo "处理backup分支..."
+          git fetch origin backup:backup 2>/dev/null || git fetch origin
+          
+          # 检查远程backup分支是否存在
+          if git ls-remote --heads origin backup | grep -q "backup"; then
+            echo "远程backup分支已存在，同步并更新..."
+            # 切换到backup分支，同步远程更改
             git checkout backup
-            git merge master --no-edit || echo "合并失败，但继续执行"
+            git pull origin backup --rebase || git merge origin/backup --no-edit
+            # 合并master的最新更改
+            git merge master --no-edit || echo "合并可能有冲突，但继续执行"
             git push origin backup
             git checkout master
           else
-            echo "backup分支不存在，创建新分支..."
+            echo "远程backup分支不存在，创建新分支..."
             git checkout -b backup
             git push -u origin backup
             git checkout master
