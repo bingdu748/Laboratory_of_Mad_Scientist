@@ -574,15 +574,70 @@ def push_to_backup_branch(dir_name=BACKUP_DIR):
             pass
         raise
 
+def cleanup_old_issue_files(issue, dir_name=BACKUP_DIR):
+    """清理issue的旧备份文件（当标签变化时）"""
+    try:
+        # 生成文件名模式
+        safe_title = issue.title.replace('/', '-').replace(' ', '.').replace('\\', '-')
+        safe_title = ''.join(c for c in safe_title if c.isalnum() or c in '.-_')
+        file_pattern = f"{issue.number}_{safe_title}.md"
+        
+        # 搜索所有子目录中是否存在该issue的旧文件
+        import glob
+        old_files = glob.glob(os.path.join(dir_name, "**", file_pattern), recursive=True)
+        
+        for old_file in old_files:
+            # 检查文件是否在正确的目录中
+            parent_dir = os.path.basename(os.path.dirname(old_file))
+            
+            # 获取当前标签
+            labels = [label.name for label in issue.labels]
+            content_labels = [l for l in labels if l not in IGNORE_LABELS]
+            
+            # 确定正确的目录
+            correct_dir = content_labels[0] if content_labels else "未分类"
+            
+            # 如果文件不在正确的目录中，删除它
+            if parent_dir != correct_dir:
+                logger.info(f"删除旧位置的issue文件: {old_file}")
+                os.remove(old_file)
+                
+    except Exception as e:
+        logger.warning(f"清理旧issue文件失败: {str(e)}")
+
 def save_issue(issue, me, dir_name=BACKUP_DIR):
+    """保存issue到备份文件夹，按标签分目录存储"""
+    # 获取issue的标签
+    labels = [label.name for label in issue.labels]
+    
+    # 过滤掉功能性标签（置顶、待办等）
+    content_labels = [l for l in labels if l not in IGNORE_LABELS]
+    
+    # 确定存储目录：
+    # 1. 如果有内容标签，使用第一个标签作为目录名
+    # 2. 如果没有内容标签，使用 "未分类" 作为目录名
+    if content_labels:
+        label_dir = content_labels[0]
+    else:
+        label_dir = "未分类"
+    
+    # 创建标签目录（如果不存在）
+    label_path = os.path.join(dir_name, label_dir)
+    if not os.path.exists(label_path):
+        logger.info(f"创建标签目录: {label_path}")
+        os.makedirs(label_path)
+    
     # 生成文件名，替换可能导致问题的字符
     safe_title = issue.title.replace('/', '-').replace(' ', '.').replace('\\', '-')
     # 移除其他可能导致文件名问题的字符
     safe_title = ''.join(c for c in safe_title if c.isalnum() or c in '.-_')
-    md_name = os.path.join(dir_name, f"{issue.number}_{safe_title}.md")
+    md_name = os.path.join(label_path, f"{issue.number}_{safe_title}.md")
     
     # 检查文件是否已存在
     file_existed = os.path.exists(md_name)
+    
+    # 如果issue有多个标签，需要在其他标签目录也创建链接文件
+    other_label_dirs = content_labels[1:] if len(content_labels) > 1 else []
     
     try:
         with open(md_name, "w", encoding="utf-8") as f:
@@ -595,7 +650,6 @@ def save_issue(issue, me, dir_name=BACKUP_DIR):
             f.write(f"- 更新时间: {format_time(issue.updated_at)}\n")
             
             # 写入issue标签信息
-            labels = [label.name for label in issue.labels]
             if labels:
                 f.write(f"- 标签: {', '.join(labels)}\n")
             f.write("\n")
@@ -617,12 +671,31 @@ def save_issue(issue, me, dir_name=BACKUP_DIR):
                         f.write(f"### 评论 ({comment_time})\n\n")
                         f.write(c.body or "(无评论内容)")
                         f.write("\n\n---\n\n")
-    
+        
         # 记录文件保存状态
         if file_existed:
             logger.info(f"更新已存在的issue文件: {md_name}")
         else:
             logger.info(f"创建新的issue文件: {md_name}")
+        
+        # 如果有多个标签，在其他标签目录创建引用文件
+        for other_label in other_label_dirs:
+            other_path = os.path.join(dir_name, other_label)
+            if not os.path.exists(other_path):
+                logger.info(f"创建标签目录: {other_path}")
+                os.makedirs(other_path)
+            
+            other_md_name = os.path.join(other_path, f"{issue.number}_{safe_title}.md")
+            
+            # 创建引用文件，指向主文件
+            with open(other_md_name, "w", encoding="utf-8") as f:
+                f.write(f"# [{issue.title}]({issue.html_url})\n\n")
+                f.write(f"> 此文章同时归属于标签: **{', '.join(labels)}**\n\n")
+                f.write(f"完整内容请查看: [{label_dir}/{issue.number}_{safe_title}.md](../{label_dir}/{issue.number}_{safe_title}.md)\n\n")
+                f.write(f"- 创建时间: {format_time(issue.created_at)}\n")
+                f.write(f"- 更新时间: {format_time(issue.updated_at)}\n")
+            
+            logger.info(f"在标签 '{other_label}' 目录创建引用文件: {other_md_name}")
             
     except Exception as e:
         logger.error(f"保存issue #{issue.number} 到 {md_name} 失败: {str(e)}")
@@ -681,6 +754,8 @@ def main(token, repo_name, issue_number=None, dir_name=BACKUP_DIR):
         # 保存issue到备份文件夹
         logger.info("开始保存issue到备份文件夹...")
         for issue in to_generate_issues:
+            # 先清理可能存在的旧文件（处理标签变化的情况）
+            cleanup_old_issue_files(issue, dir_name)
             logger.info(f"保存issue: #{issue.number} - {issue.title}")
             save_issue(issue, me, dir_name)
         
