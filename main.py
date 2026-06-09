@@ -471,44 +471,40 @@ def push_to_backup_branch(dir_name=BACKUP_DIR):
             logger.warning("git命令不可用，跳过备份分支推送操作")
             return
         
-        logger.info("开始将备份文件推送到backup分支...")
+        logger.info("开始将备份文件推送到backup分支（强制推送模式）...")
         
-        # 先fetch远程分支信息
+        # 获取远程分支信息
         logger.info("获取远程分支信息...")
         subprocess.run(["git", "fetch", "origin"], check=True)
         
-        # 检查远程backup分支是否存在
-        result = subprocess.run(
-            ["git", "ls-remote", "--heads", "origin", "backup"],
-            capture_output=True, text=True
-        )
-        remote_backup_exists = "backup" in result.stdout
+        # 删除本地已有的backup分支（如果存在）
+        logger.info("删除本地backup分支（如果存在）...")
+        subprocess.run(["git", "branch", "-D", "backup"], capture_output=True)
         
-        # 检查本地backup分支是否存在
-        result = subprocess.run(
-            ["git", "rev-parse", "--verify", "backup"],
-            capture_output=True, text=True
-        )
-        local_backup_exists = result.returncode == 0
+        # 从远程重新创建本地backup分支（若远程不存在则新建）
+        logger.info("重新创建backup分支...")
+        result = subprocess.run(["git", "checkout", "-b", "backup", "origin/backup"], capture_output=True)
+        if result.returncode != 0:
+            logger.info("远程backup分支不存在，创建新分支...")
+            subprocess.run(["git", "checkout", "-b", "backup"], check=True)
         
-        if remote_backup_exists:
-            logger.info("远程backup分支已存在")
-            if local_backup_exists:
-                # 本地已有backup分支，切换并同步
-                logger.info("切换到本地backup分支并同步远程...")
-                subprocess.run(["git", "checkout", "backup"], check=True)
-                subprocess.run(["git", "pull", "origin", "backup", "--rebase"], check=False)
-            else:
-                # 本地没有backup分支，从远程检出
-                logger.info("从远程检出backup分支...")
-                subprocess.run(["git", "checkout", "-b", "backup", "origin/backup"], check=True)
-        else:
-            logger.info("远程backup分支不存在")
-            if not local_backup_exists:
-                # 创建新的backup分支
-                logger.info("创建新的backup分支...")
-                subprocess.run(["git", "branch", "backup"], check=True)
-            subprocess.run(["git", "checkout", "backup"], check=True)
+        # 添加所有更改
+        logger.info("添加更改...")
+        subprocess.run(["git", "add", "."], check=True)
+        
+        # 提交更改（如果有）
+        logger.info("提交更改...")
+        result = subprocess.run(["git", "commit", "-m", "Auto-update backup from master"], capture_output=True)
+        if result.returncode != 0:
+            logger.info("没有需要提交的更改")
+        
+        # 强制推送到远程
+        logger.info("强制推送到远程backup分支...")
+        subprocess.run(["git", "push", "origin", "backup", "--force"], check=True)
+        
+        # 切换回原分支
+        logger.info("切换回原分支...")
+        subprocess.run(["git", "checkout", "-"], check=True)
         
         # 清理旧的备份文件（只保留当前备份的md文件）
         logger.info("清理旧的备份文件...")
