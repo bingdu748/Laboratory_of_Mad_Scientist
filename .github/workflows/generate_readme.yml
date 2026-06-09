@@ -70,25 +70,3 @@ jobs:
           
           # 推送更改到master分支
           git push origin HEAD:master
-          
-          # 更新backup分支（强制推送方式，避免合并冲突）
-          echo "处理backup分支（强制推送模式）..."
-          git fetch origin
-          
-          # 删除本地已有的backup分支（如果存在）
-          git branch -D backup 2>/dev/null || echo "本地backup分支不存在"
-          
-          # 从远程重新创建本地backup分支（若远程不存在则新建）
-          git checkout -b backup origin/backup 2>/dev/null || git checkout -b backup
-          
-          # 添加所有更改
-          git add .
-          
-          # 提交更改（如果有）
-          git commit -m "Auto-update backup from master" || echo "No changes to commit"
-          
-          # 强制推送到远程
-          git push origin backup --force
-          
-          # 切换回master分支
-          git checkout master
