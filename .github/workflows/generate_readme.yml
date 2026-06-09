@@ -42,6 +42,8 @@ jobs:
       - name: Generate content
         id: generate
         run: |
+          export ACTIONS_STEP_DEBUG=true
+          export ACTIONS_RUNNER_DEBUG=true
           # 执行main.py生成内容
           python main.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }}
           
