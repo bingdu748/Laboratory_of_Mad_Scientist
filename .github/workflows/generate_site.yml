@@ -43,7 +43,7 @@ jobs:
       BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.repository.split('/')[1] }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
       - name: Generate markdown
         run: |
           # 下载并安装isite
@@ -56,11 +56,11 @@ jobs:
           tar zxf zola.tar.gz && mv zola /usr/local/bin
           cd output && zola build --base-url $BASE_URL
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: 'output/public'
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v4.1.5
