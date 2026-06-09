@@ -62,7 +62,7 @@ if "%REPO_NAME%" == "" (
 :: 运行博客生成器
 echo.
 echo 正在运行博客生成器...
-python blog_generator.py "%GITHUB_TOKEN%" "%REPO_NAME%"
+python main.py "%GITHUB_TOKEN%" "%REPO_NAME%"
 
 if %errorlevel% equ 0 (
 echo.

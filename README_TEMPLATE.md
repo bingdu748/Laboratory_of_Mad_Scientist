@@ -70,12 +70,12 @@ jobs:
         run: |
           if [[ "${{ github.event_name }}" == "issues" || "${{ github.event_name }}" == "issue_comment" ]]; then
             if [[ -n "${{ github.event.issue.number }}" ]]; then
-              python -u blog_generator.py "${{ secrets.GITHUB_TOKEN || secrets.C_P }}" "${{ github.repository }}" --issue_number '${{ github.event.issue.number }}' 2>&1 | tee blog_generator.py.log
+              python -u main.py "${{ secrets.GITHUB_TOKEN || secrets.C_P }}" "${{ github.repository }}" --issue_number '${{ github.event.issue.number }}' 2>&1 | tee main.py.log
             else
-              python -u blog_generator.py "${{ secrets.GITHUB_TOKEN || secrets.C_P }}" "${{ github.repository }}" 2>&1 | tee blog_generator.py.log
+              python -u main.py "${{ secrets.GITHUB_TOKEN || secrets.C_P }}" "${{ github.repository }}" 2>&1 | tee main.py.log
             fi
           else
-            python -u blog_generator.py "${{ secrets.GITHUB_TOKEN || secrets.C_P }}" "${{ github.repository }}" 2>&1 | tee blog_generator.py.log
+            python -u main.py "${{ secrets.GITHUB_TOKEN || secrets.C_P }}" "${{ github.repository }}" 2>&1 | tee main.py.log
           fi
       - name: Check files
         run: |
@@ -96,7 +96,7 @@ jobs:
 如果你想在本地测试或手动更新博客，可以使用以下命令：
 
 ```bash
-python blog_generator.py YOUR_GITHUB_TOKEN YOUR_GITHUB_USERNAME/YOUR_REPO_NAME
+python main.py YOUR_GITHUB_TOKEN YOUR_GITHUB_USERNAME/YOUR_REPO_NAME
 ```
 
 ## 使用指南
@@ -131,15 +131,15 @@ python blog_generator.py YOUR_GITHUB_TOKEN YOUR_GITHUB_USERNAME/YOUR_REPO_NAME
 ├── .github/workflows/   # GitHub Actions工作流配置
 │   └── generate_readme.yml
 ├── BACKUP/              # Issues内容备份目录
-├── blog_generator.py    # 主程序文件
-├── test_blog_generator.py # 测试文件
+├── main.py    # 主程序文件
+├── test_main.py # 测试文件
 ├── requirements.txt     # 项目依赖
 └── README.md            # 自动生成的博客首页
 ```
 
 ## 配置项
 
-你可以在`blog_generator.py`中修改以下配置项：
+你可以在`main.py`中修改以下配置项：
 
 - `RECENT_ISSUE_LIMIT` - 最近更新显示的数量（默认：5）
 - `MAX_SUMMARY_LINES` - 内容摘要显示的行数（默认：3）
@@ -155,7 +155,7 @@ A: 请检查以下几点：
    3. 你的Issue是否符合条件（由你创建且没有被关闭）
 
 ### Q: 如何自定义博客样式？
-A: 可以修改`blog_generator.py`中的`MD_HEAD`变量来自定义博客头部，或者修改各个`add_md_*`方法来自定义内容格式。
+A: 可以修改`main.py`中的`MD_HEAD`变量来自定义博客头部，或者修改各个`add_md_*`方法来自定义内容格式。
 
 ### Q: 如何增加新的功能？
 A: 可以参考现有的代码结构，添加新的方法来实现所需功能，然后在`run`方法中调用它。

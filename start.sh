@@ -50,7 +50,7 @@ fi
 
 # 运行博客生成器
 echo "\n正在运行博客生成器..."
-python3 blog_generator.py "$GITHUB_TOKEN" "$REPO_NAME"
+python3 main.py "$GITHUB_TOKEN" "$REPO_NAME"
 
 if [ $? -eq 0 ]
 then
@@ -65,4 +65,4 @@ fi
 
 # 为Windows用户提供提示
 echo "\n注意：如果您在Windows系统上使用此脚本，请考虑使用PowerShell或命令提示符直接运行以下命令："
-echo "python blog_generator.py YOUR_GITHUB_TOKEN YOUR_REPO_NAME"
+echo "python main.py YOUR_GITHUB_TOKEN YOUR_REPO_NAME"
