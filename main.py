@@ -241,7 +241,7 @@ def add_md_recent(repo, md, me, limit=RECENT_ISSUE_LIMIT):
             try:
                 md_file.write("## 文章列表\n")
                 md_file.write("| 序号 | 文章标题 | 更新时间 | 字数统计 |\n")
-                md_file.write("|------|----------|----------|----------|\n")
+                md_file.write("|:------:|:------------------:|:------------------:|:------:|\n")
                 # 按更新时间排序，确保最新更新的issue在最前面
                 logger.debug("获取所有issue并按更新时间排序...")
                 all_issues = sorted(repo.get_issues(), key=lambda x: x.updated_at, reverse=True)
@@ -619,17 +619,18 @@ def save_issue(issue, me, dir_name=BACKUP_DIR):
 
 # 运行测试脚本验证README更新功能
 
-def main(token, repo_name, issue_number=None, dir_name=BACKUP_DIR):
+def main(token, repo_name, issue_number=None, dir_name=BACKUP_DIR, backup_only=False):
     try:
         # 输出环境信息
         logger.debug(f"当前工作目录: {os.getcwd()}")
         logger.debug(f"Python版本: {sys.version}")
         logger.debug(f"环境变量: {dict(os.environ)}")
         
-        logger.info(f"开始执行main函数，仓库: {repo_name}, issue_number: {issue_number}")
+        logger.info(f"开始执行main函数，仓库: {repo_name}, issue_number: {issue_number}, backup_only: {backup_only}")
         
-        # 确保README.md存在
-        ensure_readme_exists()
+        # 确保README.md存在（仅在非backup_only模式下需要）
+        if not backup_only:
+            ensure_readme_exists()
         
         # 检查备份目录是否存在
         if not os.path.exists(dir_name):
@@ -675,9 +676,11 @@ def main(token, repo_name, issue_number=None, dir_name=BACKUP_DIR):
             logger.info(f"保存issue: #{issue.number} - {issue.title}")
             save_issue(issue, me, dir_name)
         
-        # 主要修改：无论是否指定了issue_number，都重新生成整个README.md
-        # 这样在GitHub Actions触发时，即使只处理单个issue，也能更新README
-        regenerate_readme(repo, repo_name, me)
+        # 仅在非backup_only模式下重新生成README.md
+        if not backup_only:
+            regenerate_readme(repo, repo_name, me)
+        else:
+            logger.info("backup_only模式：跳过README.md生成，将在定时任务中生成")
         
         logger.info("main函数执行完成")
         
@@ -710,12 +713,16 @@ if __name__ == "__main__":
         parser.add_argument(
             "--dir_name", help="备份目录名称（可选）", default=BACKUP_DIR, required=False
         )
+        parser.add_argument(
+            "--backup-only", help="仅生成BACKUP备份，不生成README.md（可选）", 
+            action="store_true", default=False, required=False
+        )
         
         options = parser.parse_args()
         logger.info(f"解析命令行参数完成: {options}")
         
         # 执行主函数
-        main(options.github_token, options.repo_name, options.issue_number, options.dir_name)
+        main(options.github_token, options.repo_name, options.issue_number, options.dir_name, options.backup_only)
         
     except argparse.ArgumentError as e:
         logger.error(f"参数解析错误: {str(e)}")

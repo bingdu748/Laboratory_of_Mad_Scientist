@@ -1,6 +1,7 @@
 name: Generate README
 
 on:
+  # 实时触发：生成 BACKUP（issue 备份）
   issues:
     types: [opened, edited, labeled, unlabeled, closed]
   issue_comment:
@@ -13,9 +14,75 @@ on:
       - "feed.xml"
       - "BACKUP/**"
 
+  # 每天定时执行：生成并提交 README.md 和 feed.xml
+  schedule:
+    # 每天北京时间 23:59 (UTC 15:59) 执行
+    - cron: '59 15 * * *'
+
 jobs:
-  generate:
+  # 生成 BACKUP（实时触发）
+  backup:
     runs-on: ubuntu-latest
+    if: github.event_name != 'schedule'
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      # 1. 检出代码
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # 2. 设置Python环境
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.8"
+
+      # 3. 安装依赖
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install PyGithub
+
+      # 4. 生成 BACKUP
+      - name: Generate BACKUP
+        run: |
+          export ACTIONS_STEP_DEBUG=true
+          # 执行main.py生成BACKUP（只生成备份，不生成README）
+          python main.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} --backup-only
+
+      # 5. 提交 BACKUP
+      - name: Commit and push BACKUP
+        run: |
+          # 检查是否有BACKUP变更
+          if git diff --exit-code BACKUP/ 2>/dev/null; then
+            echo "没有BACKUP变更，跳过提交"
+            exit 0
+          fi
+          
+          # 配置Git用户信息
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # 添加文件并提交
+          git add BACKUP/
+          git commit -m "Auto-backup issues"
+          
+          # 获取远程最新更改
+          git fetch origin master
+          
+          # 尝试 rebase，如果失败则使用 pull --strategy-option=ours 保留本地更改
+          git rebase origin/master || (git rebase --abort && git pull origin master --strategy-option=ours)
+          
+          # 推送更改
+          git push origin HEAD:master
+
+  # 生成 README.md 和 feed.xml（每天定时执行）
+  generate-readme:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
@@ -38,35 +105,33 @@ jobs:
           python -m pip install --upgrade pip
           pip install PyGithub
 
-      # 4. 生成README和备份Issues
-      - name: Generate content
-        id: generate
+      # 4. 生成 README 和 feed.xml
+      - name: Generate README and feed.xml
         run: |
-          export ACTIONS_STEP_DEBUG=true
-          export ACTIONS_RUNNER_DEBUG=true
-          # 执行main.py生成内容
+          # 执行main.py生成内容（生成README和feed）
           python main.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }}
-          
-          # 检查是否有文件更改
-          if git diff --exit-code README.md feed.xml BACKUP/ 2>/dev/null; then
-            echo "changed=false" >> $GITHUB_OUTPUT
-            echo "没有文件变更，跳过提交"
-          else
-            echo "changed=true" >> $GITHUB_OUTPUT
-            echo "检测到文件变更，准备提交"
-          fi
 
-      # 5. 只在有更改时执行git操作
+      # 5. 检查并提交更改
       - name: Commit and push changes
-        if: steps.generate.outputs.changed == 'true'
         run: |
+          # 检查是否有文件变更
+          if git diff --exit-code README.md feed.xml 2>/dev/null; then
+            echo "没有文件变更，跳过提交"
+            exit 0
+          fi
+          
+          echo "检测到文件变更，准备提交"
+          
           # 配置Git用户信息
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
+          # 获取今天的日期
+          today=$(date +"%Y-%m-%d")
+          
           # 添加文件并提交
-          git add README.md feed.xml BACKUP/
-          git commit -m "Auto-update README and backup issues"
+          git add README.md feed.xml
+          git commit -m "Auto-update: $today"
           
           # 获取远程最新更改
           git fetch origin master
@@ -74,5 +139,5 @@ jobs:
           # 尝试 rebase，如果失败则使用 pull --strategy-option=ours 保留本地更改
           git rebase origin/master || (git rebase --abort && git pull origin master --strategy-option=ours)
           
-          # 推送更改到master分支
+          # 推送更改
           git push origin HEAD:master
