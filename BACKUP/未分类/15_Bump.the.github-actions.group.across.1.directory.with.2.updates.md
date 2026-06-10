@@ -3,13 +3,13 @@
 ## 元信息
 
 - 创建时间: 2026-06-10 03:28:51
-- 更新时间: 2026-06-10 03:28:52
+- 更新时间: 2026-06-10 03:32:37
 
 ## 内容
 
 Bumps the github-actions group with 2 updates in the / directory: [actions/checkout](https://github.com/actions/checkout) and [actions/upload-pages-artifact](https://github.com/actions/upload-pages-artifact).
 
-Updates `actions/checkout` from 4 to 6
+Updates `actions/checkout` from 5 to 6
 <details>
 <summary>Release notes</summary>
 <p><em>Sourced from <a href="https://github.com/actions/checkout/releases">actions/checkout's releases</a>.</em></p>
@@ -33,33 +33,7 @@ Updates `actions/checkout` from 4 to 6
 <li>Port v6 cleanup to v5 by <a href="https://github.com/ericsciple"><code>@​ericsciple</code></a> in <a href="https://redirect.github.com/actions/checkout/pull/2301">actions/checkout#2301</a></li>
 </ul>
 <p><strong>Full Changelog</strong>: <a href="https://github.com/actions/checkout/compare/v5...v5.0.1">https://github.com/actions/checkout/compare/v5...v5.0.1</a></p>
-<h2>v5.0.0</h2>
-<h2>What's Changed</h2>
-<ul>
-<li>Update actions checkout to use node 24 by <a href="https://github.com/salmanmkc"><code>@​salmanmkc</code></a> in <a href="https://redirect.github.com/actions/checkout/pull/2226">actions/checkout#2226</a></li>
-<li>Prepare v5.0.0 release by <a href="https://github.com/salmanmkc"><code>@​salmanmkc</code></a> in <a href="https://redirect.github.com/actions/checkout/pull/2238">actions/checkout#2238</a></li>
-</ul>
-<h2>⚠️ Minimum Compatible Runner Version</h2>
-<p><strong>v2.327.1</strong><br />
-<a href="https://github.com/actions/runner/releases/tag/v2.327.1">Release Notes</a></p>
-<p>Make sure your runner is updated to this version or newer to use this release.</p>
-<p><strong>Full Changelog</strong>: <a href="https://github.com/actions/checkout/compare/v4...v5.0.0">https://github.com/actions/checkout/compare/v4...v5.0.0</a></p>
-<h2>v4.3.1</h2>
-<h2>What's Changed</h2>
-<ul>
-<li>Port v6 cleanup to v4 by <a href="https://github.com/ericsciple"><code>@​ericsciple</code></a> in <a href="https://redirect.github.com/actions/checkout/pull/2305">actions/checkout#2305</a></li>
-</ul>
-<p><strong>Full Changelog</strong>: <a href="https://github.com/actions/checkout/compare/v4...v4.3.1">https://github.com/actions/checkout/compare/v4...v4.3.1</a></p>
-<h2>v4.3.0</h2>
-<h2>What's Changed</h2>
-<ul>
-<li>docs: update README.md by <a href="https://github.com/motss"><code>@​motss</code></a> in <a href="https://redirect.github.com/actions/checkout/pull/1971">actions/checkout#1971</a></li>
-<li>Add internal repos for checking out multiple repositories by <a href="https://github.com/mouismail"><code>@​mouismail</code></a> in <a href="https://redirect.github.com/actions/checkout/pull/1977">actions/checkout#1977</a></li>
-<li>Documentation update - add recommended permissions to Readme by <a href="https://github.com/benwells"><code>@​benwells</code></a> in <a href="https://redirect.github.com/actions/checkout/pull/2043">actions/checkout#2043</a></li>
-</ul>
-<!-- raw HTML omitted -->
 </blockquote>
-<p>... (truncated)</p>
 </details>
 <details>
 <summary>Changelog</summary>
@@ -143,7 +117,7 @@ Updates `actions/checkout` from 4 to 6
 <li><a href="https://github.com/actions/checkout/commit/033fa0dc0b82693d8986f1016a0ec2c5e7d9cbb1"><code>033fa0d</code></a> Add worktree support for persist-credentials includeIf (<a href="https://redirect.github.com/actions/checkout/issues/2327">#2327</a>)</li>
 <li><a href="https://github.com/actions/checkout/commit/c2d88d3ecc89a9ef08eebf45d9637801dcee7eb5"><code>c2d88d3</code></a> Update all references from v5 and v4 to v6 (<a href="https://redirect.github.com/actions/checkout/issues/2314">#2314</a>)</li>
 <li><a href="https://github.com/actions/checkout/commit/1af3b93b6815bc44a9784bd300feb67ff0d1eeb3"><code>1af3b93</code></a> update readme/changelog for v6 (<a href="https://redirect.github.com/actions/checkout/issues/2311">#2311</a>)</li>
-<li>Additional commits viewable in <a href="https://github.com/actions/checkout/compare/v4...v6">compare view</a></li>
+<li>Additional commits viewable in <a href="https://github.com/actions/checkout/compare/v5...v6">compare view</a></li>
 </ul>
 </details>
 <br />
@@ -198,30 +172,6 @@ If you need to include dotfiles in your artifact: instead of using this action, 
 </details>
 <br />
 
-
-Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
-
-[//]: # (dependabot-automerge-start)
-[//]: # (dependabot-automerge-end)
-
----
-
-<details>
-<summary>Dependabot commands and options</summary>
-<br />
-
-You can trigger Dependabot actions by commenting on this PR:
-- `@dependabot rebase` will rebase this PR
-- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
-- `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
-- `@dependabot ignore <dependency name> major version` will close this group update PR and stop Dependabot creating any more for the specific dependency's major version (unless you unignore this specific dependency's major version or upgrade to it yourself)
-- `@dependabot ignore <dependency name> minor version` will close this group update PR and stop Dependabot creating any more for the specific dependency's minor version (unless you unignore this specific dependency's minor version or upgrade to it yourself)
-- `@dependabot ignore <dependency name>` will close this group update PR and stop Dependabot creating any more for the specific dependency (unless you unignore this specific dependency or upgrade to it yourself)
-- `@dependabot unignore <dependency name>` will remove all of the ignore conditions of the specified dependency
-- `@dependabot unignore <dependency name> <ignore condition>` will remove the ignore condition of the specified dependency and ignore conditions
-
-
-</details>
 
 ## 评论
 
