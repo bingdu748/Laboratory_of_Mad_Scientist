@@ -201,7 +201,7 @@ def add_md_firends(repo, md, me):
                 
                 if friend_issues:
                     logger.debug(f"找到 {len(friend_issues)} 个朋友的issue")
-                    md_file.write("## 朋友的文章\n")
+                    md_file.write("## 友链文章\n")
                     for issue in friend_issues:
                         add_issue_info(issue, md_file)
                 else:
@@ -239,7 +239,7 @@ def add_md_recent(repo, md, me, limit=RECENT_ISSUE_LIMIT):
         with open(md, "a+", encoding="utf-8") as md_file:
             # one the issue that only one issue and delete (pyGitHub raise an exception)
             try:
-                md_file.write("## 最近更新\n")
+                md_file.write("## 文章列表\n")
                 md_file.write("| 序号 | 文章标题 | 更新时间 | 字数统计 |\n")
                 md_file.write("|------|----------|----------|----------|\n")
                 # 按更新时间排序，确保最新更新的issue在最前面
@@ -439,14 +439,9 @@ def regenerate_readme(repo, repo_name, me):
         owner = parts[0] if len(parts) > 1 else ""
         repo_short_name = parts[1] if len(parts) > 1 else parts[0]
         
-        # 创建新的README内容
-        new_content = f"""My personal blog（[About Me](https://github.com/{owner}/{repo_short_name}/issues/7)）using issues and GitHub Actions (随意转载，无需署名)
-[RSS Feed](https://raw.githubusercontent.com/{owner}/{repo_short_name}/master/feed.xml)
-
-"""
-        
+        # 创建新的README内容（为空，后续逐步添加内容）
         with open("README.md", "w", encoding="utf-8") as f:
-            f.write(new_content)
+            f.write("")
         
         # 添加置顶文章
         add_md_top(repo, "README.md", me)
@@ -479,7 +474,7 @@ def regenerate_readme(repo, repo_name, me):
         recent_created = [issue for issue in my_issues if issue.created_at.replace(tzinfo=None) > recent_threshold]
         
         with open("README.md", "a+", encoding="utf-8") as f:
-            f.write(f"\n\n## 更新日志\n")
+            f.write(f"\n\n## 博客统计\n")
             f.write(f"- 最后更新: {update_time}\n")
             f.write(f"- 总文章数: {total_articles}\n")
             f.write(f"- 新增文章: {len(recent_created)}\n")
