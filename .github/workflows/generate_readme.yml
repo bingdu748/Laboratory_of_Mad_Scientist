@@ -68,5 +68,11 @@ jobs:
           git add README.md feed.xml BACKUP/
           git commit -m "Auto-update README and backup issues"
           
+          # 获取远程最新更改
+          git fetch origin master
+          
+          # 尝试 rebase，如果失败则使用 pull --strategy-option=ours 保留本地更改
+          git rebase origin/master || (git rebase --abort && git pull origin master --strategy-option=ours)
+          
           # 推送更改到master分支
           git push origin HEAD:master
