@@ -71,12 +71,55 @@ jobs:
           export ACTIONS_RUNNER_DEBUG=true
           
           # Download and install isite using gh CLI
-          gh release download $ISITE_VERSION --repo kemingy/isite -p '*Linux_x86_64*' -O- | tar -xz -C /tmp && mv /tmp/isite /usr/local/bin
-          isite --version
-          isite generate --user "$USER" --repo "$REPO"
+          echo "=== Starting isite installation ==="
+          echo "Downloading isite version: $ISITE_VERSION"
+          if gh release download $ISITE_VERSION --repo kemingy/isite -p '*Linux_x86_64*' -O- | tar -xz -C /tmp; then
+            echo "isite downloaded and extracted successfully"
+          else
+            echo "ERROR: Failed to download isite"
+            exit 1
+          fi
+          
+          echo "Moving isite to /usr/local/bin..."
+          if mv /tmp/isite /usr/local/bin; then
+            echo "isite installed successfully"
+          else
+            echo "ERROR: Failed to install isite"
+            exit 1
+          fi
+          
+          echo "Checking isite version..."
+          isite version
+          
+          echo "=== Starting isite generate ==="
+          echo "Generating markdown for user: $USER, repo: $REPO"
+          if isite generate --user "$USER" --repo "$REPO"; then
+            echo "isite generate completed successfully"
+          else
+            echo "ERROR: isite generate failed"
+            exit 1
+          fi
           
           # Download and install zola using gh CLI
-          gh release download $ZOLA_VERSION --repo getzola/zola -p '*x86_64-unknown-linux*' -O- | tar -xz -C /tmp && mv /tmp/zola /usr/local/bin
+          echo ""
+          echo "=== Starting zola installation ==="
+          echo "Downloading zola version: $ZOLA_VERSION"
+          if gh release download $ZOLA_VERSION --repo getzola/zola -p '*x86_64-unknown-linux*' -O- | tar -xz -C /tmp; then
+            echo "zola downloaded and extracted successfully"
+          else
+            echo "ERROR: Failed to download zola"
+            exit 1
+          fi
+          
+          echo "Moving zola to /usr/local/bin..."
+          if mv /tmp/zola /usr/local/bin; then
+            echo "zola installed successfully"
+          else
+            echo "ERROR: Failed to install zola"
+            exit 1
+          fi
+          
+          echo "Checking zola version..."
           zola --version
           
           echo "=== Output directory contents ==="
