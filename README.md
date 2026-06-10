@@ -1,6 +1,3 @@
-My personal blog（[About Me](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/7)）using issues and GitHub Actions (随意转载，无需署名)
-[RSS Feed](https://raw.githubusercontent.com/bingdu748/Laboratory_of_Mad_Scientist/master/feed.xml)
-
 ## 最近更新
 - [「Diary」2002&2003](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/14)--2026-06-10 00:56:50
 - [0000 to 0999](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/2)--2025-10-01 02:56:01
