@@ -14,10 +14,10 @@ on:
       - "feed.xml"
       - "BACKUP/**"
 
-  # 每天定时执行：生成并提交 README.md 和 feed.xml
+  # 每天定时执行：生成并提交 README.md 和 feed.xml（在 squash 之前执行）
   schedule:
-    # 每天北京时间 23:59 (UTC 15:59) 执行
-    - cron: '59 15 * * *'
+    # 每天北京时间 23:45 (UTC 15:45) 执行
+    - cron: '45 15 * * *'
 
 jobs:
   # 生成 BACKUP（实时触发）

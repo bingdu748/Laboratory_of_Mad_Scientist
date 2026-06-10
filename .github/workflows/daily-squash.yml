@@ -1,0 +1,101 @@
+name: Daily Commit Squash
+
+on:
+  # 每天 UTC 时间 15:00（北京时间 23:00）执行
+  schedule:
+    - cron: '0 15 * * *'
+  
+  # 手动触发
+  workflow_dispatch:
+
+jobs:
+  squash-commits:
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    
+    steps:
+      # 1. 检出代码（需要完整历史）
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0  # 获取完整历史
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      # 2. 配置 Git 用户信息
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+      # 3. 获取当天日期范围（UTC）
+      - name: Get today's date range
+        run: |
+          echo "TODAY_START=$(date -u -d "today" +"%Y-%m-%dT00:00:00Z")" >> $GITHUB_ENV
+          echo "TODAY_END=$(date -u -d "tomorrow" +"%Y-%m-%dT00:00:00Z")" >> $GITHUB_ENV
+          echo "TODAY_DATE=$(date +"%Y-%m-%d")" >> $GITHUB_ENV
+          echo "Date range: ${{ env.TODAY_START }} to ${{ env.TODAY_END }}"
+          
+      # 4. 检查当天是否有提交
+      - name: Check for today's commits
+        id: check-commits
+        run: |
+          COMMIT_COUNT=$(git log --oneline --since="${{ env.TODAY_START }}" --until="${{ env.TODAY_END }}" --count)
+          echo "commit_count=$COMMIT_COUNT" >> $GITHUB_OUTPUT
+          echo "Found $COMMIT_COUNT commits today"
+          
+      # 5. 如果有提交，压缩合并
+      - name: Squash commits
+        if: steps.check-commits.outputs.commit_count > 0
+        run: |
+          echo "Starting commit squash..."
+          
+          # 获取当天第一个提交
+          FIRST_COMMIT=$(git log --reverse --since="${{ env.TODAY_START }}" --until="${{ env.TODAY_END }}" --format="%H" | head -1)
+          
+          if [ -z "$FIRST_COMMIT" ]; then
+            echo "Error: Cannot find first commit of today"
+            exit 1
+          fi
+          
+          echo "First commit: $FIRST_COMMIT"
+          
+          # 获取第一个提交的父提交
+          PARENT_COMMIT=$(git rev-parse "$FIRST_COMMIT^" 2>/dev/null || git rev-list --max-parents=0 HEAD)
+          echo "Parent commit: $PARENT_COMMIT"
+          
+          # 执行交互式 rebase，自动 squash 除第一个外的所有提交
+          GIT_SEQUENCE_EDITOR="sed -i '2,\$s/^pick/squash/'" \
+          GIT_EDITOR="cat > /dev/null" \
+          git rebase -i "$PARENT_COMMIT"
+          
+          # 修改提交信息
+          git commit --amend -m "${{ env.TODAY_DATE }} - 每日提交汇总"
+          
+          echo "Commit squash completed successfully"
+          
+      # 6. 如果没有提交，跳过
+      - name: No commits to squash
+        if: steps.check-commits.outputs.commit_count == 0
+        run: |
+          echo "No commits today, skipping squash"
+          
+      # 7. 安全推送
+      - name: Safe push
+        if: steps.check-commits.outputs.commit_count > 0
+        run: |
+          echo "Starting safe push..."
+          
+          # 先获取远程最新更改
+          git fetch origin master
+          
+          # 检查是否需要处理冲突
+          if git merge-base --is-ancestor "HEAD" "origin/master"; then
+            echo "Local is behind remote, pulling with ours strategy"
+            git pull origin master --strategy-option=ours
+          fi
+          
+          # 强制推送（--force-with-lease 更安全）
+          git push origin master --force-with-lease
+          
+          echo "Push completed successfully"
