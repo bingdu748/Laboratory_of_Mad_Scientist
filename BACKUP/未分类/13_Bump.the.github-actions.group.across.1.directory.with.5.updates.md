@@ -3,7 +3,7 @@
 ## 元信息
 
 - 创建时间: 2026-06-09 15:52:58
-- 更新时间: 2026-06-10 01:11:57
+- 更新时间: 2026-06-10 01:18:04
 
 ## 内容
 
@@ -15,7 +15,7 @@ Bumps the github-actions group with 5 updates in the / directory:
 | [actions/setup-python](https://github.com/actions/setup-python) | `5.3.0` | `6.2.0` |
 | [actions/configure-pages](https://github.com/actions/configure-pages) | `5` | `6` |
 | [actions/upload-pages-artifact](https://github.com/actions/upload-pages-artifact) | `3` | `5` |
-| [actions/deploy-pages](https://github.com/actions/deploy-pages) | `4.1.5` | `5.0.0` |
+| [actions/deploy-pages](https://github.com/actions/deploy-pages) | `4` | `5` |
 
 
 Updates `actions/checkout` from 4.2.2 to 6.0.3
@@ -313,7 +313,7 @@ If you need to include dotfiles in your artifact: instead of using this action, 
 </details>
 <br />
 
-Updates `actions/deploy-pages` from 4.1.5 to 5.0.0
+Updates `actions/deploy-pages` from 4 to 5
 <details>
 <summary>Release notes</summary>
 <p><em>Sourced from <a href="https://github.com/actions/deploy-pages/releases">actions/deploy-pages's releases</a>.</em></p>
@@ -334,12 +334,49 @@ Updates `actions/deploy-pages` from 4.1.5 to 5.0.0
 <hr />
 <p>See details of <a href="https://github.com/actions/deploy-pages/compare/v4.0.5...v4.0.6">all code changes</a> since previous release.</p>
 <p>:warning: For use with products other than GitHub.com, such as GitHub Enterprise Server, please consult the <a href="https://github.com/actions/deploy-pages/#compatibility">compatibility table</a>.</p>
+<h2>v4.0.5</h2>
+<h1>Changelog</h1>
+<ul>
+<li>On API error, the error message will surface the API request ID <a href="https://github.com/TooManyBees"><code>@​TooManyBees</code></a> (<a href="https://redirect.github.com/actions/deploy-pages/issues/324">#324</a>)</li>
+<li>Bump the non-breaking-changes group with 2 updates <a href="https://github.com/dependabot"><code>@​dependabot</code></a> (<a href="https://redirect.github.com/actions/deploy-pages/issues/318">#318</a>)</li>
+<li>Bump the non-breaking-changes group with 1 update <a href="https://github.com/dependabot"><code>@​dependabot</code></a> (<a href="https://redirect.github.com/actions/deploy-pages/issues/316">#316</a>)</li>
+<li>Bump the non-breaking-changes group with 3 updates <a href="https://github.com/dependabot"><code>@​dependabot</code></a> (<a href="https://redirect.github.com/actions/deploy-pages/issues/314">#314</a>)</li>
+<li>Bump release-drafter/release-drafter from 5.25.0 to 6.0.0 <a href="https://github.com/dependabot"><code>@​dependabot</code></a> (<a href="https://redirect.github.com/actions/deploy-pages/issues/311">#311</a>)</li>
+</ul>
+<hr />
+<p>See details of <a href="https://github.com/actions/deploy-pages/compare/v4.0.4...v4.0.5">all code changes</a> since previous release.</p>
+<p>:warning: For use with products other than GitHub.com, such as GitHub Enterprise Server, please consult the <a href="https://github.com/actions/deploy-pages/#compatibility">compatibility table</a>.</p>
+<h2>v4.0.4</h2>
+<h1>Changelog</h1>
+<ul>
+<li>Update api-client.js <a href="https://github.com/lmammino"><code>@​lmammino</code></a> (<a href="https://redirect.github.com/actions/deploy-pages/issues/295">#295</a>)</li>
+<li>fix typo: compatibilty -&gt; compatibility <a href="https://github.com/SimonSiefke"><code>@​SimonSiefke</code></a> (<a href="https://redirect.github.com/actions/deploy-pages/issues/298">#298</a>)</li>
+<li>Bump <code>@​actions/artifact</code> from 2.0.1 to 2.1.1 <a href="https://github.com/dependabot"><code>@​dependabot</code></a> (<a href="https://redirect.github.com/actions/deploy-pages/issues/310">#310</a>)</li>
+<li>Update Dependabot config to group non-breaking changes <a href="https://github.com/JamesMGreene"><code>@​JamesMGreene</code></a> (<a href="https://redirect.github.com/actions/deploy-pages/issues/307">#307</a>)</li>
+</ul>
+<hr />
+<p>See details of <a href="https://github.com/actions/deploy-pages/compare/v4.0.3...v4.0.4">all code changes</a> since previous release.</p>
+<p>:warning: For use with products other than GitHub.com, such as GitHub Enterprise Server, please consult the <a href="https://github.com/actions/deploy-pages/#compatibility">compatibility table</a>.</p>
+<h2>v4.0.3</h2>
+<h1>Changelog</h1>
+<!-- raw HTML omitted -->
 </blockquote>
+<p>... (truncated)</p>
 </details>
 <details>
 <summary>Commits</summary>
 <ul>
-<li>See full diff in <a href="https://github.com/actions/deploy-pages/compare/v4.1.5...v5.0.0">compare view</a></li>
+<li><a href="https://github.com/actions/deploy-pages/commit/cd2ce8fcbc39b97be8ca5fce6e763baed58fa128"><code>cd2ce8f</code></a> Merge pull request <a href="https://redirect.github.com/actions/deploy-pages/issues/404">#404</a> from salmanmkc/node24</li>
+<li><a href="https://github.com/actions/deploy-pages/commit/bbe2a950ee52d4f5cbe74e6d9d6a8803676e91d5"><code>bbe2a95</code></a> Update Node.js version to 24.x</li>
+<li><a href="https://github.com/actions/deploy-pages/commit/854d7aa1b99e4509c4d1b53d69b7ba4eaf39215a"><code>854d7aa</code></a> Merge pull request <a href="https://redirect.github.com/actions/deploy-pages/issues/374">#374</a> from actions/Jcambass-patch-1</li>
+<li><a href="https://github.com/actions/deploy-pages/commit/306bb814f29679fd12f0e4b0014bc1f3a7e7f4bc"><code>306bb81</code></a> Add workflow file for publishing releases to immutable action package</li>
+<li><a href="https://github.com/actions/deploy-pages/commit/b74272834adc04f971da4b0b055c49fa8d7f90c9"><code>b742728</code></a> Merge pull request <a href="https://redirect.github.com/actions/deploy-pages/issues/360">#360</a> from actions/dependabot/npm_and_yarn/npm_and_yarn-513...</li>
+<li><a href="https://github.com/actions/deploy-pages/commit/72732942c639e67ea3f70165fd2e012dd6d95027"><code>7273294</code></a> Bump braces in the npm_and_yarn group across 1 directory</li>
+<li><a href="https://github.com/actions/deploy-pages/commit/963791f01c40ef3eff219c255dbfb97a6f2c9f87"><code>963791f</code></a> Merge pull request <a href="https://redirect.github.com/actions/deploy-pages/issues/361">#361</a> from actions/dependabot-friendly</li>
+<li><a href="https://github.com/actions/deploy-pages/commit/51bb29d9d7bfe15d731c4957ce1887b5ae8c6727"><code>51bb29d</code></a> Make the rebuild dist workflow safer for Dependabot</li>
+<li><a href="https://github.com/actions/deploy-pages/commit/89f3d10406f57ee86e6517a982b3fb0438bd6dc5"><code>89f3d10</code></a> Merge pull request <a href="https://redirect.github.com/actions/deploy-pages/issues/358">#358</a> from actions/dependabot/npm_and_yarn/non-breaking-cha...</li>
+<li><a href="https://github.com/actions/deploy-pages/commit/bce735589bbbfa569f1d2ac003277b590d743e4c"><code>bce7355</code></a> Merge branch 'main' into dependabot/npm_and_yarn/non-breaking-changes-99c12deb21</li>
+<li>Additional commits viewable in <a href="https://github.com/actions/deploy-pages/compare/v4...v5">compare view</a></li>
 </ul>
 </details>
 <br />
