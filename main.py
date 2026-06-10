@@ -490,6 +490,49 @@ def regenerate_readme(repo, repo_name, me):
         logger.error(f"重新生成README.md失败: {str(e)}")
         raise
 
+def delete_issue_files(issue_number, dir_name=BACKUP_DIR):
+    """删除issue的所有备份文件（包括主文件和引用文件）"""
+    try:
+        import glob
+        # 搜索所有子目录中以 issue_number 开头的 md 文件
+        pattern = os.path.join(dir_name, "**", f"{issue_number}_*.md")
+        files_to_delete = glob.glob(pattern, recursive=True)
+        
+        if files_to_delete:
+            logger.info(f"找到 {len(files_to_delete)} 个需要删除的issue文件: {files_to_delete}")
+            for file_path in files_to_delete:
+                try:
+                    os.remove(file_path)
+                    logger.info(f"已删除文件: {file_path}")
+                except Exception as e:
+                    logger.error(f"删除文件失败 {file_path}: {str(e)}")
+            
+            # 清理可能为空的目录
+            cleanup_empty_dirs(dir_name)
+            return True
+        else:
+            logger.debug(f"没有找到issue #{issue_number}的备份文件")
+            return False
+    except Exception as e:
+        logger.error(f"删除issue #{issue_number}的文件失败: {str(e)}")
+        return False
+
+def cleanup_empty_dirs(dir_name):
+    """清理空的标签目录"""
+    try:
+        import glob
+        # 获取所有子目录
+        subdirs = [d for d in glob.glob(os.path.join(dir_name, "*"), recursive=True) 
+                   if os.path.isdir(d)]
+        
+        for subdir in subdirs:
+            # 检查目录是否为空
+            if not os.listdir(subdir):
+                logger.info(f"删除空目录: {subdir}")
+                os.rmdir(subdir)
+    except Exception as e:
+        logger.warning(f"清理空目录失败: {str(e)}")
+
 def cleanup_old_issue_files(issue, dir_name=BACKUP_DIR):
     """清理issue的旧备份文件（当标签变化时）"""
     try:
@@ -651,17 +694,37 @@ def main(token, repo_name, issue_number=None, dir_name=BACKUP_DIR, backup_only=F
         # 处理issue_number
         logger.info(f"处理issue_number: {issue_number}")
         # 更健壮的issue_number处理
+        target_issue_number = issue_number
         if issue_number == '' or issue_number is None:
             issue_number = None
+            target_issue_number = None
             logger.info("issue_number为空字符串或None，将处理所有issue")
         else:
             # 尝试转换为整数，确保输入有效
             try:
                 issue_number = int(issue_number)
+                target_issue_number = issue_number
                 logger.info(f"已转换issue_number为整数: {issue_number}")
+                
+                # 检查该issue是否被关闭
+                try:
+                    target_issue = repo.get_issue(issue_number)
+                    if target_issue.state == 'closed':
+                        logger.info(f"Issue #{issue_number} 已关闭，将删除相关文件")
+                        # 删除issue的备份文件
+                        delete_issue_files(issue_number, dir_name)
+                        # 在非backup_only模式下重新生成README
+                        if not backup_only:
+                            regenerate_readme(repo, repo_name, me)
+                        logger.info(f"Issue #{issue_number} 处理完成（已删除）")
+                        return  # 提前返回，不再处理其他内容
+                except Exception as e:
+                    logger.warning(f"检查issue #{issue_number} 状态失败: {str(e)}")
+                    
             except ValueError:
                 logger.error(f"无效的issue_number: {issue_number}，将处理所有issue")
                 issue_number = None
+                target_issue_number = None
         
         # 获取待生成的issues
         logger.info("获取待生成的issues...")

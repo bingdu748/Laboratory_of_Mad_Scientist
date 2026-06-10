@@ -46,12 +46,25 @@ jobs:
           python -m pip install --upgrade pip
           pip install PyGithub
 
-      # 4. 生成 BACKUP
+      # 4. 生成 BACKUP 或删除关闭的 issue 文件
       - name: Generate BACKUP
         run: |
           export ACTIONS_STEP_DEBUG=true
-          # 执行main.py生成BACKUP（只生成备份，不生成README）
-          python main.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} --backup-only
+          
+          # 获取当前触发的 issue 编号（如果是 issues 事件）
+          ISSUE_NUMBER=""
+          if [ "${{ github.event_name }}" == "issues" ]; then
+            ISSUE_NUMBER="${{ github.event.issue.number }}"
+          fi
+          
+          # 检查 issue 是否被关闭
+          if [ "${{ github.event_name }}" == "issues" ] && [ "${{ github.event.action }}" == "closed" ]; then
+            echo "Issue #$ISSUE_NUMBER 已关闭，执行删除操作"
+            python main.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} --issue_number $ISSUE_NUMBER --backup-only
+          else
+            # 正常生成 BACKUP
+            python main.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} --backup-only
+          fi
 
       # 5. 提交 BACKUP
       - name: Commit and push BACKUP
