@@ -87,7 +87,7 @@ def get_repo(user, repo_name):
 def format_time(time_obj):
     """格式化时间"""
     try:
-        return time_obj.strftime("%Y-%m-%d %H:%M:%S") if hasattr(time_obj, 'strftime') else "未知时间"
+        return time_obj.strftime("%Y-%m-%d %H:%M") if hasattr(time_obj, 'strftime') else "未知时间"
     except Exception as e:
         logger.error(f"格式化时间失败: {str(e)}")
         return "时间格式化失败"
