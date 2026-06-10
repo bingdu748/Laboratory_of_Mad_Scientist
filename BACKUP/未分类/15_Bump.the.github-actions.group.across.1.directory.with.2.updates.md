@@ -3,20 +3,9 @@
 ## 元信息
 
 - 创建时间: 2026-06-10 03:28:51
-- 更新时间: 2026-06-10 05:15:17
+- 更新时间: 2026-06-10 05:16:08
 
 ## 内容
-
-[//]: # (dependabot-start)
-⚠️  **Dependabot is rebasing this PR** ⚠️ 
-
-Rebasing might not happen immediately, so don't worry if this takes some time.
-
-Note: if you make any changes to this PR yourself, they will take precedence over the rebase.
-
----
-
-[//]: # (dependabot-end)
 
 Bumps the github-actions group with 2 updates in the / directory: [actions/checkout](https://github.com/actions/checkout) and [actions/upload-pages-artifact](https://github.com/actions/upload-pages-artifact).
 
