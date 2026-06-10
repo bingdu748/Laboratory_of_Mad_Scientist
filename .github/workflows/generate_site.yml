@@ -38,8 +38,8 @@ jobs:
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       GH_TOKEN: ${{ github.token }}
-      ISITE_VERSION: v0.1.3
-      ZOLA_VERSION: v0.17.2
+      ISITE_VERSION: v0.2.2
+      ZOLA_VERSION: v0.20.0
       USER: ${{ github.repository_owner }}
       REPO_FULL_NAME: ${{ github.repository }}
       BASE_URL: https://${{ github.repository_owner }}.github.io/
@@ -70,17 +70,13 @@ jobs:
           export ACTIONS_STEP_DEBUG=true
           export ACTIONS_RUNNER_DEBUG=true
           
-          # Download and install isite
-          curl -L -o isite.tar.gz "https://github.com/kemingy/isite/releases/download/${ISITE_VERSION}/isite_Linux_x86_64.tar.gz"
-          tar zxf isite.tar.gz
-          sudo mv isite /usr/local/bin
+          # Download and install isite using gh CLI
+          gh release download $ISITE_VERSION --repo kemingy/isite -p '*Linux_x86_64*' -O- | tar -xz -C /tmp && mv /tmp/isite /usr/local/bin
           isite --version
           isite generate --user "$USER" --repo "$REPO"
           
-          # Download and install zola
-          curl -L -o zola.tar.gz "https://github.com/getzola/zola/releases/download/${ZOLA_VERSION}/zola-${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
-          tar zxf zola.tar.gz
-          sudo mv zola /usr/local/bin
+          # Download and install zola using gh CLI
+          gh release download $ZOLA_VERSION --repo getzola/zola -p '*x86_64-unknown-linux*' -O- | tar -xz -C /tmp && mv /tmp/zola /usr/local/bin
           zola --version
           
           echo "=== Output directory contents ==="
