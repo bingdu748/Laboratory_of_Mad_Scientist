@@ -23,7 +23,7 @@ jobs:
   # 生成 BACKUP（实时触发）
   backup:
     runs-on: ubuntu-latest
-    if: github.event_name != 'schedule'
+    if: github.event_name != 'schedule' && github.event_name != 'workflow_dispatch'
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
@@ -92,10 +92,11 @@ jobs:
           # 推送更改
           git push origin HEAD:master
 
-  # 生成 README.md 和 feed.xml（每天定时执行）
+  # 生成 README.md 和 feed.xml（实时更新 + 定时备份）
   generate-readme:
     runs-on: ubuntu-latest
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    # 在 issue 事件、定时任务或手动触发时执行
+    if: github.event_name == 'issues' || github.event_name == 'issue_comment' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
