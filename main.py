@@ -160,6 +160,30 @@ def add_issue_info(issue, md):
     except Exception as e:
         logger.error(f"添加issue信息失败 #{issue.number}: {str(e)}")
 
+def get_issue_word_count(issue):
+    """获取issue的字数统计"""
+    try:
+        body = issue.body or ""
+        # 移除markdown标记，只统计纯文本
+        import re
+        # 移除代码块
+        body = re.sub(r'```.*?```', '', body, flags=re.DOTALL)
+        # 移除行内代码
+        body = re.sub(r'`[^`]*`', '', body)
+        # 移除链接
+        body = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', body)
+        # 移除图片
+        body = re.sub(r'!\[([^\]]*)\]\([^)]+\)', '', body)
+        # 移除markdown标记
+        body = re.sub(r'[*_#`~\[\](){}|\\>+-]', '', body)
+        # 统计中文字符和英文单词
+        chinese_chars = len(re.findall(r'[\u4e00-\u9fff]', body))
+        english_words = len(re.findall(r'\b[a-zA-Z]+\b', body))
+        return chinese_chars + english_words
+    except Exception as e:
+        logger.error(f"获取issue字数失败 #{issue.number}: {str(e)}")
+        return 0
+
 def add_md_firends(repo, md, me):
     """添加朋友的issue到Markdown文件"""
     try:
@@ -216,6 +240,8 @@ def add_md_recent(repo, md, me, limit=RECENT_ISSUE_LIMIT):
             # one the issue that only one issue and delete (pyGitHub raise an exception)
             try:
                 md_file.write("## 最近更新\n")
+                md_file.write("| 序号 | 文章标题 | 更新时间 | 字数统计 |\n")
+                md_file.write("|------|----------|----------|----------|\n")
                 # 按更新时间排序，确保最新更新的issue在最前面
                 logger.debug("获取所有issue并按更新时间排序...")
                 all_issues = sorted(repo.get_issues(), key=lambda x: x.updated_at, reverse=True)
@@ -223,7 +249,9 @@ def add_md_recent(repo, md, me, limit=RECENT_ISSUE_LIMIT):
                 
                 for issue in all_issues:
                     if is_me(issue, me):
-                        add_issue_info(issue, md_file)
+                        time = format_time(issue.updated_at)
+                        word_count = get_issue_word_count(issue)
+                        md_file.write(f"| {count + 1} | [{issue.title}]({issue.html_url}) | {time} | {word_count} |\n")
                         count += 1
                         if count >= limit:
                             break
@@ -435,11 +463,28 @@ def regenerate_readme(repo, repo_name, me):
         # 添加朋友的文章
         add_md_firends(repo, "README.md", me)
         
-        # 更新最后更新时间
+        # 更新最后更新时间并添加统计信息
         update_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
+        # 统计信息
+        all_issues = list(repo.get_issues())
+        my_issues = [issue for issue in all_issues if is_me(issue, me)]
+        total_articles = len(my_issues)
+        total_word_count = sum(get_issue_word_count(issue) for issue in my_issues)
+        
+        # 计算新增和更新的文章（最近24小时内更新）
+        from datetime import timedelta
+        recent_threshold = datetime.now() - timedelta(hours=24)
+        recent_updated = [issue for issue in my_issues if issue.updated_at.replace(tzinfo=None) > recent_threshold]
+        recent_created = [issue for issue in my_issues if issue.created_at.replace(tzinfo=None) > recent_threshold]
+        
         with open("README.md", "a+", encoding="utf-8") as f:
             f.write(f"\n\n## 更新日志\n")
             f.write(f"- 最后更新: {update_time}\n")
+            f.write(f"- 总文章数: {total_articles}\n")
+            f.write(f"- 新增文章: {len(recent_created)}\n")
+            f.write(f"- 更新文章: {len(recent_updated)}\n")
+            f.write(f"- 总字数: {total_word_count}\n")
         
         logger.info("README.md重新生成成功")
         
