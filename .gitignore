@@ -1,10 +1,28 @@
-__pycache__
-nohup.out
-.git-credentials
+# ==================== Python ====================
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
 venv/
-*.pyc
-.DS_Store
+env/
+.venv/
+
+# ==================== IDE & Editor ====================
 .idea/
 .vscode/
+.DS_Store
+*.swp
+*.swo
+
+# ==================== Logs & Temp ====================
 *.log
+nohup.out
 temp_backup/
+
+# ==================== Credentials ====================
+.git-credentials
+.env
+*.token
