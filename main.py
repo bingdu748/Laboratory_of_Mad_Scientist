@@ -161,27 +161,90 @@ def add_issue_info(issue, md):
         logger.error(f"添加issue信息失败 #{issue.number}: {str(e)}")
 
 def get_issue_word_count(issue):
-    """获取issue的字数统计"""
+    """获取issue的字数统计（去掉markdown语法后真正显示的字符数）"""
     try:
         body = issue.body or ""
-        # 移除markdown标记，只统计纯文本
         import re
-        # 移除代码块
+        
+        # 移除 HTML 注释
+        body = re.sub(r'<!--.*?-->', '', body, flags=re.DOTALL)
+        
+        # 移除代码块（```...``` 或 ~~~...~~~）
         body = re.sub(r'```.*?```', '', body, flags=re.DOTALL)
+        body = re.sub(r'~~~.*?~~~', '', body, flags=re.DOTALL)
+        
         # 移除行内代码
         body = re.sub(r'`[^`]*`', '', body)
-        # 移除链接
+        
+        # 移除图片（在移除链接之前处理）
+        body = re.sub(r'!\[[^\]]*\]\([^)]+\)', '', body)
+        
+        # 移除链接语法，保留链接文本 [text](url) -> text
         body = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', body)
-        # 移除图片
-        body = re.sub(r'!\[([^\]]*)\]\([^)]+\)', '', body)
-        # 移除markdown标记
-        body = re.sub(r'[*_#`~\[\](){}|\\>+-]', '', body)
-        # 统计中文字符和英文单词
-        chinese_chars = len(re.findall(r'[\u4e00-\u9fff]', body))
+        
+        # 移除 HTML 标签
+        body = re.sub(r'<[^>]+>', '', body)
+        
+        # 移除 URL（裸链接）
+        body = re.sub(r'https?://\S+', '', body)
+        
+        # 移除表格分隔线
+        body = re.sub(r'^\s*\|?[-:| ]+\|?\s*$', '', body, flags=re.MULTILINE)
+        
+        # 移除引用标记、列表标记
+        body = re.sub(r'^\s*[>\-*+]\s+', '', body, flags=re.MULTILINE)
+        
+        # 移除标题标记
+        body = re.sub(r'^#{1,6}\s+', '', body, flags=re.MULTILINE)
+        
+        # 移除水平分隔线
+        body = re.sub(r'^[-*_]{3,}\s*$', '', body, flags=re.MULTILINE)
+        
+        # 移除加粗/斜体标记
+        body = re.sub(r'\*\*([^*]+)\*\*', r'\1', body)
+        body = re.sub(r'__([^_]+)__', r'\1', body)
+        body = re.sub(r'\*([^*]+)\*', r'\1', body)
+        body = re.sub(r'_([^_]+)_', r'\1', body)
+        
+        # 移除删除线
+        body = re.sub(r'~~([^~]+)~~', r'\1', body)
+        
+        # 移除表格管道符和多余的空白
+        body = re.sub(r'\|', ' ', body)
+        
+        # 移除反斜杠转义
+        body = re.sub(r'\\(.)', r'\1', body)
+        
+        # 合并多余的空白
+        body = re.sub(r'\s+', ' ', body).strip()
+        
+        # 统计中文字符（包括中文标点）
+        chinese_chars = len(re.findall(r'[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef]', body))
+        
+        # 统计英文单词
         english_words = len(re.findall(r'\b[a-zA-Z]+\b', body))
-        return chinese_chars + english_words
+        
+        # 统计数字（独立数字也算作一个"字"）
+        numbers = len(re.findall(r'\b\d+\b', body))
+        
+        return chinese_chars + english_words + numbers
     except Exception as e:
         logger.error(f"获取issue字数失败 #{issue.number}: {str(e)}")
+        return 0
+
+
+def get_issue_image_count(issue):
+    """获取issue中的图片数量"""
+    try:
+        body = issue.body or ""
+        import re
+        # 匹配 Markdown 图片语法 ![...](...)
+        md_images = len(re.findall(r'!\[[^\]]*\]\([^)]+\)', body))
+        # 匹配 HTML img 标签
+        html_images = len(re.findall(r'<img[^>]+src=["\'][^"\']+["\']', body, re.IGNORECASE))
+        return md_images + html_images
+    except Exception as e:
+        logger.error(f"获取issue图片数量失败 #{issue.number}: {str(e)}")
         return 0
 
 def add_md_firends(repo, md, me):
@@ -466,6 +529,7 @@ def regenerate_readme(repo, repo_name, me):
         my_issues = [issue for issue in all_issues if is_me(issue, me)]
         total_articles = len(my_issues)
         total_word_count = sum(get_issue_word_count(issue) for issue in my_issues)
+        total_image_count = sum(get_issue_image_count(issue) for issue in my_issues)
         
         # 计算新增和更新的文章（最近24小时内更新）
         from datetime import timedelta
@@ -480,6 +544,7 @@ def regenerate_readme(repo, repo_name, me):
             f.write(f"- 新增文章: {len(recent_created)}\n")
             f.write(f"- 更新文章: {len(recent_updated)}\n")
             f.write(f"- 总字数: {total_word_count}\n")
+            f.write(f"- 总插图数: {total_image_count}\n")
         
         logger.info("README.md重新生成成功")
         

@@ -128,7 +128,7 @@ jobs:
       # 5. 检查并提交更改
       - name: Commit and push changes
         run: |
-          # 检查是否有文件变更
+          # 检查 README.md 或 feed.xml 是否有变更
           if git diff --exit-code README.md feed.xml 2>/dev/null; then
             echo "没有文件变更，跳过提交"
             exit 0
@@ -143,11 +143,14 @@ jobs:
           # 获取今天的日期
           today=$(date +"%Y-%m-%d")
           
-          # 暂存未跟踪的变更（main.py 可能还修改了 BACKUP 等其他文件）
-          git stash --include-untracked
-          
-          # 添加文件并提交
+          # 暂存 README.md 和 feed.xml
           git add README.md feed.xml
+          
+          # 暂存其他未跟踪的变更（BACKUP 等），但保留已暂存的文件
+          # --keep-index: 保留已 git add 的文件，只 stash 未暂存的变更
+          git stash push --keep-index --include-untracked -m "WIP-BACKUP" || echo "No other changes to stash"
+          
+          # 提交已暂存的 README.md 和 feed.xml
           git commit -m "Auto-update: $today"
           
           # 获取远程最新更改
@@ -156,8 +159,8 @@ jobs:
           # 尝试 rebase，如果失败则使用 pull --strategy-option=ours 保留本地更改
           git rebase origin/master || (git rebase --abort && git pull origin master --strategy-option=ours)
           
-          # 恢复之前暂存的其他变更
-          git stash pop || echo "没有需要恢复的 stash"
+          # 恢复之前暂存的其他变更（BACKUP 文件）
+          git stash pop || echo "No stash to restore"
           
           # 推送更改
           git push origin HEAD:master
