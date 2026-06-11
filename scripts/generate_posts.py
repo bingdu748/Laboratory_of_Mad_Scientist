@@ -80,17 +80,9 @@ def save_issue(issue, me):
     safe_title = sanitize_filename(issue.title)
     md_path = os.path.join(dir_path, f"{safe_title}.md")
 
-    labels = [label.name for label in issue.labels]
-
     try:
         with open(md_path, "w", encoding="utf-8") as f:
             f.write(f"# [{issue.title}]({issue.html_url})\n\n")
-            f.write(f"## 元信息\n\n")
-            f.write(f"- 创建时间: {format_time(issue.created_at)}\n")
-            f.write(f"- 更新时间: {format_time(issue.updated_at)}\n")
-            if labels:
-                f.write(f"- 标签: {', '.join(labels)}\n")
-            f.write("\n")
             f.write("## 内容\n\n")
             f.write(issue.body or "(无内容)")
 
