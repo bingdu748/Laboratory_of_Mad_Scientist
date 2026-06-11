@@ -37,10 +37,15 @@ def get_me(user):
     """获取当前用户信息"""
     try:
         if os.getenv("GITHUB_ACTIONS") == "true":
+            # GITHUB_ACTOR 是触发 action 的用户名，比 GITHUB_REPOSITORY 更准确
+            actor = os.getenv("GITHUB_ACTOR", "")
+            if actor:
+                logger.info(f"在GitHub Actions环境中，使用 GITHUB_ACTOR: {actor}")
+                return actor
             repo_name = os.getenv("GITHUB_REPOSITORY", "")
             if repo_name and '/' in repo_name:
                 owner = repo_name.split('/')[0]
-                logger.info(f"在GitHub Actions环境中，使用仓库所有者作为用户名: {owner}")
+                logger.info(f"在GitHub Actions环境中，使用仓库所有者: {owner}")
                 return owner
             logger.info("在GitHub Actions环境中，使用默认用户名")
             return "github-actions"

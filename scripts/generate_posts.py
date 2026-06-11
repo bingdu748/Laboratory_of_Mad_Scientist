@@ -190,11 +190,11 @@ def main():
 
     # 登录
     user = login(args.token)
-    logger.info(f"登录成功: {user.get_user().login}")
+    me = get_me(user)
+    logger.info(f"登录成功: {me}")
 
     # 获取仓库
     repo = get_repo(user, args.repo_name)
-    me = get_me(user)
 
     # 处理指定 issue（关闭的 issue 执行删除）
     if args.issue_number:

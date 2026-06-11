@@ -337,11 +337,11 @@ def main():
 
     # 登录
     user = login(args.token)
-    logger.info(f"登录成功: {user.get_user().login}")
+    me = get_me(user)
+    logger.info(f"登录成功: {me}")
 
     # 获取仓库
     repo = get_repo(user, args.repo_name)
-    me = get_me(user)
 
     # 确保 README.md 存在
     ensure_readme_exists()
