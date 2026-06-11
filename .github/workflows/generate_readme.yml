@@ -23,7 +23,7 @@ on:
 
 jobs:
   # 生成 issue 的 .md 文件（实时触发）
-  backup:
+  generate-posts:
     runs-on: ubuntu-latest
     if: github.event_name != 'schedule' && github.event_name != 'workflow_dispatch'
     env:
@@ -55,9 +55,9 @@ jobs:
 
           if [ "${{ github.event_name }}" == "issues" ] && [ "${{ github.event.action }}" == "closed" ]; then
             echo "Issue #$ISSUE_NUMBER 已关闭，执行删除操作"
-            python main.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} --issue_number $ISSUE_NUMBER --backup-only
+            python scripts/generate_posts.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} --issue_number $ISSUE_NUMBER
           else
-            python main.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} --backup-only
+            python scripts/generate_posts.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} --issue_number $ISSUE_NUMBER
           fi
 
       - name: Commit and push issue files
@@ -115,7 +115,7 @@ jobs:
 
       - name: Generate README and feed.xml
         run: |
-          python main.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }}
+          python scripts/update_readme.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }}
 
       - name: Commit and push changes
         run: |
