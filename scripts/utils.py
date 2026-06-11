@@ -102,67 +102,97 @@ def format_time(time_obj):
         return "时间格式化失败"
 
 
-def get_issue_word_count(issue):
-    """获取issue的字数统计（去掉markdown语法后真正显示的字符数）"""
+def _clean_markdown(text):
+    """去掉 markdown 语法，返回纯文本"""
+    if not text:
+        return ""
+
+    # 移除 HTML 注释
+    text = re.sub(r'<!--.*?-->', '', text, flags=re.DOTALL)
+    # 移除代码块
+    text = re.sub(r'```.*?```', '', text, flags=re.DOTALL)
+    text = re.sub(r'~~~.*?~~~', '', text, flags=re.DOTALL)
+    # 移除行内代码
+    text = re.sub(r'`[^`]*`', '', text)
+    # 移除图片（在移除链接之前处理）
+    text = re.sub(r'!\[[^\]]*\]\([^)]+\)', '', text)
+    # 移除链接语法，保留链接文本 [text](url) -> text
+    text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
+    # 移除 HTML 标签
+    text = re.sub(r'<[^>]+>', '', text)
+    # 移除 URL（裸链接）
+    text = re.sub(r'https?://\S+', '', text)
+    # 移除表格分隔线
+    text = re.sub(r'^\s*\|?[-:| ]+\|?\s*$', '', text, flags=re.MULTILINE)
+    # 移除引用标记、列表标记
+    text = re.sub(r'^\s*[>\-*+]\s+', '', text, flags=re.MULTILINE)
+    # 移除标题标记
+    text = re.sub(r'^#{1,6}\s+', '', text, flags=re.MULTILINE)
+    # 移除水平分隔线
+    text = re.sub(r'^[-*_]{3,}\s*$', '', text, flags=re.MULTILINE)
+    # 移除加粗/斜体标记
+    text = re.sub(r'\*\*([^*]+)\*\*', r'\1', text)
+    text = re.sub(r'__([^_]+)__', r'\1', text)
+    text = re.sub(r'\*([^*]+)\*', r'\1', text)
+    text = re.sub(r'_([^_]+)_', r'\1', text)
+    # 移除删除线
+    text = re.sub(r'~~([^~]+)~~', r'\1', text)
+    # 移除表格管道符和多余的空白
+    text = re.sub(r'\|', ' ', text)
+    # 移除反斜杠转义
+    text = re.sub(r'\\(.)', r'\1', text)
+    # 合并多余的空白
+    return re.sub(r'\s+', ' ', text).strip()
+
+
+def _count_words(clean_text):
+    """从纯文本中统计字数：中文单字 + 英文单词 + 数字"""
+    if not clean_text:
+        return 0
+    chinese_chars = len(re.findall(r'[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef]', clean_text))
+    english_words = len(re.findall(r'\b[a-zA-Z]+\b', clean_text))
+    numbers = len(re.findall(r'\b\d+\b', clean_text))
+    return chinese_chars + english_words + numbers
+
+
+def get_content_word_count(content):
+    """从文本内容统计字数（去掉 markdown 后真正显示的字符数）"""
     try:
-        body = issue.body or ""
+        return _count_words(_clean_markdown(content))
+    except Exception as e:
+        logger.error(f"从内容统计字数失败: {str(e)}")
+        return 0
 
-        # 移除 HTML 注释
-        body = re.sub(r'<!--.*?-->', '', body, flags=re.DOTALL)
-        # 移除代码块
-        body = re.sub(r'```.*?```', '', body, flags=re.DOTALL)
-        body = re.sub(r'~~~.*?~~~', '', body, flags=re.DOTALL)
-        # 移除行内代码
-        body = re.sub(r'`[^`]*`', '', body)
-        # 移除图片（在移除链接之前处理）
-        body = re.sub(r'!\[[^\]]*\]\([^)]+\)', '', body)
-        # 移除链接语法，保留链接文本 [text](url) -> text
-        body = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', body)
-        # 移除 HTML 标签
-        body = re.sub(r'<[^>]+>', '', body)
-        # 移除 URL（裸链接）
-        body = re.sub(r'https?://\S+', '', body)
-        # 移除表格分隔线
-        body = re.sub(r'^\s*\|?[-:| ]+\|?\s*$', '', body, flags=re.MULTILINE)
-        # 移除引用标记、列表标记
-        body = re.sub(r'^\s*[>\-*+]\s+', '', body, flags=re.MULTILINE)
-        # 移除标题标记
-        body = re.sub(r'^#{1,6}\s+', '', body, flags=re.MULTILINE)
-        # 移除水平分隔线
-        body = re.sub(r'^[-*_]{3,}\s*$', '', body, flags=re.MULTILINE)
-        # 移除加粗/斜体标记
-        body = re.sub(r'\*\*([^*]+)\*\*', r'\1', body)
-        body = re.sub(r'__([^_]+)__', r'\1', body)
-        body = re.sub(r'\*([^*]+)\*', r'\1', body)
-        body = re.sub(r'_([^_]+)_', r'\1', body)
-        # 移除删除线
-        body = re.sub(r'~~([^~]+)~~', r'\1', body)
-        # 移除表格管道符和多余的空白
-        body = re.sub(r'\|', ' ', body)
-        # 移除反斜杠转义
-        body = re.sub(r'\\(.)', r'\1', body)
-        # 合并多余的空白
-        body = re.sub(r'\s+', ' ', body).strip()
 
-        # 统计中文字符（包括中文标点）
-        chinese_chars = len(re.findall(r'[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef]', body))
-        # 统计英文单词
-        english_words = len(re.findall(r'\b[a-zA-Z]+\b', body))
-        # 统计数字（独立数字也算作一个"字"）
-        numbers = len(re.findall(r'\b\d+\b', body))
+def get_content_image_count(content):
+    """从文本内容统计图片数量（Markdown ![]() 和 HTML <img>）"""
+    try:
+        if not content:
+            return 0
+        md_images = len(re.findall(r'!\[[^\]]*\]\([^)]+\)', content))
+        html_images = len(re.findall(r'<img[^>]+src=["\'][^"\']+["\']', content, re.IGNORECASE))
+        return md_images + html_images
+    except Exception as e:
+        logger.error(f"从内容统计图片数量失败: {str(e)}")
+        return 0
 
-        return chinese_chars + english_words + numbers
+
+def get_issue_word_count(issue):
+    """获取 issue 的字数统计（仅统计 issue.body，不含评论）"""
+    try:
+        return _count_words(_clean_markdown(issue.body or ""))
     except Exception as e:
         logger.error(f"获取issue字数失败 #{issue.number}: {str(e)}")
         return 0
 
 
 def get_issue_image_count(issue):
-    """获取issue中的图片数量"""
+    """获取 issue 中的图片数量（仅统计 issue.body，不含评论）"""
     try:
-        body = issue.body or ""
-        md_images = len(re.findall(r'!\[[^\]]*\]\([^)]+\)', body))
-        html_images = len(re.findall(r'<img[^>]+src=["\'][^"\']+["\']', body, re.IGNORECASE))
+        if not issue.body:
+            return 0
+        md_images = len(re.findall(r'!\[[^\]]*\]\([^)]+\)', issue.body))
+        html_images = len(re.findall(r'<img[^>]+src=["\'][^"\']+["\']', issue.body, re.IGNORECASE))
         return md_images + html_images
     except Exception as e:
         logger.error(f"获取issue图片数量失败 #{issue.number}: {str(e)}")

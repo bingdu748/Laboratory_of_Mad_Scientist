@@ -14,7 +14,7 @@ from datetime import datetime, timedelta, timezone
 
 from scripts.utils import (
     logger, login, get_repo, get_me, is_me, format_time,
-    get_issue_word_count, get_issue_image_count,
+    get_issue_word_count, get_issue_image_count, load_metadata,
     TOP_ISSUES_LABELS, TODO_ISSUES_LABELS, IGNORE_LABELS,
     RECENT_ISSUE_LIMIT, BEIJING_TZ
 )
@@ -118,11 +118,22 @@ def add_md_recent(repo, md, me, limit=RECENT_ISSUE_LIMIT):
                 all_issues = sorted(repo.get_issues(state='all'), key=lambda x: x.updated_at, reverse=True)
                 logger.debug(f"获取到 {len(all_issues)} 个issue")
 
+                # 加载元数据（含生成 .md 文件时计算的完整字数/图片数）
+                metadata = load_metadata()
+
                 for issue in all_issues:
                     if is_me(issue, me):
                         time = format_time(issue.updated_at)
-                        word_count = get_issue_word_count(issue)
-                        image_count = get_issue_image_count(issue)
+
+                        # 优先从元数据读取（含评论），回退到仅统计 issue.body
+                        issue_key = str(issue.number)
+                        if issue_key in metadata and "word_count" in metadata[issue_key]:
+                            word_count = metadata[issue_key]["word_count"]
+                            image_count = metadata[issue_key].get("image_count", 0)
+                        else:
+                            word_count = get_issue_word_count(issue)
+                            image_count = get_issue_image_count(issue)
+
                         md_file.write(
                             f"| {count + 1} | [{issue.title}]({issue.html_url}) "
                             f"| {time} | {word_count} | {image_count} |\n"
@@ -294,8 +305,19 @@ def regenerate_readme(repo, repo_name, me):
         all_issues = list(repo.get_issues(state='all'))
         my_issues = [issue for issue in all_issues if is_me(issue, me)]
         total_articles = len(my_issues)
-        total_word_count = sum(get_issue_word_count(issue) for issue in my_issues)
-        total_image_count = sum(get_issue_image_count(issue) for issue in my_issues)
+
+        # 优先从元数据读取（含评论），回退到仅统计 issue.body
+        metadata = load_metadata()
+        total_word_count = 0
+        total_image_count = 0
+        for issue in my_issues:
+            issue_key = str(issue.number)
+            if issue_key in metadata and "word_count" in metadata[issue_key]:
+                total_word_count += metadata[issue_key]["word_count"]
+                total_image_count += metadata[issue_key].get("image_count", 0)
+            else:
+                total_word_count += get_issue_word_count(issue)
+                total_image_count += get_issue_image_count(issue)
 
         # 最近24小时内的新增和更新
         recent_threshold = beijing_now - timedelta(hours=24)

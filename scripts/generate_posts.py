@@ -14,6 +14,7 @@ import glob
 import logging
 from scripts.utils import (
     logger, login, get_repo, get_me, is_me, format_time,
+    get_content_word_count, get_content_image_count,
     POSTS_DIR, IGNORE_LABELS, METADATA_FILE, load_metadata, save_metadata
 )
 
@@ -106,15 +107,24 @@ def save_issue(issue, me):
 
         logger.info(f"保存issue文件: {md_path}")
 
+        # 读取完整文件内容，统计字数与图片数（包含正文+评论）
+        with open(md_path, "r", encoding="utf-8") as f:
+            full_content = f.read()
+        word_count = get_content_word_count(full_content)
+        image_count = get_content_image_count(full_content)
+
         # 更新元数据
         metadata = load_metadata()
         metadata[str(issue.number)] = {
             "title": issue.title,
             "filename": safe_title,
             "label": label_dir,
-            "updated": issue.updated_at.isoformat() if hasattr(issue.updated_at, 'isoformat') else str(issue.updated_at)
+            "updated": issue.updated_at.isoformat() if hasattr(issue.updated_at, 'isoformat') else str(issue.updated_at),
+            "word_count": word_count,
+            "image_count": image_count
         }
         save_metadata(metadata)
+        logger.info(f"issue #{issue.number} 字数: {word_count}, 图片: {image_count}")
 
         return md_path
     except Exception as e:
