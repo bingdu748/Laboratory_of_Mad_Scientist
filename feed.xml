@@ -5,7 +5,19 @@
     <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist</link>
     <description>Blog generated from GitHub issues</description>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 11 Jun 2026 05:58:40 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jun 2026 06:00:31 GMT</lastBuildDate>
+
+    <item>
+        <title>About Calculations</title>
+        <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/7</link>
+        <description>似乎每个博客都有个关于博主的介绍，那么我就在这里做个简单的介绍吧。
+- 马甲非常多，而且经常更换
+- 喜欢百合、音游、ACGN、读书、电影，以及奇奇怪怪的东西
+- 写了很多年的日记，一部分丢失，另一部分保存在笔记软件上
+- 能背下整个元素周期表</description>
+        <pubDate>Thu, 11 Jun 2026 06:00:13 GMT</pubDate>
+        <guid>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/7</guid>
+    </item>
 
     <item>
         <title>About Diary</title>
@@ -24,39 +36,11 @@
     </item>
 
     <item>
-        <title>2000 to 2999</title>
-        <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/4</link>
-        <description># 2024-04-02（火）
-<details><summary>显示图片</summary>
-
-![2024.4.1](https://github.com/bingdu748/c_d-project/assets/50004335/6136dc2c-483f-4f32-8170-19db34d73053)
-</details>
----
-
-# 2024-04-08（月）
-报名一...</description>
-        <pubDate>Wed, 10 Jun 2026 05:30:40 GMT</pubDate>
-        <guid>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/4</guid>
-    </item>
-
-    <item>
         <title>「Diary」2006 & 2007</title>
         <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/16</link>
         <description>2006年和2007年的日记</description>
         <pubDate>Wed, 10 Jun 2026 05:29:00 GMT</pubDate>
         <guid>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/16</guid>
-    </item>
-
-    <item>
-        <title>About Me</title>
-        <link>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/7</link>
-        <description>似乎每个博客都有个关于博主的介绍，那么我就在这里做个简单的介绍吧。
-- 马甲非常多，而且经常更换
-- 喜欢百合、音游、ACGN、读书、电影，以及奇奇怪怪的东西
-- 写了很多年的日记，一部分丢失，另一部分保存在笔记软件上
-- 能背下整个元素周期表</description>
-        <pubDate>Mon, 15 Apr 2024 01:08:55 GMT</pubDate>
-        <guid>https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/7</guid>
     </item>
 
 </channel>
