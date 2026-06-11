@@ -10,6 +10,7 @@ import sys
 # 将项目根目录加入 sys.path，使脚本可直接 python scripts/xxx.py 运行
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+import re
 import glob
 import logging
 from scripts.utils import (
@@ -69,6 +70,28 @@ def get_label_dir(issue):
     return content_labels[0] if content_labels else "no-label"
 
 
+def _extract_comment_title_and_body(comment, me):
+    """从评论中提取标题和正文，标题降级一级"""
+    body = comment.body or "*(无内容)*"
+
+    # 尝试提取评论首行的一级标题作为分段标题
+    h1_match = re.match(r'^#\s+(.+?)(?:\n|$)', body)
+    if h1_match:
+        title = h1_match.group(1).strip()
+        # 去掉首行标题，其余内容所有标题降一级
+        remaining = body[h1_match.end():].strip()
+        return title, _downgrade_headings(remaining) if remaining else "*(无内容)*"
+
+    # 没有 H1，使用时间戳作为标题，全部内容降级
+    time_str = format_time(comment.created_at)
+    return time_str, _downgrade_headings(body)
+
+
+def _downgrade_headings(text):
+    """将文本中所有 # 标题降一级（# → ##, ## → ### ... ###### → #######）"""
+    return re.sub(r'^(#{1,6})(?=\s)', r'#\1', text, flags=re.MULTILINE)
+
+
 def save_issue(issue, me):
     """保存 issue 为 .md 文件到 posts/ 目录下"""
     label_dir = get_label_dir(issue)
@@ -82,20 +105,27 @@ def save_issue(issue, me):
 
     try:
         with open(md_path, "w", encoding="utf-8") as f:
+            # 一级标题：issue 标题（链接回原文）
             f.write(f"# [{issue.title}]({issue.html_url})\n\n")
-            f.write("## 内容\n\n")
-            f.write(issue.body or "(无内容)")
 
-            # 写入评论
+            # 文档说明：issue 正文
+            f.write("## 文档说明\n\n")
+            f.write(issue.body or "*(无内容)*")
+            f.write("\n")
+
+            # 评论：每个评论作为独立分段，按时间顺序排列
             comments = list(issue.get_comments())
-            if comments:
-                logger.info(f"处理issue #{issue.number} 的 {len(comments)} 条评论")
-                f.write("\n\n## 评论\n\n")
-                for c in comments:
-                    if is_me(c, me):
-                        f.write(f"### 评论 ({format_time(c.created_at)})\n\n")
-                        f.write(c.body or "(无评论内容)")
-                        f.write("\n\n---\n\n")
+            my_comments = [c for c in comments if is_me(c, me)]
+            if my_comments:
+                # 按创建时间排序
+                my_comments.sort(key=lambda c: c.created_at)
+                logger.info(f"处理issue #{issue.number} 的 {len(my_comments)} 条评论")
+
+                for c in my_comments:
+                    title, body = _extract_comment_title_and_body(c, me)
+                    f.write(f"\n## {title}\n\n")
+                    f.write(body)
+                    f.write("\n")
 
         logger.info(f"保存issue文件: {md_path}")
 
