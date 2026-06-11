@@ -143,6 +143,9 @@ jobs:
           # 获取今天的日期
           today=$(date +"%Y-%m-%d")
           
+          # 暂存未跟踪的变更（main.py 可能还修改了 BACKUP 等其他文件）
+          git stash --include-untracked
+          
           # 添加文件并提交
           git add README.md feed.xml
           git commit -m "Auto-update: $today"
@@ -152,6 +155,9 @@ jobs:
           
           # 尝试 rebase，如果失败则使用 pull --strategy-option=ours 保留本地更改
           git rebase origin/master || (git rebase --abort && git pull origin master --strategy-option=ours)
+          
+          # 恢复之前暂存的其他变更
+          git stash pop || echo "没有需要恢复的 stash"
           
           # 推送更改
           git push origin HEAD:master
