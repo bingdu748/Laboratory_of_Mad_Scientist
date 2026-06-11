@@ -21,6 +21,7 @@ env/
 *.log
 nohup.out
 temp_backup/
+BACKUP/
 
 # ==================== Credentials ====================
 .git-credentials

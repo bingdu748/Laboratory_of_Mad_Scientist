@@ -9,7 +9,7 @@ import sys
 import logging
 import argparse
 import traceback
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 
 import github
 
@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 TOP_ISSUES_LABELS = ["Top", "置顶"]
 TODO_ISSUES_LABELS = ["TODO", "待办"]
 IGNORE_LABELS = TOP_ISSUES_LABELS + TODO_ISSUES_LABELS + ["bug", "enhancement"]
-BACKUP_DIR = "BACKUP"
+BACKUP_DIR = "."
 RECENT_ISSUE_LIMIT = 20  # 最近更新显示数量
 MAX_SUMMARY_LINES = 3    # 摘要显示行数
 MAX_SUMMARY_LENGTH = 100  # 摘要行最大长度
@@ -85,9 +85,18 @@ def get_repo(user, repo_name):
         raise
 
 def format_time(time_obj):
-    """格式化时间"""
+    """格式化时间为北京时间 (UTC+8)"""
     try:
-        return time_obj.strftime("%Y-%m-%d %H:%M") if hasattr(time_obj, 'strftime') else "未知时间"
+        if not hasattr(time_obj, 'strftime'):
+            return "未知时间"
+        # GitHub API 返回的是 UTC 时间，转换为北京时间
+        from datetime import timezone, timedelta
+        beijing_tz = timezone(timedelta(hours=8))
+        if time_obj.tzinfo is None:
+            # 如果没有时区信息，假定为 UTC
+            time_obj = time_obj.replace(tzinfo=timezone.utc)
+        local_time = time_obj.astimezone(beijing_tz)
+        return local_time.strftime("%Y-%m-%d %H:%M")
     except Exception as e:
         logger.error(f"格式化时间失败: {str(e)}")
         return "时间格式化失败"
@@ -303,8 +312,8 @@ def add_md_recent(repo, md, me, limit=RECENT_ISSUE_LIMIT):
             # one the issue that only one issue and delete (pyGitHub raise an exception)
             try:
                 md_file.write("## 文章列表\n")
-                md_file.write("| 序号 | 文章标题 | 更新时间 | 字数统计 |\n")
-                md_file.write("|:------:|:------------------:|:------------------:|:------:|\n")
+                md_file.write("| 序号 | 文章标题 | 更新时间 | 字数统计 | 插图统计 |\n")
+                md_file.write("|:------:|:------------------:|:------------------:|:------:|:------:|\n")
                 # 按更新时间排序，确保最新更新的issue在最前面
                 logger.debug("获取所有issue并按更新时间排序...")
                 all_issues = sorted(repo.get_issues(), key=lambda x: x.updated_at, reverse=True)
@@ -314,7 +323,8 @@ def add_md_recent(repo, md, me, limit=RECENT_ISSUE_LIMIT):
                     if is_me(issue, me):
                         time = format_time(issue.updated_at)
                         word_count = get_issue_word_count(issue)
-                        md_file.write(f"| {count + 1} | [{issue.title}]({issue.html_url}) | {time} | {word_count} |\n")
+                        image_count = get_issue_image_count(issue)
+                        md_file.write(f"| {count + 1} | [{issue.title}]({issue.html_url}) | {time} | {word_count} | {image_count} |\n")
                         count += 1
                         if count >= limit:
                             break
@@ -483,20 +493,6 @@ def regenerate_readme(repo, repo_name, me):
     try:
         logger.info("开始重新生成README.md...")
         
-        # 备份当前README.md
-        backup_time = datetime.now().strftime("%Y%m%d_%H%M%S")
-        backup_path = os.path.join(BACKUP_DIR, f"README_backup_{backup_time}.md")
-        if os.path.exists("README.md"):
-            try:
-                with open("README.md", "r", encoding="utf-8") as f:
-                    content = f.read()
-                with open(backup_path, "w", encoding="utf-8") as f:
-                    f.write(content)
-                logger.info(f"已备份README.md到: {backup_path}")
-            except Exception as e:
-                logger.error(f"备份README.md失败: {str(e)}")
-        
-        # 创建新的README.md
         # 从仓库名提取所有者和仓库名
         parts = repo_name.split("/")
         owner = parts[0] if len(parts) > 1 else ""
@@ -522,7 +518,8 @@ def regenerate_readme(repo, repo_name, me):
         add_md_firends(repo, "README.md", me)
         
         # 更新最后更新时间并添加统计信息
-        update_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        beijing_now = datetime.now(timezone(timedelta(hours=8)))
+        update_time = beijing_now.strftime("%Y-%m-%d %H:%M:%S")
         
         # 统计信息
         all_issues = list(repo.get_issues())
@@ -531,11 +528,10 @@ def regenerate_readme(repo, repo_name, me):
         total_word_count = sum(get_issue_word_count(issue) for issue in my_issues)
         total_image_count = sum(get_issue_image_count(issue) for issue in my_issues)
         
-        # 计算新增和更新的文章（最近24小时内更新）
-        from datetime import timedelta
-        recent_threshold = datetime.now() - timedelta(hours=24)
-        recent_updated = [issue for issue in my_issues if issue.updated_at.replace(tzinfo=None) > recent_threshold]
-        recent_created = [issue for issue in my_issues if issue.created_at.replace(tzinfo=None) > recent_threshold]
+        # 计算新增和更新的文章（最近24小时内，使用北京时间）
+        recent_threshold = datetime.now(timezone(timedelta(hours=8))) - timedelta(hours=24)
+        recent_updated = [issue for issue in my_issues if issue.updated_at.replace(tzinfo=timezone.utc).astimezone(timezone(timedelta(hours=8))) > recent_threshold]
+        recent_created = [issue for issue in my_issues if issue.created_at.replace(tzinfo=timezone.utc).astimezone(timezone(timedelta(hours=8))) > recent_threshold]
         
         with open("README.md", "a+", encoding="utf-8") as f:
             f.write(f"\n\n## 博客统计\n")
@@ -598,48 +594,27 @@ def cleanup_empty_dirs(dir_name):
     except Exception as e:
         logger.warning(f"清理空目录失败: {str(e)}")
 
-def cleanup_old_issue_files(issue, dir_name=BACKUP_DIR):
-    """清理issue的旧备份文件（当标签变化时）"""
-    try:
-        # 生成文件名模式
-        safe_title = issue.title.replace('/', '-').replace(' ', '.').replace('\\', '-')
-        safe_title = ''.join(c for c in safe_title if c.isalnum() or c in '.-_')
-        file_pattern = f"{issue.number}_{safe_title}.md"
-        
-        # 搜索所有子目录中是否存在该issue的旧文件
-        import glob
-        old_files = glob.glob(os.path.join(dir_name, "**", file_pattern), recursive=True)
-        
-        for old_file in old_files:
-            # 检查文件是否在正确的目录中
-            parent_dir = os.path.basename(os.path.dirname(old_file))
-            
-            # 获取当前标签
-            labels = [label.name for label in issue.labels]
-            content_labels = [l for l in labels if l not in IGNORE_LABELS]
-            
-            # 确定正确的目录
-            correct_dir = content_labels[0] if content_labels else "未分类"
-            
-            # 如果文件不在正确的目录中，删除它
-            if parent_dir != correct_dir:
-                logger.info(f"删除旧位置的issue文件: {old_file}")
-                os.remove(old_file)
-                
-    except Exception as e:
-        logger.warning(f"清理旧issue文件失败: {str(e)}")
-
 def save_issue(issue, me, dir_name=BACKUP_DIR):
-    """保存issue到备份文件夹，按标签分目录存储"""
+    """保存issue为.md文件，按标签在根目录下分目录存储"""
+    import glob
+    
+    # 先删除该 issue 编号的所有旧文件（处理标题修改、标签变化等情况）
+    old_pattern = os.path.join(dir_name, "*", f"{issue.number}_*.md")
+    old_files = glob.glob(old_pattern)
+    for old_file in old_files:
+        try:
+            os.remove(old_file)
+            logger.info(f"删除旧issue文件: {old_file}")
+        except Exception as e:
+            logger.error(f"删除旧文件失败 {old_file}: {str(e)}")
+    
     # 获取issue的标签
     labels = [label.name for label in issue.labels]
     
     # 过滤掉功能性标签（置顶、待办等）
     content_labels = [l for l in labels if l not in IGNORE_LABELS]
     
-    # 确定存储目录：
-    # 1. 如果有内容标签，使用第一个标签作为目录名
-    # 2. 如果没有内容标签，使用 "未分类" 作为目录名
+    # 确定存储目录
     if content_labels:
         label_dir = content_labels[0]
     else:
@@ -651,76 +626,37 @@ def save_issue(issue, me, dir_name=BACKUP_DIR):
         logger.info(f"创建标签目录: {label_path}")
         os.makedirs(label_path)
     
-    # 生成文件名，替换可能导致问题的字符
+    # 生成文件名
     safe_title = issue.title.replace('/', '-').replace(' ', '.').replace('\\', '-')
-    # 移除其他可能导致文件名问题的字符
     safe_title = ''.join(c for c in safe_title if c.isalnum() or c in '.-_')
     md_name = os.path.join(label_path, f"{issue.number}_{safe_title}.md")
     
-    # 检查文件是否已存在
-    file_existed = os.path.exists(md_name)
-    
-    # 如果issue有多个标签，需要在其他标签目录也创建链接文件
-    other_label_dirs = content_labels[1:] if len(content_labels) > 1 else []
-    
     try:
         with open(md_name, "w", encoding="utf-8") as f:
-            # 写入issue标题和链接
             f.write(f"# [{issue.title}]({issue.html_url})\n\n")
-            
-            # 写入issue创建时间和更新时间
             f.write(f"## 元信息\n\n")
             f.write(f"- 创建时间: {format_time(issue.created_at)}\n")
             f.write(f"- 更新时间: {format_time(issue.updated_at)}\n")
-            
-            # 写入issue标签信息
             if labels:
                 f.write(f"- 标签: {', '.join(labels)}\n")
             f.write("\n")
-            
-            # 写入issue内容
             f.write("## 内容\n\n")
             f.write(issue.body or "(无内容)")
             
-            # 写入评论（如果有）
+            # 写入评论
             comments = list(issue.get_comments())
             if comments:
                 logger.info(f"处理issue #{issue.number} 的 {len(comments)} 条评论")
                 f.write("\n\n## 评论\n\n")
-                
                 for c in comments:
-                    # 只保存自己的评论
                     if is_me(c, me):
                         comment_time = format_time(c.created_at)
                         f.write(f"### 评论 ({comment_time})\n\n")
                         f.write(c.body or "(无评论内容)")
                         f.write("\n\n---\n\n")
         
-        # 记录文件保存状态
-        if file_existed:
-            logger.info(f"更新已存在的issue文件: {md_name}")
-        else:
-            logger.info(f"创建新的issue文件: {md_name}")
+        logger.info(f"保存issue文件: {md_name}")
         
-        # 如果有多个标签，在其他标签目录创建引用文件
-        for other_label in other_label_dirs:
-            other_path = os.path.join(dir_name, other_label)
-            if not os.path.exists(other_path):
-                logger.info(f"创建标签目录: {other_path}")
-                os.makedirs(other_path)
-            
-            other_md_name = os.path.join(other_path, f"{issue.number}_{safe_title}.md")
-            
-            # 创建引用文件，指向主文件
-            with open(other_md_name, "w", encoding="utf-8") as f:
-                f.write(f"# [{issue.title}]({issue.html_url})\n\n")
-                f.write(f"> 此文章同时归属于标签: **{', '.join(labels)}**\n\n")
-                f.write(f"完整内容请查看: [{label_dir}/{issue.number}_{safe_title}.md](../{label_dir}/{issue.number}_{safe_title}.md)\n\n")
-                f.write(f"- 创建时间: {format_time(issue.created_at)}\n")
-                f.write(f"- 更新时间: {format_time(issue.updated_at)}\n")
-            
-            logger.info(f"在标签 '{other_label}' 目录创建引用文件: {other_md_name}")
-            
     except Exception as e:
         logger.error(f"保存issue #{issue.number} 到 {md_name} 失败: {str(e)}")
         raise
@@ -796,11 +732,9 @@ def main(token, repo_name, issue_number=None, dir_name=BACKUP_DIR, backup_only=F
         to_generate_issues = get_to_generate_issues(repo, dir_name, issue_number)
         logger.info(f"找到{len(to_generate_issues)}个待生成的issue")
         
-        # 保存issue到备份文件夹
-        logger.info("开始保存issue到备份文件夹...")
+        # 保存issue文件
+        logger.info("开始保存issue文件...")
         for issue in to_generate_issues:
-            # 先清理可能存在的旧文件（处理标签变化的情况）
-            cleanup_old_issue_files(issue, dir_name)
             logger.info(f"保存issue: #{issue.number} - {issue.title}")
             save_issue(issue, me, dir_name)
         

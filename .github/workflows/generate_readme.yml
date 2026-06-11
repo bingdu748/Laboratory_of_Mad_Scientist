@@ -1,7 +1,7 @@
 name: Generate README
 
 on:
-  # 实时触发：生成 BACKUP（issue 备份）
+  # 实时触发：issue 事件
   issues:
     types: [opened, edited, labeled, unlabeled, closed]
   issue_comment:
@@ -12,120 +12,111 @@ on:
     paths-ignore:
       - "README.md"
       - "feed.xml"
-      - "BACKUP/**"
 
-  # 每天定时执行：生成并提交 README.md 和 feed.xml（在 squash 之前执行）
+  # 每天定时执行：生成并提交 README.md 和 feed.xml
   schedule:
     # 每天北京时间 23:45 (UTC 15:45) 执行
     - cron: '45 15 * * *'
 
+  # 手动触发
+  workflow_dispatch:
+
 jobs:
-  # 生成 BACKUP（实时触发）
+  # 生成 issue 的 .md 文件（实时触发）
   backup:
     runs-on: ubuntu-latest
     if: github.event_name != 'schedule' && github.event_name != 'workflow_dispatch'
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      TZ: Asia/Shanghai
     steps:
-      # 1. 检出代码
       - name: Checkout code
         uses: actions/checkout@v5
         with:
           fetch-depth: 1
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 2. 设置Python环境
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.8"
 
-      # 3. 安装依赖
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install PyGithub
 
-      # 4. 生成 BACKUP 或删除关闭的 issue 文件
-      - name: Generate BACKUP
+      - name: Generate issue files
         run: |
-          export ACTIONS_STEP_DEBUG=true
-          
-          # 获取当前触发的 issue 编号（如果是 issues 事件）
           ISSUE_NUMBER=""
           if [ "${{ github.event_name }}" == "issues" ]; then
             ISSUE_NUMBER="${{ github.event.issue.number }}"
           fi
-          
-          # 检查 issue 是否被关闭
+
           if [ "${{ github.event_name }}" == "issues" ] && [ "${{ github.event.action }}" == "closed" ]; then
             echo "Issue #$ISSUE_NUMBER 已关闭，执行删除操作"
             python main.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} --issue_number $ISSUE_NUMBER --backup-only
           else
-            # 正常生成 BACKUP
             python main.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} --backup-only
           fi
 
-      # 5. 提交 BACKUP
-      - name: Commit and push BACKUP
+      - name: Commit and push issue files
         run: |
-          # 检查是否有BACKUP变更
-          if git diff --exit-code BACKUP/ 2>/dev/null; then
-            echo "没有BACKUP变更，跳过提交"
+          # 暂存 README.md 和 feed.xml（如果被意外修改则还原）
+          git checkout -- README.md feed.xml 2>/dev/null || true
+
+          # 检查是否有文件变更
+          if git diff --exit-code --quiet && git diff --cached --exit-code --quiet; then
+            echo "没有文件变更，跳过提交"
             exit 0
           fi
-          
-          # 配置Git用户信息
+
+          echo "检测到 issue 文件变更，准备提交"
+
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          
-          # 添加文件并提交
-          git add BACKUP/
-          git commit -m "Auto-backup issues"
-          
-          # 获取远程最新更改
+
+          git add --all
+          git checkout -- README.md feed.xml 2>/dev/null || true
+
+          git stash push --keep-index --include-untracked -m "WIP" 2>/dev/null || true
+
+          git commit -m "Auto-update: issue files"
+
           git fetch origin master
-          
-          # 尝试 rebase，如果失败则使用 pull --strategy-option=ours 保留本地更改
           git rebase origin/master || (git rebase --abort && git pull origin master --strategy-option=ours)
-          
-          # 推送更改
+
+          git stash pop 2>/dev/null || true
           git push origin HEAD:master
 
-  # 生成 README.md 和 feed.xml（实时更新 + 定时备份）
+  # 生成 README.md 和 feed.xml
   generate-readme:
     runs-on: ubuntu-latest
-    # 在 issue 事件、定时任务或手动触发时执行
     if: github.event_name == 'issues' || github.event_name == 'issue_comment' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      TZ: Asia/Shanghai
     steps:
-      # 1. 检出代码
       - name: Checkout code
         uses: actions/checkout@v5
         with:
-          fetch-depth: 0  # 获取完整历史
+          fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 2. 设置Python环境
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.8"
 
-      # 3. 安装依赖
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install PyGithub
 
-      # 4. 生成 README 和 feed.xml
       - name: Generate README and feed.xml
         run: |
-          # 执行main.py生成内容（生成README和feed）
           python main.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }}
 
-      # 5. 检查并提交更改
       - name: Commit and push changes
         run: |
           # 检查 README.md 或 feed.xml 是否有变更
@@ -133,34 +124,22 @@ jobs:
             echo "没有文件变更，跳过提交"
             exit 0
           fi
-          
+
           echo "检测到文件变更，准备提交"
-          
-          # 配置Git用户信息
+
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          
-          # 获取今天的日期
+
           today=$(date +"%Y-%m-%d")
-          
-          # 暂存 README.md 和 feed.xml
+
           git add README.md feed.xml
-          
-          # 暂存其他未跟踪的变更（BACKUP 等），但保留已暂存的文件
-          # --keep-index: 保留已 git add 的文件，只 stash 未暂存的变更
+
           git stash push --keep-index --include-untracked -m "WIP-BACKUP" || echo "No other changes to stash"
-          
-          # 提交已暂存的 README.md 和 feed.xml
+
           git commit -m "Auto-update: $today"
-          
-          # 获取远程最新更改
+
           git fetch origin master
-          
-          # 尝试 rebase，如果失败则使用 pull --strategy-option=ours 保留本地更改
           git rebase origin/master || (git rebase --abort && git pull origin master --strategy-option=ours)
-          
-          # 恢复之前暂存的其他变更（BACKUP 文件）
+
           git stash pop || echo "No stash to restore"
-          
-          # 推送更改
           git push origin HEAD:master
