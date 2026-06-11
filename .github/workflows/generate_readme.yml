@@ -12,6 +12,7 @@ on:
     paths-ignore:
       - "README.md"
       - "feed.xml"
+      - "posts/**"
 
   # 每天定时执行：生成并提交 README.md 和 feed.xml
   schedule:
@@ -22,78 +23,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  # 生成 issue 的 .md 文件（实时触发）
-  generate-posts:
+  # 合并为单 job：生成 posts → 生成 README → 一次 commit → 一次 push
+  generate-all:
     runs-on: ubuntu-latest
-    if: github.event_name != 'schedule'
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-      TZ: Asia/Shanghai
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
-        with:
-          fetch-depth: 1
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Setup Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.8"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install PyGithub
-
-      - name: Generate issue files
-        run: |
-          ISSUE_NUMBER=""
-          if [ "${{ github.event_name }}" == "issues" ] || [ "${{ github.event_name }}" == "issue_comment" ]; then
-            ISSUE_NUMBER="${{ github.event.issue.number }}"
-          fi
-
-          if [ -n "$ISSUE_NUMBER" ]; then
-            echo "处理 issue #$ISSUE_NUMBER (event: ${{ github.event_name }})"
-            python scripts/generate_posts.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} --issue_number $ISSUE_NUMBER
-          else
-            echo "未指定 issue，处理所有 issue"
-            python scripts/generate_posts.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }}
-          fi
-
-      - name: Commit and push issue files
-        run: |
-          # 暂存 README.md 和 feed.xml（如果被意外修改则还原）
-          git checkout -- README.md feed.xml 2>/dev/null || true
-
-          # 检查是否有文件变更
-          if git diff --exit-code --quiet && git diff --cached --exit-code --quiet; then
-            echo "没有文件变更，跳过提交"
-            exit 0
-          fi
-
-          echo "检测到 issue 文件变更，准备提交"
-
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-
-          git add --all
-          git checkout -- README.md feed.xml 2>/dev/null || true
-
-          git stash push --keep-index --include-untracked -m "WIP" 2>/dev/null || true
-
-          git commit -m "Auto-update: issue files"
-
-          git fetch origin master
-          git rebase origin/master || (git rebase --abort && git pull origin master --strategy-option=ours)
-
-          git stash pop 2>/dev/null || true
-          git push origin HEAD:master
-
-  # 生成 README.md 和 feed.xml
-  generate-readme:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'issues' || github.event_name == 'issue_comment' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       TZ: Asia/Shanghai
@@ -114,14 +46,33 @@ jobs:
           python -m pip install --upgrade pip
           pip install PyGithub
 
+      # ========== Step 1: 生成 posts/ 下的 .md 文件（非 schedule 时执行） ==========
+      - name: Generate issue .md files
+        if: github.event_name != 'schedule'
+        run: |
+          ISSUE_NUMBER=""
+          if [ "${{ github.event_name }}" == "issues" ] || [ "${{ github.event_name }}" == "issue_comment" ]; then
+            ISSUE_NUMBER="${{ github.event.issue.number }}"
+          fi
+
+          if [ -n "$ISSUE_NUMBER" ]; then
+            echo "处理 issue #$ISSUE_NUMBER (event: ${{ github.event_name }})"
+            python scripts/generate_posts.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} --issue_number $ISSUE_NUMBER
+          else
+            echo "未指定 issue，处理所有 issue"
+            python scripts/generate_posts.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }}
+          fi
+
+      # ========== Step 2: 生成 README.md 和 feed.xml ==========
       - name: Generate README and feed.xml
         run: |
           python scripts/update_readme.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }}
 
-      - name: Commit and push changes
+      # ========== Step 3: 一次 commit + push 所有变更 ==========
+      - name: Commit and push all changes
         run: |
-          # 检查 README.md 或 feed.xml 是否有变更
-          if git diff --exit-code README.md feed.xml 2>/dev/null; then
+          # 检查是否有任何文件变更
+          if git diff --exit-code --quiet && git diff --cached --exit-code --quiet; then
             echo "没有文件变更，跳过提交"
             exit 0
           fi
@@ -133,14 +84,18 @@ jobs:
 
           today=$(date +"%Y-%m-%d")
 
-          git add README.md feed.xml
+          git add --all
 
-          git stash push --keep-index --include-untracked -m "WIP-BACKUP" || echo "No other changes to stash"
+          # stash 可能存在的无关变更（如 metadata 文件），但保留已 git add 的
+          git stash push --keep-index --include-untracked -m "WIP" 2>/dev/null || echo "No other changes to stash"
 
           git commit -m "Auto-update: $today"
 
+          # 拉取远程最新并 rebase
           git fetch origin master
           git rebase origin/master || (git rebase --abort && git pull origin master --strategy-option=ours)
 
-          git stash pop || echo "No stash to restore"
+          # 恢复 stash
+          git stash pop 2>/dev/null || echo "No stash to restore"
+
           git push origin HEAD:master
