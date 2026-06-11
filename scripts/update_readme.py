@@ -23,7 +23,7 @@ from scripts.utils import (
 def get_todo_issues(repo):
     """获取待办issue"""
     try:
-        return repo.get_issues(labels=TODO_ISSUES_LABELS)
+        return repo.get_issues(state='all', labels=TODO_ISSUES_LABELS)
     except Exception as e:
         logger.error(f"获取待办文章失败: {str(e)}")
         return []
@@ -32,7 +32,7 @@ def get_todo_issues(repo):
 def get_top_issues(repo):
     """获取置顶issue"""
     try:
-        return repo.get_issues(labels=TOP_ISSUES_LABELS)
+        return repo.get_issues(state='all', labels=TOP_ISSUES_LABELS)
     except Exception as e:
         logger.error(f"获取置顶文章失败: {str(e)}")
         return []
@@ -50,7 +50,7 @@ def get_repo_labels(repo):
 def get_issues_from_label(repo, label):
     """获取特定标签的issue"""
     try:
-        return repo.get_issues(labels=(label,))
+        return repo.get_issues(state='all', labels=(label,))
     except Exception as e:
         logger.error(f"获取标签issue失败: {str(e)}")
         return []
@@ -115,7 +115,7 @@ def add_md_recent(repo, md, me, limit=RECENT_ISSUE_LIMIT):
                 md_file.write("| 序号 | 文章标题 | 更新时间 | 字数统计 | 插图统计 |\n")
                 md_file.write("|:------:|:------------------:|:------------------:|:------:|:------:|\n")
                 logger.debug("获取所有issue并按更新时间排序...")
-                all_issues = sorted(repo.get_issues(), key=lambda x: x.updated_at, reverse=True)
+                all_issues = sorted(repo.get_issues(state='all'), key=lambda x: x.updated_at, reverse=True)
                 logger.debug(f"获取到 {len(all_issues)} 个issue")
 
                 for issue in all_issues:
@@ -185,7 +185,7 @@ def add_md_firends(repo, md, me):
     try:
         with open(md, "a+", encoding="utf-8") as md_file:
             try:
-                issues = list(repo.get_issues())
+                issues = list(repo.get_issues(state='all'))
                 friend_issues = [issue for issue in issues if not is_me(issue, me)]
                 friend_issues = sorted(friend_issues, key=lambda x: x.updated_at, reverse=True)
 
@@ -207,7 +207,7 @@ def generate_rss_feed(repo, me):
     """生成RSS feed文件"""
     try:
         all_issues = sorted(
-            [issue for issue in repo.get_issues() if is_me(issue, me)],
+            [issue for issue in repo.get_issues(state='all') if is_me(issue, me)],
             key=lambda x: x.updated_at, reverse=True
         )
 
@@ -291,7 +291,7 @@ def regenerate_readme(repo, repo_name, me):
         beijing_now = datetime.now(BEIJING_TZ)
         update_time = beijing_now.strftime("%Y-%m-%d %H:%M:%S")
 
-        all_issues = list(repo.get_issues())
+        all_issues = list(repo.get_issues(state='all'))
         my_issues = [issue for issue in all_issues if is_me(issue, me)]
         total_articles = len(my_issues)
         total_word_count = sum(get_issue_word_count(issue) for issue in my_issues)

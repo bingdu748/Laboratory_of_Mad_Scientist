@@ -25,7 +25,7 @@ jobs:
   # 生成 issue 的 .md 文件（实时触发）
   generate-posts:
     runs-on: ubuntu-latest
-    if: github.event_name != 'schedule' && github.event_name != 'workflow_dispatch'
+    if: github.event_name != 'schedule'
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       TZ: Asia/Shanghai
@@ -49,12 +49,12 @@ jobs:
       - name: Generate issue files
         run: |
           ISSUE_NUMBER=""
-          if [ "${{ github.event_name }}" == "issues" ]; then
+          if [ "${{ github.event_name }}" == "issues" ] || [ "${{ github.event_name }}" == "issue_comment" ]; then
             ISSUE_NUMBER="${{ github.event.issue.number }}"
           fi
 
           if [ -n "$ISSUE_NUMBER" ]; then
-            echo "处理 issue #$ISSUE_NUMBER"
+            echo "处理 issue #$ISSUE_NUMBER (event: ${{ github.event_name }})"
             python scripts/generate_posts.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} --issue_number $ISSUE_NUMBER
           else
             echo "未指定 issue，处理所有 issue"
