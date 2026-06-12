@@ -199,6 +199,45 @@ def get_issue_image_count(issue):
         return 0
 
 
+def is_pull_request(issue):
+    """检查Issue对象是否实际上是一个Pull Request"""
+    try:
+        return issue.pull_request is not None
+    except Exception:
+        return False
+
+
+def should_include_issue(issue, metadata=None):
+    """检查issue是否应该出现在文章列表中
+    条件：
+    1. 不是 Pull Request
+    2. 状态为 open
+    3. 字数 > 0
+    4. 插图数量 >= 0
+    """
+    if is_pull_request(issue):
+        return False
+
+    if issue.state != "open":
+        return False
+
+    # 检查字数：优先从元数据读取，回退到 issue.body
+    if metadata and str(issue.number) in metadata:
+        word_count = metadata[str(issue.number)].get("word_count", 0)
+        image_count = metadata[str(issue.number)].get("image_count", 0)
+    else:
+        word_count = get_issue_word_count(issue)
+        image_count = get_issue_image_count(issue)
+
+    if word_count <= 0:
+        return False
+
+    if image_count < 0:
+        return False
+
+    return True
+
+
 def load_metadata():
     """加载元数据文件，返回 issue_number -> metadata 的字典"""
     if not os.path.exists(METADATA_FILE):

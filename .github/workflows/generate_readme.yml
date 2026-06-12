@@ -93,7 +93,11 @@ jobs:
 
           # 拉取远程最新并 rebase
           git fetch origin master
-          git rebase origin/master || (git rebase --abort && git pull origin master --strategy-option=ours)
+          if ! git rebase origin/master; then
+            echo "Rebase 冲突，中止并使用 merge 策略（优先保留本地生成内容）"
+            git rebase --abort
+            git merge origin/master -X ours -m "Auto-update: $today"
+          fi
 
           # 恢复 stash
           git stash pop 2>/dev/null || echo "No stash to restore"
