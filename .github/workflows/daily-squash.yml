@@ -40,9 +40,9 @@ jobs:
       - name: Check for today's commits
         id: check-commits
         run: |
-          COMMIT_COUNT=$(git log --oneline --since="${{ env.TODAY_START }}" --until="${{ env.TODAY_END }}" --count)
+          COMMIT_COUNT=$(git rev-list --count --since="${{ env.TODAY_START }}" --until="${{ env.TODAY_END }}" HEAD)
           echo "commit_count=$COMMIT_COUNT" >> $GITHUB_OUTPUT
-          echo "Found $COMMIT_COUNT commits today"
+          echo "Found ${COMMIT_COUNT} commits today"
           
       # 5. 如果有提交，压缩合并
       - name: Squash commits
