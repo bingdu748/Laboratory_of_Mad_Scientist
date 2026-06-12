@@ -1,5 +1,10 @@
 name: Daily Commit Squash
 
+# 互斥锁：与 generate_readme 共享同一组，防止并行写入 master
+concurrency:
+  group: master-branch-write
+  cancel-in-progress: true
+
 on:
   # 每天 UTC 时间 15:00（北京时间 23:00）执行
   schedule:

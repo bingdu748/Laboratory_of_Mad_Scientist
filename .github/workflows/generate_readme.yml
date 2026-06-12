@@ -1,5 +1,10 @@
 name: Generate README
 
+# 互斥锁：同一时间只允许一个实例运行，新触发会取消旧运行
+concurrency:
+  group: master-branch-write
+  cancel-in-progress: true
+
 on:
   # 实时触发：issue 事件
   issues:
@@ -81,6 +86,9 @@ jobs:
 
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+
+          # 配置自动合并驱动：README.md / feed.xml / CHANGELOG.md 冲突时使用本地版本
+          git config merge.ours.driver 'git merge-file --ours %A %O %B'
 
           today=$(date +"%Y-%m-%d")
 
