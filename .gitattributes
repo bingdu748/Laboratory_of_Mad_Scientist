@@ -3,3 +3,4 @@
 README.md merge=ours
 feed.xml merge=ours
 CHANGELOG.md merge=ours
+.temp_metadata.json merge=ours

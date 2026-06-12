@@ -16,6 +16,7 @@ from scripts.utils import (
     logger, login, get_repo, get_me, is_me, format_time,
     get_issue_word_count, get_issue_image_count, load_metadata,
     is_pull_request, should_include_issue,
+    count_from_md_file, log_environment,
     TOP_ISSUES_LABELS, TODO_ISSUES_LABELS, IGNORE_LABELS,
     RECENT_ISSUE_LIMIT, BEIJING_TZ
 )
@@ -126,14 +127,31 @@ def add_md_recent(repo, md, me, limit=RECENT_ISSUE_LIMIT):
                     if is_me(issue, me) and should_include_issue(issue, metadata):
                         time = format_time(issue.updated_at)
 
-                        # 优先从元数据读取（含评论），回退到仅统计 issue.body
+                        # 三层回退：元数据 → .md 文件 → issue.body
                         issue_key = str(issue.number)
+                        word_count = None
+                        image_count = None
+                        source = "unknown"
+
                         if issue_key in metadata and "word_count" in metadata[issue_key]:
                             word_count = metadata[issue_key]["word_count"]
                             image_count = metadata[issue_key].get("image_count", 0)
-                        else:
+                            source = "metadata"
+                            logger.debug(f"[STAT_SRC] #{issue.number} 使用元数据: wc={word_count}, ic={image_count}")
+
+                        if word_count is None:
+                            wc, ic = count_from_md_file(issue.number, issue.title)
+                            if wc is not None:
+                                word_count = wc
+                                image_count = ic
+                                source = "md_file"
+                                logger.info(f"[STAT_SRC] #{issue.number} 回退到 .md 文件: wc={word_count}, ic={image_count}")
+
+                        if word_count is None:
                             word_count = get_issue_word_count(issue)
                             image_count = get_issue_image_count(issue)
+                            source = "issue_body"
+                            logger.warning(f"[STAT_SRC] #{issue.number} 回退到 issue.body: wc={word_count}, ic={image_count}")
 
                         md_file.write(
                             f"| {count + 1} | [{issue.title}]({issue.html_url}) "
@@ -289,6 +307,7 @@ def ensure_readme_exists():
 def regenerate_readme(repo, repo_name, me):
     """重新生成README.md文件"""
     try:
+        log_environment()
         logger.info("开始重新生成README.md...")
 
         # 清空 README.md

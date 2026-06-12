@@ -51,6 +51,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install PyGithub
 
+      # ========== Step 0: 运行单元测试（跨环境一致性验证） ==========
+      - name: Run unit tests
+        run: |
+          echo "=== 运行跨环境一致性测试 ==="
+          python -m unittest scripts.test_utils -v
+          echo "=== 所有测试通过 ==="
+
       # ========== Step 1: 生成 posts/ 下的 .md 文件（非 schedule 时执行） ==========
       - name: Generate issue .md files
         if: github.event_name != 'schedule'
