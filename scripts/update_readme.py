@@ -15,6 +15,8 @@ from datetime import datetime, timedelta, timezone
 from scripts.utils import (
     logger, login, get_repo, get_me, is_me, format_time,
     get_issue_word_count, get_issue_image_count, load_metadata,
+    is_pull_request, should_include_issue,
+    count_from_md_file, log_environment,
     TOP_ISSUES_LABELS, TODO_ISSUES_LABELS, IGNORE_LABELS,
     RECENT_ISSUE_LIMIT, BEIJING_TZ
 )
@@ -122,17 +124,34 @@ def add_md_recent(repo, md, me, limit=RECENT_ISSUE_LIMIT):
                 metadata = load_metadata()
 
                 for issue in all_issues:
-                    if is_me(issue, me):
+                    if is_me(issue, me) and should_include_issue(issue, metadata):
                         time = format_time(issue.updated_at)
 
-                        # 优先从元数据读取（含评论），回退到仅统计 issue.body
+                        # 三层回退：元数据 → .md 文件 → issue.body
                         issue_key = str(issue.number)
+                        word_count = None
+                        image_count = None
+                        source = "unknown"
+
                         if issue_key in metadata and "word_count" in metadata[issue_key]:
                             word_count = metadata[issue_key]["word_count"]
                             image_count = metadata[issue_key].get("image_count", 0)
-                        else:
+                            source = "metadata"
+                            logger.debug(f"[STAT_SRC] #{issue.number} 使用元数据: wc={word_count}, ic={image_count}")
+
+                        if word_count is None:
+                            wc, ic = count_from_md_file(issue.number, issue.title)
+                            if wc is not None:
+                                word_count = wc
+                                image_count = ic
+                                source = "md_file"
+                                logger.info(f"[STAT_SRC] #{issue.number} 回退到 .md 文件: wc={word_count}, ic={image_count}")
+
+                        if word_count is None:
                             word_count = get_issue_word_count(issue)
                             image_count = get_issue_image_count(issue)
+                            source = "issue_body"
+                            logger.warning(f"[STAT_SRC] #{issue.number} 回退到 issue.body: wc={word_count}, ic={image_count}")
 
                         md_file.write(
                             f"| {count + 1} | [{issue.title}]({issue.html_url}) "
@@ -191,34 +210,37 @@ def add_md_label(repo, md, me):
         raise
 
 
-def add_md_firends(repo, md, me):
-    """添加友链文章到Markdown文件"""
+def generate_changelog(repo, me):
+    """生成 CHANGELOG.md — 记录非本人的 PR（Dependabot 等），独立于 README"""
     try:
-        with open(md, "a+", encoding="utf-8") as md_file:
-            try:
-                issues = list(repo.get_issues(state='all'))
-                friend_issues = [issue for issue in issues if not is_me(issue, me)]
-                friend_issues = sorted(friend_issues, key=lambda x: x.updated_at, reverse=True)
+        all_issues = list(repo.get_issues(state='all'))
+        # 筛选非本人的 PR
+        bot_prs = [issue for issue in all_issues if not is_me(issue, me) and is_pull_request(issue)]
+        bot_prs = sorted(bot_prs, key=lambda x: x.updated_at, reverse=True)
 
-                if friend_issues:
-                    logger.debug(f"找到 {len(friend_issues)} 个友链文章")
-                    md_file.write("## 友链文章\n")
-                    for issue in friend_issues:
-                        add_issue_info(issue, md_file)
-                else:
-                    logger.debug("没有找到友链文章")
-            except Exception as e:
-                logger.error(f"添加友链文章时发生异常: {str(e)}")
+        if not bot_prs:
+            logger.debug("没有找到第三方 PR，跳过 CHANGELOG 生成")
+            return
+
+        with open("CHANGELOG.md", "w", encoding="utf-8") as f:
+            f.write("# 更新日志\n\n")
+            f.write("> 本文件由自动化工作流生成，记录第三方提交的 Pull Request（如 Dependabot）。\n\n")
+            f.write("| PR 标题 | 链接 | 更新时间 |\n")
+            f.write("|:--------|:-----|:--------|\n")
+            for pr in bot_prs[:RECENT_ISSUE_LIMIT]:
+                time = format_time(pr.updated_at)
+                f.write(f"| {pr.title} | [PR #{pr.number}]({pr.html_url}) | {time} |\n")
+
+        logger.info(f"CHANGELOG.md 生成成功，共 {len(bot_prs[:RECENT_ISSUE_LIMIT])} 条 PR")
     except Exception as e:
-        logger.error(f"添加友链文章部分失败: {str(e)}")
-        raise
+        logger.error(f"生成 CHANGELOG.md 失败: {str(e)}")
 
 
 def generate_rss_feed(repo, me):
     """生成RSS feed文件"""
     try:
         all_issues = sorted(
-            [issue for issue in repo.get_issues(state='all') if is_me(issue, me)],
+            [issue for issue in repo.get_issues(state='all') if is_me(issue, me) and not is_pull_request(issue)],
             key=lambda x: x.updated_at, reverse=True
         )
 
@@ -285,6 +307,7 @@ def ensure_readme_exists():
 def regenerate_readme(repo, repo_name, me):
     """重新生成README.md文件"""
     try:
+        log_environment()
         logger.info("开始重新生成README.md...")
 
         # 清空 README.md
@@ -296,14 +319,16 @@ def regenerate_readme(repo, repo_name, me):
         add_md_todo(repo, "README.md", me)
         add_md_label(repo, "README.md", me)
         add_md_recent(repo, "README.md", me)
-        add_md_firends(repo, "README.md", me)
+
+        # 生成 CHANGELOG.md（第三方 PR 独立文档）
+        generate_changelog(repo, me)
 
         # 统计信息
         beijing_now = datetime.now(BEIJING_TZ)
         update_time = beijing_now.strftime("%Y-%m-%d %H:%M:%S")
 
         all_issues = list(repo.get_issues(state='all'))
-        my_issues = [issue for issue in all_issues if is_me(issue, me)]
+        my_issues = [issue for issue in all_issues if is_me(issue, me) and not is_pull_request(issue)]
         total_articles = len(my_issues)
 
         # 优先从元数据读取（含评论），回退到仅统计 issue.body

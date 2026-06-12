@@ -9,6 +9,7 @@ import re
 import sys
 import json
 import logging
+import platform
 from datetime import datetime, timedelta, timezone
 
 import github
@@ -31,6 +32,28 @@ METADATA_FILE = ".temp_metadata.json"
 
 # 北京时区
 BEIJING_TZ = timezone(timedelta(hours=8))
+
+
+def log_environment():
+    """输出运行环境信息，用于跨环境调试"""
+    env_info = {
+        "platform": platform.platform(),
+        "python_version": sys.version,
+        "os_name": os.name,
+        "is_ci": os.getenv("GITHUB_ACTIONS") == "true",
+        "event_name": os.getenv("GITHUB_EVENT_NAME", "local"),
+        "cwd": os.getcwd(),
+        "encoding": sys.getdefaultencoding(),
+        "filesystem_encoding": sys.getfilesystemencoding(),
+    }
+    logger.info(f"[ENV] {json.dumps(env_info, ensure_ascii=False)}")
+
+
+def _normalize_line_endings(text):
+    """归一化换行符：\\r\\n → \\n, \\r → \\n，确保跨平台一致"""
+    if not text:
+        return ""
+    return text.replace('\r\n', '\n').replace('\r', '\n')
 
 
 def get_me(user):
@@ -103,9 +126,12 @@ def format_time(time_obj):
 
 
 def _clean_markdown(text):
-    """去掉 markdown 语法，返回纯文本"""
+    """去掉 markdown 语法，返回纯文本（跨平台兼容）"""
     if not text:
         return ""
+
+    # 归一化换行符（消除 Windows/Linux 差异）
+    text = _normalize_line_endings(text)
 
     # 移除 HTML 注释
     text = re.sub(r'<!--.*?-->', '', text, flags=re.DOTALL)
@@ -158,7 +184,10 @@ def _count_words(clean_text):
 def get_content_word_count(content):
     """从文本内容统计字数（去掉 markdown 后真正显示的字符数）"""
     try:
-        return _count_words(_clean_markdown(content))
+        clean = _clean_markdown(content)
+        result = _count_words(clean)
+        logger.debug(f"[STAT] word_count={result}, clean_text_len={len(clean)}, raw_len={len(content) if content else 0}")
+        return result
     except Exception as e:
         logger.error(f"从内容统计字数失败: {str(e)}")
         return 0
@@ -171,7 +200,9 @@ def get_content_image_count(content):
             return 0
         md_images = len(re.findall(r'!\[[^\]]*\]\([^)]+\)', content))
         html_images = len(re.findall(r'<img[^>]+src=["\'][^"\']+["\']', content, re.IGNORECASE))
-        return md_images + html_images
+        result = md_images + html_images
+        logger.debug(f"[STAT] image_count={result} (md={md_images}, html={html_images})")
+        return result
     except Exception as e:
         logger.error(f"从内容统计图片数量失败: {str(e)}")
         return 0
@@ -199,6 +230,45 @@ def get_issue_image_count(issue):
         return 0
 
 
+def is_pull_request(issue):
+    """检查Issue对象是否实际上是一个Pull Request"""
+    try:
+        return issue.pull_request is not None
+    except Exception:
+        return False
+
+
+def should_include_issue(issue, metadata=None):
+    """检查issue是否应该出现在文章列表中
+    条件：
+    1. 不是 Pull Request
+    2. 状态为 open
+    3. 字数 > 0
+    4. 插图数量 >= 0
+    """
+    if is_pull_request(issue):
+        return False
+
+    if issue.state != "open":
+        return False
+
+    # 检查字数：优先从元数据读取，回退到 issue.body
+    if metadata and str(issue.number) in metadata:
+        word_count = metadata[str(issue.number)].get("word_count", 0)
+        image_count = metadata[str(issue.number)].get("image_count", 0)
+    else:
+        word_count = get_issue_word_count(issue)
+        image_count = get_issue_image_count(issue)
+
+    if word_count <= 0:
+        return False
+
+    if image_count < 0:
+        return False
+
+    return True
+
+
 def load_metadata():
     """加载元数据文件，返回 issue_number -> metadata 的字典"""
     if not os.path.exists(METADATA_FILE):
@@ -218,3 +288,40 @@ def save_metadata(metadata):
             json.dump(metadata, f, ensure_ascii=False, indent=2)
     except Exception as e:
         logger.error(f"保存元数据失败: {str(e)}")
+
+
+def count_from_md_file(issue_number, issue_title):
+    """从已生成的 posts/ 目录下的 .md 文件中直接统计字数和图片数
+    当元数据不可用时作为回退方案，确保统计结果与 generate_posts 一致
+    Returns:
+        (word_count, image_count) 或 (None, None) 如果文件不存在
+    """
+    from scripts.generate_posts import sanitize_filename
+
+    safe_title = sanitize_filename(issue_title)
+    md_path = None
+
+    # 遍历 posts/ 目录查找匹配的 .md 文件
+    if os.path.isdir(POSTS_DIR):
+        for root, dirs, files in os.walk(POSTS_DIR):
+            for f in files:
+                if f == f"{safe_title}.md":
+                    md_path = os.path.join(root, f)
+                    break
+            if md_path:
+                break
+
+    if not md_path or not os.path.exists(md_path):
+        logger.debug(f"[FALLBACK] issue #{issue_number} 的 .md 文件不存在: posts/**/ {safe_title}.md")
+        return None, None
+
+    try:
+        with open(md_path, "r", encoding="utf-8") as f:
+            content = f.read()
+        wc = get_content_word_count(content)
+        ic = get_content_image_count(content)
+        logger.info(f"[FALLBACK] issue #{issue_number} 从 .md 文件统计: word_count={wc}, image_count={ic}, path={md_path}")
+        return wc, ic
+    except Exception as e:
+        logger.error(f"[FALLBACK] 从 .md 文件统计失败 #{issue_number}: {str(e)}")
+        return None, None

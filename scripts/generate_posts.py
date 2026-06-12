@@ -16,7 +16,8 @@ import logging
 from scripts.utils import (
     logger, login, get_repo, get_me, is_me, format_time,
     get_content_word_count, get_content_image_count,
-    POSTS_DIR, IGNORE_LABELS, METADATA_FILE, load_metadata, save_metadata
+    POSTS_DIR, IGNORE_LABELS, METADATA_FILE, load_metadata, save_metadata,
+    log_environment
 )
 
 
@@ -219,6 +220,7 @@ def main():
 
     logger.info("=" * 50)
     logger.info("开始生成 issue .md 文件")
+    log_environment()
 
     # 登录
     user = login(args.token)

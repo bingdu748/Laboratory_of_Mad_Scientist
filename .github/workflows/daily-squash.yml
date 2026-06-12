@@ -1,5 +1,10 @@
 name: Daily Commit Squash
 
+# 互斥锁：与 generate_readme 共享同一组，防止并行写入 master
+concurrency:
+  group: master-branch-write
+  cancel-in-progress: true
+
 on:
   # 每天 UTC 时间 15:00（北京时间 23:00）执行
   schedule:
@@ -40,9 +45,9 @@ jobs:
       - name: Check for today's commits
         id: check-commits
         run: |
-          COMMIT_COUNT=$(git log --oneline --since="${{ env.TODAY_START }}" --until="${{ env.TODAY_END }}" --count)
+          COMMIT_COUNT=$(git rev-list --count --since="${{ env.TODAY_START }}" --until="${{ env.TODAY_END }}" HEAD)
           echo "commit_count=$COMMIT_COUNT" >> $GITHUB_OUTPUT
-          echo "Found $COMMIT_COUNT commits today"
+          echo "Found ${COMMIT_COUNT} commits today"
           
       # 5. 如果有提交，压缩合并
       - name: Squash commits
@@ -91,8 +96,8 @@ jobs:
           
           # 检查是否需要处理冲突
           if git merge-base --is-ancestor "HEAD" "origin/master"; then
-            echo "Local is behind remote, pulling with ours strategy"
-            git pull origin master --strategy-option=ours
+            echo "Local is behind remote, merging with ours strategy"
+            git merge origin/master -X ours -m "Merge remote changes before squash"
           fi
           
           # 强制推送（--force-with-lease 更安全）

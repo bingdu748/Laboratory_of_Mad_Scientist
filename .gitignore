@@ -22,7 +22,6 @@ env/
 nohup.out
 temp_backup/
 BACKUP/
-.temp_metadata.json
 
 # ==================== Credentials ====================
 .git-credentials
