@@ -9,11 +9,14 @@
 
 #### 2002-07-09（星期二）阴
 今天帮忙做家务，很是辛苦。
-<details>
-<summary>手稿原版</summary>
-<p>今天，我帮妈妈 tuō 地，我有非常 xīn 苦的 gǎn jué，我知道妈妈 tuō 地也很 xīn 苦。</p>
-<p><img width="768" height="1920" alt="Image" src="https://github.com/user-attachments/assets/519698f6-ea3e-47c9-a4d3-ee90d3d72762" /></p>
 
+<details>
+<summary>原版手稿</summary>
+<p>
+<img width="1290" height="560" alt="Image" src="https://github.com/user-attachments/assets/cfa16d6a-db62-4956-974f-70e3c717f9c4" />
+</p>
+<p>【文字】  
+今天，我帮妈妈 tuō 地，我有非常 xīn 苦的 gǎn jué，我知道妈妈 tuō 地也很 xīn 苦。</p>
 </details>
 
 ---
@@ -25,6 +28,11 @@ HNO₃问我：“月亮和云朵谁在动？”
 HNO₃告诉我，是云朵在动。  
 （现在的我已经知道，其实月亮、乌云，还有地球都在动）
 
+<details>
+<summary>原版手稿</summary>
+<p><img width="1278" height="834" alt="Image" src="https://github.com/user-attachments/assets/40870de5-e179-49b0-be70-d9174a25a018" /></p>
+<p>【文字】</p>
+</details>
 ---
 
 #### 2002-07-27（星期六）晴
