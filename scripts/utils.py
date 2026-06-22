@@ -27,6 +27,8 @@ TOP_ISSUES_LABELS = ["Top", "置顶"]
 TODO_ISSUES_LABELS = ["TODO", "待办"]
 IGNORE_LABELS = TOP_ISSUES_LABELS + TODO_ISSUES_LABELS + ["bug", "enhancement"]
 POSTS_DIR = "posts"
+POSTS_INDEX_FILE = "posts/index.json"
+POSTS_EXPORT_FILE = "posts_export.json"
 RECENT_ISSUE_LIMIT = 20
 METADATA_FILE = ".temp_metadata.json"
 

@@ -11,12 +11,15 @@ import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import re
+import json
 import glob
 import logging
+from datetime import datetime, timezone
 from scripts.utils import (
     logger, login, get_repo, get_me, is_me, format_time,
     get_content_word_count, get_content_image_count,
-    POSTS_DIR, IGNORE_LABELS, METADATA_FILE, load_metadata, save_metadata,
+    POSTS_DIR, POSTS_INDEX_FILE, POSTS_EXPORT_FILE,
+    IGNORE_LABELS, METADATA_FILE, load_metadata, save_metadata,
     log_environment
 )
 
@@ -106,6 +109,17 @@ def save_issue(issue, me):
 
     try:
         with open(md_path, "w", encoding="utf-8") as f:
+            # 元数据注释块（机器可读，不影响渲染）
+            labels = [l.name for l in issue.labels]
+            f.write("<!--\n")
+            f.write(f"  issue_number: {issue.number}\n")
+            f.write(f"  state: {issue.state}\n")
+            f.write(f"  created_at: {issue.created_at.isoformat() if hasattr(issue.created_at, 'isoformat') else str(issue.created_at)}\n")
+            f.write(f"  updated_at: {issue.updated_at.isoformat() if hasattr(issue.updated_at, 'isoformat') else str(issue.updated_at)}\n")
+            f.write(f"  labels: [{', '.join(labels)}]\n")
+            f.write(f"  url: {issue.html_url}\n")
+            f.write("-->\n\n")
+
             # 一级标题：issue 标题（链接回原文）
             f.write(f"# [{issue.title}]({issue.html_url})\n\n")
 
@@ -208,6 +222,122 @@ def cleanup_empty_dirs():
         logger.error(f"清理空目录失败: {str(e)}")
 
 
+def export_json(repo_name):
+    """生成结构化 JSON 导出文件 posts_export.json
+    包含所有 issue 的完整元数据 + 内容，便于程序化处理和数据迁移
+    """
+    try:
+        metadata = load_metadata()
+        if not metadata:
+            logger.warning("元数据为空，跳过 JSON 导出")
+            return
+
+        export = {
+            "repository": repo_name,
+            "generated_at": datetime.now(timezone.utc).isoformat(),
+            "total_issues": len(metadata),
+            "issues": []
+        }
+
+        for issue_number, info in sorted(metadata.items(), key=lambda x: int(x[0])):
+            issue_entry = {
+                "issue_number": int(issue_number),
+                "title": info.get("title", ""),
+                "filename": info.get("filename", ""),
+                "label": info.get("label", "no-label"),
+                "updated": info.get("updated", ""),
+                "word_count": info.get("word_count", 0),
+                "image_count": info.get("image_count", 0),
+                "md_path": os.path.join(POSTS_DIR, info.get("label", "no-label"),
+                                        f"{info.get('filename', '')}.md"),
+                "url": f"https://github.com/{repo_name}/issues/{issue_number}"
+            }
+
+            # 尝试读取对应的 .md 文件内容
+            md_path = os.path.join(
+                POSTS_DIR, info.get("label", "no-label"),
+                f"{info.get('filename', '')}.md"
+            )
+            if os.path.exists(md_path):
+                try:
+                    with open(md_path, "r", encoding="utf-8") as f:
+                        issue_entry["content"] = f.read()
+                except Exception as e:
+                    logger.warning(f"读取 {md_path} 失败: {e}")
+                    issue_entry["content"] = ""
+
+            export["issues"].append(issue_entry)
+
+        with open(POSTS_EXPORT_FILE, "w", encoding="utf-8") as f:
+            json.dump(export, f, ensure_ascii=False, indent=2)
+
+        logger.info(f"JSON 导出完成: {POSTS_EXPORT_FILE} ({len(metadata)} 个 issue)")
+    except Exception as e:
+        logger.error(f"JSON 导出失败: {str(e)}")
+
+
+def generate_index_json():
+    """生成 posts/ 目录索引 posts/index.json
+    包含所有 .md 文件的路径、标题、标签、字数等元数据
+    """
+    try:
+        import hashlib
+
+        index = {
+            "generated_at": datetime.now(timezone.utc).isoformat(),
+            "entries": []
+        }
+
+        if not os.path.isdir(POSTS_DIR):
+            logger.warning(f"posts/ 目录不存在，跳过索引生成")
+            return
+
+        for root, dirs, files in os.walk(POSTS_DIR):
+            # 跳过隐藏目录
+            dirs[:] = [d for d in dirs if not d.startswith('.')]
+            for f in sorted(files):
+                if not f.endswith('.md'):
+                    continue
+                filepath = os.path.join(root, f)
+                rel_path = os.path.relpath(filepath, POSTS_DIR)
+                label_dir = os.path.dirname(rel_path) or "root"
+
+                try:
+                    with open(filepath, "r", encoding="utf-8") as fh:
+                        content = fh.read()
+
+                    # 提取标题（第一个 H1）
+                    title_match = re.match(r'^#\s+(.+?)(?:\n|$)', content)
+                    title = title_match.group(1).strip() if title_match else f
+
+                    wc = get_content_word_count(content)
+                    ic = get_content_image_count(content)
+
+                    # 计算文件 SHA256（用于完整性校验）
+                    file_hash = hashlib.sha256(content.encode('utf-8')).hexdigest()[:16]
+
+                    index["entries"].append({
+                        "path": rel_path,
+                        "title": title,
+                        "label": label_dir,
+                        "word_count": wc,
+                        "image_count": ic,
+                        "file_size": os.path.getsize(filepath),
+                        "sha256_short": file_hash
+                    })
+                except Exception as e:
+                    logger.warning(f"索引 {filepath} 失败: {e}")
+
+        index["total_files"] = len(index["entries"])
+
+        with open(POSTS_INDEX_FILE, "w", encoding="utf-8") as f:
+            json.dump(index, f, ensure_ascii=False, indent=2)
+
+        logger.info(f"索引生成完成: {POSTS_INDEX_FILE} ({len(index['entries'])} 个文件)")
+    except Exception as e:
+        logger.error(f"索引生成失败: {str(e)}")
+
+
 def main():
     """主入口：生成 .md 文件"""
     import argparse
@@ -261,6 +391,11 @@ def main():
             logger.error(f"处理 issue #{issue.number} 失败: {str(e)}")
 
     cleanup_empty_dirs()
+
+    # 生成 JSON 结构化导出和目录索引
+    export_json(args.repo_name)
+    generate_index_json()
+
     logger.info("issue .md 文件生成完成")
     logger.info("=" * 50)
 
