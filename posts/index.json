@@ -1,0 +1,159 @@
+{
+  "generated_at": "2026-06-23T16:34:36.198048+00:00",
+  "entries": [
+    {
+      "path": "no-label/Bump.actions-checkout.from.6.to.7.in.the.github-actions.group.md",
+      "title": "Bump.actions-checkout.from.6.to.7.in.the.github-actions.group.md",
+      "label": "no-label",
+      "word_count": 1064,
+      "image_count": 1,
+      "file_size": 17346,
+      "sha256_short": "11172a2252483066"
+    },
+    {
+      "path": "the-lore/About.Calculations.md",
+      "title": "About.Calculations.md",
+      "label": "the-lore",
+      "word_count": 113,
+      "image_count": 0,
+      "file_size": 659,
+      "sha256_short": "830a24afc2b9c4f9"
+    },
+    {
+      "path": "the-lore/About.Diary.md",
+      "title": "About.Diary.md",
+      "label": "the-lore",
+      "word_count": 57,
+      "image_count": 0,
+      "file_size": 559,
+      "sha256_short": "8f650b1b341c9c49"
+    },
+    {
+      "path": "my-diary/Diary2002..2003.md",
+      "title": "Diary2002..2003.md",
+      "label": "my-diary",
+      "word_count": 2342,
+      "image_count": 0,
+      "file_size": 8095,
+      "sha256_short": "b69fe564b9f1380b"
+    },
+    {
+      "path": "my-diary/Diary2006..2007.md",
+      "title": "Diary2006..2007.md",
+      "label": "my-diary",
+      "word_count": 2067,
+      "image_count": 0,
+      "file_size": 7013,
+      "sha256_short": "fb2275c3e8896e6d"
+    },
+    {
+      "path": "my-diary/Diary2014.md",
+      "title": "Diary2014.md",
+      "label": "my-diary",
+      "word_count": 18,
+      "image_count": 0,
+      "file_size": 362,
+      "sha256_short": "d8530296d188e402"
+    },
+    {
+      "path": "my-diary/Diary2015.md",
+      "title": "Diary2015.md",
+      "label": "my-diary",
+      "word_count": 18,
+      "image_count": 0,
+      "file_size": 362,
+      "sha256_short": "d83bdf2a545c30de"
+    },
+    {
+      "path": "my-diary/Diary2016.md",
+      "title": "Diary2016.md",
+      "label": "my-diary",
+      "word_count": 18,
+      "image_count": 0,
+      "file_size": 362,
+      "sha256_short": "e6366bb36c0da2d3"
+    },
+    {
+      "path": "my-diary/Diary2017..2018.md",
+      "title": "Diary2017..2018.md",
+      "label": "my-diary",
+      "word_count": 21,
+      "image_count": 0,
+      "file_size": 379,
+      "sha256_short": "17c3d8f274ca7cd9"
+    },
+    {
+      "path": "my-diary/Diary2019.md",
+      "title": "Diary2019.md",
+      "label": "my-diary",
+      "word_count": 18,
+      "image_count": 0,
+      "file_size": 362,
+      "sha256_short": "f072d310d00644c2"
+    },
+    {
+      "path": "my-diary/Diary2020.md",
+      "title": "Diary2020.md",
+      "label": "my-diary",
+      "word_count": 18,
+      "image_count": 0,
+      "file_size": 362,
+      "sha256_short": "f4ce90750b468570"
+    },
+    {
+      "path": "my-diary/Diary2021.md",
+      "title": "Diary2021.md",
+      "label": "my-diary",
+      "word_count": 18,
+      "image_count": 0,
+      "file_size": 362,
+      "sha256_short": "289ffcc3d434d622"
+    },
+    {
+      "path": "my-diary/Diary2022.md",
+      "title": "Diary2022.md",
+      "label": "my-diary",
+      "word_count": 18,
+      "image_count": 0,
+      "file_size": 362,
+      "sha256_short": "3f498e04aad6c594"
+    },
+    {
+      "path": "my-diary/Diary2023.md",
+      "title": "Diary2023.md",
+      "label": "my-diary",
+      "word_count": 18,
+      "image_count": 0,
+      "file_size": 362,
+      "sha256_short": "d3171708844de8c1"
+    },
+    {
+      "path": "my-diary/Diary2024.md",
+      "title": "Diary2024.md",
+      "label": "my-diary",
+      "word_count": 18,
+      "image_count": 0,
+      "file_size": 362,
+      "sha256_short": "734646afa8ae6e8a"
+    },
+    {
+      "path": "my-diary/Diary2025.md",
+      "title": "Diary2025.md",
+      "label": "my-diary",
+      "word_count": 18,
+      "image_count": 0,
+      "file_size": 362,
+      "sha256_short": "18f50ad57a187b74"
+    },
+    {
+      "path": "my-diary/Diary2026.md",
+      "title": "Diary2026.md",
+      "label": "my-diary",
+      "word_count": 8042,
+      "image_count": 0,
+      "file_size": 26907,
+      "sha256_short": "9f9349362af748b5"
+    }
+  ],
+  "total_files": 17
+}

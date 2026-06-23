@@ -84,12 +84,12 @@ jobs:
       - name: Generate JSON export and index
         run: |
           python -c "
-import sys
-sys.path.insert(0, '.')
-from scripts.generate_posts import export_json, generate_index_json
-export_json('${{ github.repository }}')
-generate_index_json()
-"
+          import sys
+          sys.path.insert(0, '.')
+          from scripts.generate_posts import export_json, generate_index_json
+          export_json('${{ github.repository }}')
+          generate_index_json()
+          "
 
       # ========== Step 3: 一次 commit + push 所有变更 ==========
       - name: Commit and push all changes

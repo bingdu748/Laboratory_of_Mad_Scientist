@@ -1,3 +1,12 @@
+<!--
+  issue_number: 7
+  state: open
+  created_at: 2024-04-15T00:57:06+00:00
+  updated_at: 2026-06-11T06:00:13+00:00
+  labels: [the-lore]
+  url: https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/7
+-->
+
 # [About Calculations](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/7)
 
 ## 文档说明

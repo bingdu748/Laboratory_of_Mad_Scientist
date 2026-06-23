@@ -322,7 +322,7 @@ def generate_index_json():
                         "label": label_dir,
                         "word_count": wc,
                         "image_count": ic,
-                        "file_size": os.path.getsize(filepath),
+                        "file_size": len(content.encode('utf-8')),
                         "sha256_short": file_hash
                     })
                 except Exception as e:
