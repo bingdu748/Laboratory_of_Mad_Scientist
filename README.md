@@ -1,7 +1,7 @@
 ## 文章列表
 | 序号 | 文章标题 | 更新时间 | 字数统计 | 插图统计 |
 |:------:|:------------------:|:------------------:|:------:|:------:|
-| 1 | [「Diary」2026](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/28) | 2026-06-26 16:30 | 8124 | 0 |
+| 1 | [「Diary」2026](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/28) | 2026-07-01 15:34 | 8474 | 0 |
 | 2 | [「Diary」2002 & 2003](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/14) | 2026-06-16 17:48 | 2342 | 0 |
 | 3 | [「Diary」2006 & 2007](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/16) | 2026-06-16 17:48 | 2067 | 0 |
 | 4 | [「Diary」2025](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/27) | 2026-06-16 17:47 | 18 | 0 |
@@ -20,9 +20,9 @@
 
 
 ## 博客统计
-- 最后更新: 2026-07-01 01:30:02
+- 最后更新: 2026-07-01 15:34:57
 - 总文章数: 16
 - 新增文章: 0
-- 更新文章: 0
-- 总字数: 12904
+- 更新文章: 1
+- 总字数: 13254
 - 总插图数: 0
