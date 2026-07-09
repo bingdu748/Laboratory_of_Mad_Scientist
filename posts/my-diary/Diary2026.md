@@ -2,7 +2,7 @@
   issue_number: 28
   state: open
   created_at: 2026-06-16T09:47:58+00:00
-  updated_at: 2026-07-03T09:31:13+00:00
+  updated_at: 2026-07-09T05:43:40+00:00
   labels: [my-diary]
   url: https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/28
 -->
@@ -260,3 +260,7 @@
 480面值：布达拉宫、姬路城、基督山神像、玛雅金字塔、泰姬陵；
 580面值：圆形斗兽场、故宫、帕特农神庙；
 1850面值：吉萨金字塔群、长城
+
+## 第28周（2026.07.06-2026.07.12）
+
+*(无内容)*
