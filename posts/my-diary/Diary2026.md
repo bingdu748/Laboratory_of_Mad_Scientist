@@ -2,7 +2,7 @@
   issue_number: 28
   state: open
   created_at: 2026-06-16T09:47:58+00:00
-  updated_at: 2026-08-03T13:23:25+00:00
+  updated_at: 2026-08-04T02:25:18+00:00
   labels: [my-diary]
   url: https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/28
 -->
@@ -373,8 +373,9 @@
 
 [^8.1]: 跟AI聊了几句养花的事。我想把开败的鸿运当头扔进绿萝盆里，它一开始说不行，会招虫会烧根，后来又松口说放在表面就没事。接着我问其他植物的叶子行不行，它又扯出核桃树叶、桉树叶，说有些植物叶子会抑制其他植物生长。我当时就笑了，我一个住楼房的，上哪儿找核桃树叶子去。我跟它说，你严谨是好事，但得配合实际情况。顺手举了个例子：一滴水从高空掉下来，物理公式算出来动能确实能砸死人，可下雨天人在雨里走着也没事啊。它听完说，你说得对，我以后会先想想这些知识跟用户到底有没有关系。感觉挺有意思的，一直以来都是AI给人讲道理，今天算是给它上了一课。
 
-[^8.2]: 上周三在闲鱼上买的书，今天终于发货了。
-凡人修仙记PK赛终于告一段落了。
+[^8.2]: ① 上周三在闲鱼上买的书，今天终于发货了。
+② 凡人修仙记PK赛终于告一段落了。
+③ 抄写诗文：《将进酒》《行路难·其一》《蜀道难》《宣州谢朓楼饯别校书叔云》《梦游天姥吟留别》《出师表》《木兰诗》
 
 <!-- 魔法卡片 -->
 [^节奏大师]:共15张卡片 —<br>10面值：十六分音符、八分音符、二分音符、四分音符、全音符；<br>40面值：降半音号、两个八分音符、升半音号、还原号；<br>150面值：八分休止符、四分休止符、二分休止符、全休止符；<br>540面值：高音谱号、低音谱号
@@ -389,18 +390,18 @@
 ### 附录1：电子设备使用情况统计
 | 项目 | 本周数值 | 较上周变化 | 排名 | 排名变化 |
 | :---: | :---: | :---: | :---: | :---: |
-| 键盘 | 79,680 | ▼ -5,150 | 18,305th | ▼ -138 |
-| 鼠标 | 106,652 | ▲ +4,655 | 4,972nd | ▼ -54 |
-| 下载 | 45.86GB | ▲ +6.48GB | 3,158th | ±0 |
-| 上传 | 126.60GB | ▲ +28.31GB | 709th | ▼ -4 |
-| 时长 | 2w8h10m | ▲ +4h20m | 3,113th | ▼ -42 |
-| 滑轮 | 106,093 | ▲ +5,063 | 906th | ▼ -12 |
-| 距离 | 18.131km | ▲ +0.998km | 1,666th | ▼ -27 |
-| 字数 | 13,351 | ▼ -419 | - | - |
+| 键盘 | 58,043 | ▼ -21,637 | 18,203rd | ▼ -102 |
+| 鼠标 | 68,700 | ▼ -37,952 | 4,942nd | ▼ -30 |
+| 下载 | 86.25GB | ▲ +40.39GB | 3,149th | ▼ -9 |
+| 上传 | 52.99GB | ▼ -73.62GB | 708th | ▼ -1 |
+| 时长 | 2w4d1h2m | ▲ +3d16h51m | 3,076th | ▼ -37 |
+| 滑轮 | 47,339 | ▼ -58,754 | 901st | ▼ -5 |
+| 距离 | 10.39km | ▼ -7.741km | 1,659th | ▼ -7 |
+| 字数 | 10,932 | ▼ -2,419 | - | - |
 
 <!-- 附录c-p系列 -->
-### 附录2：草稿纸・No.8980 - No.89xx
+### 附录2：草稿纸・No.8980 - No.8988
 0/5 | 1/6 | 2/7 | 3/8 | 4/9
 :-: | :-: | :-: | :-: | :-:
-![8980](https://upload-images.jianshu.io/upload_images/6641787-ba50833e07662d31.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) | ![8981](https://upload-images.jianshu.io/upload_images/6641787-43faf3f19d3b53dc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) | ![8982](https://upload-images.jianshu.io/upload_images/6641787-5fa041233e3a758e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) | ![8983](https://upload-images.jianshu.io/upload_images/6641787-bb683bb5ff74a5b2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) | ![8984](https://upload-images.jianshu.io/upload_images/6641787-ba2623f6c1270d69.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![8985](https://upload-images.jianshu.io/upload_images/6641787-afde21689752d2e0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) | ![8986](https://upload-images.jianshu.io/upload_images/6641787-6b4e68baceaf228c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) | ![8987](https://upload-images.jianshu.io/upload_images/6641787-f35df58bc0767fea.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) | 8988
+![8980](https://github.com/user-attachments/assets/eeb30848-d550-4d6f-83a4-1bcdf4e40374) 8980 | ![8981](https://github.com/user-attachments/assets/b86e5163-6550-4083-83f1-4fcc4798ae08) 8981 | ![8982](https://github.com/user-attachments/assets/1ca56861-91ce-4c82-84f4-ee9ccff9a0c7) 8982 | ![8983](https://github.com/user-attachments/assets/011b249c-7a31-4b0e-a325-2c9779bb424e) 8983 | ![8984](https://github.com/user-attachments/assets/49ea440a-89da-4c40-b165-9fa2c60f9787) 8984
+![8985](https://github.com/user-attachments/assets/f45d5d46-8bf1-4056-88b7-0034d1dc7586) 8985 | ![8986](https://github.com/user-attachments/assets/04c755b2-cefa-48fa-8198-a41205544c9b) 8986 | ![8987](https://github.com/user-attachments/assets/5244142e-538f-4ca7-9e27-345a559f1f3b) 8987 | ![8988](https://github.com/user-attachments/assets/a6dbdeaa-6099-4dd0-a19b-bea7162504bb) 8988
