@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-10T16:34:25.979846+00:00",
+  "generated_at": "2026-08-11T15:16:06.992636+00:00",
   "entries": [
     {
       "path": "my-diary/Diary2002..2003.md",
@@ -122,10 +122,10 @@
       "path": "my-diary/Diary2026.md",
       "title": "Diary2026.md",
       "label": "my-diary",
-      "word_count": 14270,
-      "image_count": 9,
-      "file_size": 48585,
-      "sha256_short": "05a83e23dc6e1f47"
+      "word_count": 42976,
+      "image_count": 1,
+      "file_size": 146654,
+      "sha256_short": "5b35de5db444ee59"
     },
     {
       "path": "no-label/Bump.actions-checkout.from.6.to.7.in.the.github-actions.group.md",
