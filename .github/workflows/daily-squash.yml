@@ -6,9 +6,9 @@ concurrency:
   cancel-in-progress: true
 
 on:
-  # 每天 UTC 时间 15:00（北京时间 23:00）执行
+  # 每天 UTC 时间 15:30（北京时间 23:30）执行，晚于 generate（22:15）收拢当天提交
   schedule:
-    - cron: '0 15 * * *'
+    - cron: '30 15 * * *'
   
   # 手动触发
   workflow_dispatch:
@@ -33,49 +33,48 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-      # 3. 获取当天日期范围（UTC）
-      - name: Get today's date range
+      # 3. 定位最近的「每日提交汇总」提交作为压缩边界
+      - name: Locate last daily summary commit
+        id: locate-summary
         run: |
-          echo "TODAY_START=$(date -u -d "today" +"%Y-%m-%dT00:00:00Z")" >> $GITHUB_ENV
-          echo "TODAY_END=$(date -u -d "tomorrow" +"%Y-%m-%dT00:00:00Z")" >> $GITHUB_ENV
-          echo "TODAY_DATE=$(date +"%Y-%m-%d")" >> $GITHUB_ENV
-          echo "Date range: ${{ env.TODAY_START }} to ${{ env.TODAY_END }}"
+          LAST_SUMMARY=$(git log --grep="每日提交汇总" --format="%H" -1)
+          if [ -z "$LAST_SUMMARY" ]; then
+            # 首次兜底：历史尚无汇总提交时，以最近一个非 Auto-update 提交为初始锚点
+            LAST_SUMMARY=$(git log --grep="Auto-update" --invert-grep --format="%H" -1)
+            echo "No daily summary found, falling back to last non-Auto-update commit"
+          fi
+          if [ -z "$LAST_SUMMARY" ]; then
+            echo "Error: cannot find an anchor commit"
+            exit 1
+          fi
+          echo "last_summary=$LAST_SUMMARY" >> $GITHUB_OUTPUT
+          echo "Anchor commit: $LAST_SUMMARY"
           
-      # 4. 检查当天是否有提交
-      - name: Check for today's commits
+      # 4. 检查锚点之后是否有提交
+      - name: Check for commits since last summary
         id: check-commits
         run: |
-          COMMIT_COUNT=$(git rev-list --count --since="${{ env.TODAY_START }}" --until="${{ env.TODAY_END }}" HEAD)
+          COMMIT_COUNT=$(git rev-list --count "${{ steps.locate-summary.outputs.last_summary }}..HEAD")
           echo "commit_count=$COMMIT_COUNT" >> $GITHUB_OUTPUT
-          echo "Found ${COMMIT_COUNT} commits today"
+          echo "Found ${COMMIT_COUNT} commits since last summary"
           
-      # 5. 如果有提交，压缩合并
+      # 5. 如果有提交，压缩到最近一次汇总（或首次兜底锚点）为止
       - name: Squash commits
         if: steps.check-commits.outputs.commit_count > 0
         run: |
           echo "Starting commit squash..."
           
-          # 获取当天第一个提交
-          FIRST_COMMIT=$(git log --reverse --since="${{ env.TODAY_START }}" --until="${{ env.TODAY_END }}" --format="%H" | head -1)
+          SUMMARY="${{ steps.locate-summary.outputs.last_summary }}"
+          TODAY_DATE=$(date +"%Y-%m-%d")
+          echo "Anchor commit: $SUMMARY, commits to squash: ${{ steps.check-commits.outputs.commit_count }}"
           
-          if [ -z "$FIRST_COMMIT" ]; then
-            echo "Error: Cannot find first commit of today"
-            exit 1
-          fi
-          
-          echo "First commit: $FIRST_COMMIT"
-          
-          # 获取第一个提交的父提交
-          PARENT_COMMIT=$(git rev-parse "$FIRST_COMMIT^" 2>/dev/null || git rev-list --max-parents=0 HEAD)
-          echo "Parent commit: $PARENT_COMMIT"
-          
-          # 执行交互式 rebase，自动 squash 除第一个外的所有提交
+          # 执行交互式 rebase，自动 squash 锚点之后的除第一个外的所有提交
           GIT_SEQUENCE_EDITOR="sed -i '2,\$s/^pick/squash/'" \
           GIT_EDITOR="cat > /dev/null" \
-          git rebase -i "$PARENT_COMMIT"
+          git rebase -i "$SUMMARY"
           
-          # 修改提交信息
-          git commit --amend -m "${{ env.TODAY_DATE }} - 每日提交汇总"
+          # 修改提交信息为每日汇总
+          git commit --amend -m "$TODAY_DATE - 每日提交汇总"
           
           echo "Commit squash completed successfully"
           
@@ -83,7 +82,7 @@ jobs:
       - name: No commits to squash
         if: steps.check-commits.outputs.commit_count == 0
         run: |
-          echo "No commits today, skipping squash"
+          echo "No commits since last summary, skipping squash"
           
       # 7. 安全推送
       - name: Safe push

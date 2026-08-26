@@ -21,8 +21,8 @@ on:
 
   # 每天定时执行：生成并提交 README.md 和 feed.xml
   schedule:
-    # 每天北京时间 23:45 (UTC 15:45) 执行
-    - cron: '45 15 * * *'
+    # 每天北京时间 22:15 (UTC 14:15) 执行，确保在 squash（23:30）之前完成
+    - cron: '15 14 * * *'
 
   # 手动触发
   workflow_dispatch:
