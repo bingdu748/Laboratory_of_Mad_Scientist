@@ -2,7 +2,7 @@
   issue_number: 21
   state: open
   created_at: 2026-06-16T09:38:25+00:00
-  updated_at: 2026-08-27T15:16:31+00:00
+  updated_at: 2026-08-28T01:36:57+00:00
   labels: [my-diary]
   url: https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/21
 -->
@@ -52,7 +52,7 @@
 
 <details><summary><b>2019-03-18</b></summary>
 
-才发现佐咲紗花为很多 galgame 唱过主题曲～ 今天开始补《黑之宣告》 诶女主不错, 声线也很喜欢, op好像听过, 原来是fripSide, 设定好像在哪见过, 剩下的我就记录进bangumi里面了~ 总之今天先这样吧~
+才发现佐咲紗花为很多galgame唱过主题曲～<br>今天开始补《黑之宣告》<br>诶女主不错,<br>声线也很喜欢,<br>op好像听过,<br>原来是fripSide,<br>设定好像在哪见过,<br>剩下的我就记录进bangumi里面了~<br>总之今天先这样吧~
 </details>
 
 <details><summary><b>2019-03-20</b></summary>
@@ -62,7 +62,7 @@
 
 <details><summary><b>2019-04-08【月曜日】</b></summary>
 
-注册了一个帐号准备发帖问问，<br>结果抛出了异常————<br>$距离能够发帖还有 14362 秒。$
+注册了一个帐号准备发帖问问，<br>结果抛出了异常————<br>距离能够发帖还有 **14362** 秒。
 </details>
 
 ## 5月
