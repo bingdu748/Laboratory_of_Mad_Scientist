@@ -1,7 +1,7 @@
 name: Deploy static content to Pages
 
 on:
-  # README.md 更新后自动部署 Pages
+  # 内容更新后部署 Pages
   push:
     branches:
       - main
@@ -9,6 +9,14 @@ on:
     paths:
       - "README.md"
       - "feed.xml"
+      - "posts/**"
+      - ".temp_metadata.json"
+      - "posts_export.json"
+      - "CHANGELOG.md"
+  # 每日定时兜底：squash（UTC 15:30）后重建站点，
+  # 避免 force-push 场景下 push 事件不匹配文件而漏更
+  schedule:
+    - cron: '40 15 * * *'
   # 手动触发（用于首次部署或修复）
   workflow_dispatch:
 
