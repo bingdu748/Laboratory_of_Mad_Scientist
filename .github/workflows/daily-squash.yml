@@ -63,19 +63,18 @@ jobs:
         if: steps.check-commits.outputs.commit_count > 0
         run: |
           echo "Starting commit squash..."
-          
+
           SUMMARY="${{ steps.locate-summary.outputs.last_summary }}"
           TODAY_DATE=$(date +"%Y-%m-%d")
           echo "Anchor commit: $SUMMARY, commits to squash: ${{ steps.check-commits.outputs.commit_count }}"
-          
-          # 执行交互式 rebase，自动 squash 锚点之后的除第一个外的所有提交
-          GIT_SEQUENCE_EDITOR="sed -i '2,\$s/^pick/squash/'" \
-          GIT_EDITOR="cat > /dev/null" \
-          git rebase -i "$SUMMARY"
-          
-          # 修改提交信息为每日汇总
-          git commit --amend -m "$TODAY_DATE - 每日提交汇总"
-          
+
+          # 将 HEAD 软重置到锚点：锚点之后的全部变更保留在暂存区，
+          # 一次性提交为汇总。对比逐条 rebase + squash，不会因多个
+          # 全量重写型提交（如 Auto-update）互相覆盖而产生合并冲突。
+          git reset --soft "$SUMMARY"
+          git add -A
+          git commit -m "$TODAY_DATE - 每日提交汇总"
+
           echo "Commit squash completed successfully"
           
       # 6. 如果没有提交，跳过
