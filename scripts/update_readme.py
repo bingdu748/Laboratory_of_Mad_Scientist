@@ -201,7 +201,7 @@ def generate_changelog(all_issues, me):
         logger.error(f"生成 CHANGELOG.md 失败: {str(e)}")
 
 
-def generate_rss_feed(all_issues, me):
+def generate_rss_feed(all_issues, repo, me):
     """生成RSS feed文件"""
     try:
         all_issues = sorted(
@@ -382,7 +382,7 @@ def main():
     all_issues = regenerate_readme(repo, args.repo_name, me)
 
     # 生成 RSS feed（复用已拉取的 issues，避免重复 API 请求）
-    generate_rss_feed(all_issues, me)
+    generate_rss_feed(all_issues, repo, me)
 
     logger.info("README.md 和 feed.xml 更新完成")
     logger.info("=" * 50)
