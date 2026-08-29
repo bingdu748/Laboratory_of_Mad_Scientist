@@ -112,6 +112,35 @@ jobs:
 
           git add --all
 
+          # ===== 时间戳拦截：若全部变更仅为时间戳行，则视为无实质变更，跳过提交 =====
+          TIMESTAMP_ONLY=true
+          for file in $(git diff --cached --name-only); do
+            case "$file" in
+              README.md|feed.xml|posts_export.json|posts/index.json)
+                # 忽略空文件（如仅删除了README列变化），非空才检查
+                numstats=$(git diff --cached --numstat "$file" | awk '{s+=$1; d+=$2} END {print s, d}')
+                additions=$(echo $numstats | cut -d' ' -f1)
+                deletions=$(echo $numstats | cut -d' ' -f2)
+                # README 时间戳行增减只会有1~2行的变动
+                if [ "$additions" -le 2 ] && [ "$deletions" -le 2 ]; then
+                  : # 视为时间戳微调
+                else
+                  TIMESTAMP_ONLY=false
+                  break
+                fi
+                ;;
+              *)
+                TIMESTAMP_ONLY=false
+                break
+                ;;
+            esac
+          done
+          if [ "$TIMESTAMP_ONLY" = true ]; then
+            echo "仅时间戳变化，跳过提交"
+            git reset --hard HEAD
+            exit 0
+          fi
+
           # stash 可能存在的无关变更（如 metadata 文件），但保留已 git add 的
           git stash push --keep-index --include-untracked -m "WIP" 2>/dev/null || echo "No other changes to stash"
 

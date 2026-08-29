@@ -2,7 +2,7 @@
   issue_number: 21
   state: open
   created_at: 2026-06-16T09:38:25+00:00
-  updated_at: 2026-08-27T15:16:31+00:00
+  updated_at: 2026-08-28T06:07:11+00:00
   labels: [my-diary]
   url: https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/21
 -->
@@ -14,7 +14,7 @@
 存放2019年的日记。
 待整理..
 
-## 1-4月
+## 1月、2月、3月、4月（2019.01.01 - 2019.04.30）
 
 <details><summary><b>2019-01-24</b></summary>
 
@@ -52,7 +52,7 @@
 
 <details><summary><b>2019-03-18</b></summary>
 
-才发现佐咲紗花为很多 galgame 唱过主题曲～ 今天开始补《黑之宣告》 诶女主不错, 声线也很喜欢, op好像听过, 原来是fripSide, 设定好像在哪见过, 剩下的我就记录进bangumi里面了~ 总之今天先这样吧~
+才发现佐咲紗花为很多galgame唱过主题曲～<br>今天开始补《黑之宣告》<br>诶女主不错,<br>声线也很喜欢,<br>op好像听过,<br>原来是fripSide,<br>设定好像在哪见过,<br>剩下的我就记录进bangumi里面了~<br>总之今天先这样吧~
 </details>
 
 <details><summary><b>2019-03-20</b></summary>
@@ -62,7 +62,167 @@
 
 <details><summary><b>2019-04-08【月曜日】</b></summary>
 
-注册了一个帐号准备发帖问问，<br>结果抛出了异常————<br>$距离能够发帖还有 14362 秒。$
+注册了一个帐号准备发帖问问，<br>结果抛出了异常————<br>距离能够发帖还有 **14362** 秒。
+</details>
+
+<details><summary><b>2019-04-09【火耀日】</b></summary>
+
+<img width="40%" height="40%" alt="2019-04-09" src="https://github.com/user-attachments/assets/2860dbad-a79f-4d20-b52f-b017a7091122" />
+</details>
+
+<details><summary><b>2019-04-10【水曜日】</b></summary>
+
+今天做了一个重要的决定————<br>给为知续费了一个月(๑乛_乛๑)<br>这也就表示————<br>可能要放弃印象了<br>继续用为知，<br>所以今天花了一下午的时间又把印象的文档转移到为知(๑乛_乛๑)<br>其实也没那么多，<br>只是拷贝了一下图片链接而已，<br>毕竟这些日记都保留在为知上面~
+</details>
+
+<details><summary><b>2019-04-11【木耀日】</b></summary>
+
+昨天的按键计数————<br>键盘按键：6318 次<br>鼠标左键：7263 次<br>鼠标右键：65 次<br>鼠标滚轮：8430 格<br>鼠标移动：61264.1 厘米
+
+* * *
+
+今天的按键计数————<br>键盘按键：16629 次<br>鼠标左键：7628 次<br>鼠标右键：65 次<br>鼠标滚轮：8813 格<br>鼠标移动：64720.3 厘米
+
+* * *
+
+今晚形象礼仪课程结业，<br>每位学员为大家演示了一遍茶道，<br>包括自己~<br>茶真好喝~<br>第一次知道喝茶也能喝醉~
+</details>
+
+<details><summary><b>2019-04-12【金曜日】</b></summary>
+
+一大早四人小组就去交任务~
+当然我这次没去~
+
+* * *
+
+等了三四天快递终于到达了，<br>结果收到快递后只有20包，<br>问了淘宝才知道是分批次发过来的，<br>还有这种操作！？<br><img width="40%" height="40%" alt="Image" src="https://github.com/user-attachments/assets/b91a0a8c-b04c-4b33-bea4-203e66b152c7" />
+
+* * *
+
+扎心了( ´_ゝ｀)<br><img width="40%" height="40%" alt="Image" src="https://github.com/user-attachments/assets/1b801db2-df2c-4333-a793-7540733082dc" />
+
+* * *
+
+古典FM给我推荐97键盘轮舞曲，<br>这又是啥操作！？( ´_ゝ｀)<br><img width="40%" height="40%" alt="Image" src="https://github.com/user-attachments/assets/09badb0e-1341-407c-a233-984436fa7b9c" />
+
+* * *
+
+今日按键次数统计————<br>键盘按键：9967 次<br>鼠标左键：6089 次<br>鼠标右键：100 次<br>鼠标滚轮：7491 格<br>鼠标移动：46404.9 厘米
+</details>
+
+<details><summary><b>2019-04-13【土曜日】</b></summary>
+
+直播的时候打出了一个整齐的分数<br>922222(๑乛◡乛๑)<br><img width="40%" height="40%" alt="Image" src="https://github.com/user-attachments/assets/92f38bb1-8fa7-43c5-8aa6-807008e443d1" />
+</details>
+
+<details><summary><b>2019-04-14【日曜日】</b></summary>
+
+### 上午完成了两个自制谱
+一首《さくらの季节》<br>经过原RM自制谱改编，<br>原谱面比较简单，<br>于是乎osu谱被a²塞爆了(๑乛◡乛๑)<br>（正常游戏的情况下Miss总数为233）<br>另外一首《Invitation》<br>也是由RM自制改编而来，<br>被a²改成了变速谱，<br>总算是摸清了变速谱的制作规则，<br>就是比较麻烦，<br>有时候还容易搞错，<br>不过还是完工了，<br>算是填上了一个坑，<br>以后再慢慢摸索摸索(๑乛◡乛๑)
+
+* * *
+
+### 下午去了一趟新都
+自从搬来成都这边就没怎么去过新都，<br>尤其是过年后，<br>跟那边的同学也没怎么联系，<br>随着春天慢慢流逝，<br>夏天也快要到了，<br>我还有一堆衣物放在新都，<br>所以下午才过去搬过来，<br>令我没想到的是，<br>那位同学依然还住在原来的地方，<br>当然还是跟原来一样，<br>自从我离开后就没打扫过屋子，<br>我一到新都就去吃了铁板炒饭(๑乛◡乛๑)<br>毕竟搬出来后就没吃过那边的炒饭了，<br>不如说来新都就为了吃一顿炒饭（笑）<br>据那位同学所说，<br>他在上周就把工作辞了，<br>明天还有新的面试<br>我一边大吃一惊一边询问具体事宜，<br>无非就是不会做不相干之类的，<br>我也算是清楚了大致原由<br>就在他请我喝完一杯奶茶后送我离开时，<br>不偏不倚地撞见了另外两位同学，<br>于是又跟他们一起吃了晚饭<br>（我很饱所以没吃）<br>接着天色也暗了下来，<br>我跟着小昊童鞋坐地铁一起回成都~<br>晚上又去周围逛了逛准备买瓶墨水<br>谁知转了一大圈，<br>一个文具店都没得<br>只得在淘宝上买了一个(๑乛_乛๑)<br>回到家又把钢笔清洗了,<br>之后跟网友一起osu<br>osu真好玩(๑乛◡乛๑)<br>今天就这么过去了
+
+* * *
+
+### 半夜看电视剧到凌晨5点
+连a²自己都想不到，<br>a²居然会去看《巾帼枭雄之义海豪情》<br>剧情紧凑，变幻莫测，捉摸不定，<br>一口气看了6集，<br>一直到凌晨5点才睡，<br>刚好把"吔屎啦 梁非凡"看完(๑乛◡乛๑)
+</details>
+
+<details><summary><b>2019-04-23【火】</b>$\color{#009B6B}\text{【难度】☆}$</summary>
+
+4月23日不仅是世界读书日，也是中国海军节。中国海军在青岛及其附近海空域举行各国海军舰艇海上阅兵——新闻中拍到了我在青岛买的公寓，当时的内心十分激动\~
+
+另外也收到了小礼物(๑乛◡乛๑)
+
+只要坚持不懈地努力，总是能够实现伟大的梦想的！<br><img width="40%" height="40%" alt="乘风破浪啾!" src="https://github.com/user-attachments/assets/cca6c083-175f-4412-a94f-b513294d5880" />
+
+但为什么文字是反着的??(๑乛_乛๑) <br><img width="40%" height="40%" alt="经验值" src="https://github.com/user-attachments/assets/9ba65f14-a68b-4665-a2d0-95f82c69fd62" />
+
+* * *
+
+今天发现了一个有趣的扩展名&nbsp;`.ova`：<br><img width="212" height="49" alt="ova扩展名" src="https://github.com/user-attachments/assets/08938940-a260-4321-88e0-ded8e4c776f7" /><br>之前一直没注意，看来是我孤陋寡闻了。。
+
+而且我还发现了一种加入图片的方式，简单说就是把图片转换为BASE64编码，把编码直接放入图片的URL中，上面这张图就是这样做的，当然这种方式也存在着很大的弊端，比如编码本身就比图片占用更多的内存，体积小一点的图片还能适用，若是大体积的图片，啧啧啧。。还是图床靠谱-sct
+
+* * *
+
+$\color{#00f}{找到了一个新的方式为文字添加颜色!}$
+
+还能使用更丰富的颜色: $\color{#4285f4}{更}\color{#ea4335}{丰}\color{#fbbc05}{富}\color{#4285f4}{的}\color{#34a853}{颜}\color{#ea4335}{色}$
+
+这也算是一种隐藏功能吧(๑乛◡乛๑)
+</details>
+
+<details><summary><b>2019-04-24【水】</b>$\color{#009E96}{【难度】★}$`</summary>
+
+曾几何时，日记的难度系统已经被窝取消了，因为在那之后的日记是非共享性质的，也就是说只有我自己能看得到，当然如果公开出来也不影响，然而今天我又开始重新考虑这个问题了——那么难度系数应不应该重新加上呢，深思熟虑后我觉定还是加上~<br>而且目前来说，印象笔记还没有完全支持Markdown，若哪天彻底支持了，我就立刻把笔记迁移过去~<br>忙碌了一添，发现一个实用的教城：[有道云笔记去广告教程](https://weibo.com/ttarticle/p/show?id=2309404294772469706130)<br>使用之后真的把广告去除了~<br>其实两天前看过一篇文章：[谈谈为知笔记的Markdown功能](https://sspai.com/post/37275)<br>这样便很清晰地解释了为什么每次我打开笔记的时候总会先显示源码，再渲染成应有的样式----看来也该找个替代的产品了~<br>而且现在分享一篇为知笔记时总要审核一番，至于审核我倒是不担心不会不通过，而是这个流程，为知的逻辑是这样的：先审核，通过后才能看到内容，最关键的一点，审核的时间是不定的，可能一分钟，也可能一个小时，前者还能接受，若是后者，我可能就要重新选择产品了~
+</details>
+
+<details><summary><b>2019-04-25【木】</b>$\color{#00A0C1}{【难度】★☆}$</summary>
+
+Today is a Sunny Day.<br>困扰我多天的一个，<br>不，两个问题终于解决了~<br>其中一个问题就是难度表的颜色~<br>参考了L<sup>A</sup>T<sub>E</sub>X语法格式后，<br>我才发现原来要加上代码块的标识符，<br>另外一个问题，<br>我就用下面这个例子演示一遍，<br>依然是之前那个例子：
+```mermaid
+sequenceDiagram
+    participant 小苏打
+    participant 取个名真难2000
+
+    小苏打->>取个名真难2000: Hello,
+    取个名真难2000-->>小苏打: Hi,正在肝碧蓝中..
+    小苏打->>取个名真难2000: 你的`喵赛克`里有没有《bass telekinesis》这首？
+    取个名真难2000-->>小苏打: 稍等我看看，
+    取个名真难2000->>取个名真难2000: 查阅`喵赛克`曲目列表..
+    取个名真难2000-->>小苏打: 嗯，我有。
+
+    Note over 小苏打: Excited
+    小苏打->>取个名真难2000: OK,可以联动了!
+
+    取个名真难2000-->>小苏打: 黑人问号1.jpg
+    取个名真难2000-->>小苏打: 黑人问号2.png
+    取个名真难2000-->>小苏打: 黑人问号3.gif
+    取个名真难2000-->>小苏打: 猝不及防..
+
+    小苏打->>取个名真难2000: 《bass telekinesis》.mp4
+    小苏打->>取个名真难2000: So,what's your reply?
+    取个名真难2000-->>小苏打: No!
+
+    note over 小苏打: Angry
+    小苏打->>取个名真难2000: You,going to hell！Hahaha..
+    Note over 取个名真难2000: Aaaaaaah~
+```
+
+当然这只是一个例子，并非真实情况![滑稽](http://upload-images.jianshu.io/upload_images/6641787-f15b76d8ed77cc6b.png)
+***
+不幸的事发生了，同事 $\color{#8A2BE2}\text{小宇}$ 今早去医院做了各项检查，下午过来后收拾东西打算回ChongQing做手术，居然这么突然，据他索说，20天前便出现了征兆，昨天实在受不了，结果今天检察后才知道已经很严重了，恐怕今后是干不了这一行了，准备转行经商。这么一说，a&sup2;不禁开始反思起莱，身体才是硬件，不管技术再优秀，都是软体，都是没用的，医生还对 $\color{#8A2BE2}\text{小宇}$ 说，你这么年轻就已经这样了，再过不久链路也走不动了，看来确实挺严重的，今后只能有缘再见咯~
+***
+于是整个下午a&sup2;就在整李申请资料，中途需要打印申请表，拿出了快要落满灰尘的U pan，万万没想到不管哪个USB街口都无法写入数据，万般无奈之下只好进行了格式化，顺便修改了文件系统(๑乛◡乛๑)<br>格式化完毕后瞬间就能正常读写数据了,心情复杂~<br><img width="366" height="133" alt="格式化完毕" src="https://github.com/user-attachments/assets/d382bec1-5930-4409-9fcc-db03cb4d057a" />
+***
+不知不觉四月也快结束咯~<br>今天的气温居然高达89.6℉，<br>这还没到五月呢，<br>难道说是夏天来临的蒸兆？<br>希望雨季也快点降临吧~
+***
+
+Lanota更新，于是a&sup2;又把Deemo装回来了，果然还是低速适合我(๑乛◡乛๑)
+<details><summary>已折叠多张图片</summary>
+
+![IMG_3186.PNG](https://ws3.sinaimg.cn/large/005BYqpggy1g2p4luwv76j31400u01ky.jpg)
+![IMG_3185.PNG](https://ws3.sinaimg.cn/large/005BYqpggy1g2p4pb8ajoj31400u0x6p.jpg)
+![IMG_3183.PNG](https://ws3.sinaimg.cn/large/005BYqpggy1g2p54y241cj31400u01ky.jpg)
+![IMG_3189.PNG](https://ws3.sinaimg.cn/large/005BYqpggy1g2p563uz04j31400u0e82.jpg)
+![IMG_3184.PNG](https://ws3.sinaimg.cn/large/005BYqpggy1g2p5adg2ycj31400u0u0x.jpg)
+![IMG_3191.PNG](https://ws3.sinaimg.cn/large/005BYqpggy1g2p5aw14l4j31400u01ky.jpg)
+![IMG_3192.PNG](https://ws3.sinaimg.cn/large/005BYqpggy1g2p5fhe588j31400u0hdu.jpg)
+![IMG_3187.PNG](https://ws3.sinaimg.cn/large/005BYqpggy1g2p5fyxd8uj31400u0kjm.jpg)
+![IMG_3190.PNG](https://ws3.sinaimg.cn/large/005BYqpggy1g2p5gh71m8j31400u0b2a.jpg)
+![IMG_3188.PNG](https://ws3.sinaimg.cn/large/005BYqpggy1g2p5hg1kgmj31400u0e82.jpg)
+</details>
+
+***
+第一次得到两张彩色图纸，后来才知道装备图纸需要集齐50张才能合成，这得到猴年马月了。。。<br><img width="40%" height="40%" alt="彩色×2" src="https://github.com/user-attachments/assets/b255068c-1346-4568-b32d-1f93a9e9ecc7" />
+
+***
+
+今天再来测试一下gif动图的效果：<br><img width="490" height="201" alt="Image" src="https://github.com/user-attachments/assets/09517e07-b1df-4f8e-ae84-e6fe2a7121e2" />
 </details>
 
 ## 5月

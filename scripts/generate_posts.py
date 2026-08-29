@@ -24,24 +24,6 @@ from scripts.utils import (
 )
 
 
-def get_repo_labels(repo):
-    """获取仓库所有标签"""
-    try:
-        return list(repo.get_labels())
-    except Exception as e:
-        logger.error(f"获取仓库标签失败: {str(e)}")
-        return []
-
-
-def get_issues_from_label(repo, label):
-    """获取特定标签的issue"""
-    try:
-        return repo.get_issues(labels=(label,))
-    except Exception as e:
-        logger.error(f"获取标签issue失败: {str(e)}")
-        return []
-
-
 def get_to_generate_issues(repo, me, issue_number=None):
     """获取需要生成的issue列表"""
     try:
