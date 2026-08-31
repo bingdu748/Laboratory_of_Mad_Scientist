@@ -4,10 +4,10 @@
   created_at: 2026-06-10T00:56:50+00:00
   updated_at: 2026-06-16T09:48:45+00:00
   labels: [my-diary]
-  url: https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/14
+  url: https://github.com/volatile-Quartz/Dr_Wunderkammer/issues/14
 -->
 
-# [「Diary」2002 & 2003](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/14)
+# [「Diary」2002 & 2003](https://github.com/volatile-Quartz/Dr_Wunderkammer/issues/14)
 
 ## 文档说明
 

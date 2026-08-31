@@ -4,10 +4,10 @@
   created_at: 2026-06-23T16:33:56+00:00
   updated_at: 2026-06-23T16:33:57+00:00
   labels: []
-  url: https://github.com/bingdu748/Laboratory_of_Mad_Scientist/pull/29
+  url: https://github.com/volatile-Quartz/Dr_Wunderkammer/pull/29
 -->
 
-# [Bump actions/checkout from 6 to 7 in the github-actions group](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/pull/29)
+# [Bump actions/checkout from 6 to 7 in the github-actions group](https://github.com/volatile-Quartz/Dr_Wunderkammer/pull/29)
 
 ## 文档说明
 
