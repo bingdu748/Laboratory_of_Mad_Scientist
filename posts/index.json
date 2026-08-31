@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-31T05:16:11.739365+00:00",
+  "generated_at": "2026-08-31T05:19:51.123546+00:00",
   "entries": [
     {
       "path": "the-lore/About.Calculations.md",
@@ -25,8 +25,8 @@
       "label": "no-label",
       "word_count": 1064,
       "image_count": 1,
-      "file_size": 17346,
-      "sha256_short": "11172a2252483066"
+      "file_size": 17322,
+      "sha256_short": "fa80dce846f1f6bf"
     },
     {
       "path": "no-label/Bump.the.github-actions.group.across.1.directory.with.2.updates.md",
@@ -34,8 +34,8 @@
       "label": "no-label",
       "word_count": 1472,
       "image_count": 0,
-      "file_size": 25765,
-      "sha256_short": "b249427a01a5b670"
+      "file_size": 25741,
+      "sha256_short": "2a4d2d45746e817b"
     },
     {
       "path": "my-diary/Diary2002..2003.md",
