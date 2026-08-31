@@ -2,7 +2,7 @@
   issue_number: 28
   state: open
   created_at: 2026-06-16T09:47:58+00:00
-  updated_at: 2026-08-30T13:08:15+00:00
+  updated_at: 2026-08-31T05:44:03+00:00
   labels: [my-diary]
   url: https://github.com/volatile-Quartz/Dr_Wunderkammer/issues/28
 -->
@@ -930,7 +930,8 @@ With its constant rhythm, it measures the 文明的进程 and sustains the 精�
 [^8.10]: 帮同事重装电脑系统，他的重要文件全都存放在 D 盘。我只格式化了 C 盘，事前没发现 D 盘开启了 BitLocker 加密，也不知道重装系统之后磁盘会被锁住。等装好系统开机后，发现系统要求输入 48 位恢复密钥。这台电脑从未登录微软账号，密钥没有云端备份，加上 C 盘已经格式化，旧系统留存的数据也全部消失。D 盘存放着同事很关键的工作文件，凭我现在已经没办法解锁。这次也算吸取教训，往后重装电脑之前，务必检查磁盘加密状态和重要文件备份。<br>上午因为一些问题导致整个园区停水，下午才恢复。<br>喝下了450mL的生椰拿铁咖啡饮料。<br>补完「私を喰べたい、ひとでなし」EP12.愛し子、EP13.暖かな海底
 [^龙年四季之夏吃瓜]: 共 9 张 328 面值的卡片 — 丝瓜、南瓜、黄瓜、冬瓜、木瓜、西瓜、笋瓜、北瓜、苦瓜
 
-### 附录1：《Urban Pulse》曲目列表
+<details><summary><b>附录1：《Urban Pulse》曲目列表</b></summary>
+
 序号 | 曲目 | 表演者 | 时长
 :-: | :-: | :-: | :-: 
 1 | Piano Suite from "Let's Build a City": I. March | Didier Jean/Georges Pludermacher/Ysabelle Van Wersch‑Cot | 00:40
@@ -1153,6 +1154,7 @@ With its constant rhythm, it measures the 文明的进程 and sustains the 精�
 218 | Polytope de Montréal | Ensemble Ars Nova/Marius Constant | 06:19
 219 | Canti di vita e d'amore: No. 1, Sul punto di Hiroshima | Bamberger Symphoniker - (班堡交响乐团)/Ingo Metzmacher/Sarah Leonard - (莎拉・伦纳德)/Thomas Randle | 06:12
 220 | For Children, Sz. 42, Book II "Hungarian Folk Songs": No. 37, The Lovely Girls of Budapest | Dezső Ránki | 00:22
+</details>
 
 ### 附录2：电子设备使用情况统计
 | 项目 | 本周数值 | 较上周变化 | 排名 | 排名变化 |
