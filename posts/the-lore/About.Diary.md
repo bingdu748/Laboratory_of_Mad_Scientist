@@ -4,10 +4,10 @@
   created_at: 2024-04-11T09:25:42+00:00
   updated_at: 2026-06-11T05:58:15+00:00
   labels: [the-lore]
-  url: https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/1
+  url: https://github.com/bingdu748/Dr_Wunderkammer/issues/1
 -->
 
-# [About Diary](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/1)
+# [About Diary](https://github.com/bingdu748/Dr_Wunderkammer/issues/1)
 
 ## 文档说明
 

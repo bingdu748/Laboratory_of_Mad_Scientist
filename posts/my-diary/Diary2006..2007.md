@@ -4,10 +4,10 @@
   created_at: 2026-06-10T05:28:27+00:00
   updated_at: 2026-06-16T09:48:32+00:00
   labels: [my-diary]
-  url: https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/16
+  url: https://github.com/bingdu748/Dr_Wunderkammer/issues/16
 -->
 
-# [「Diary」2006 & 2007](https://github.com/bingdu748/Laboratory_of_Mad_Scientist/issues/16)
+# [「Diary」2006 & 2007](https://github.com/bingdu748/Dr_Wunderkammer/issues/16)
 
 ## 文档说明
 
