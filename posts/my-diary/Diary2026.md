@@ -4,10 +4,10 @@
   created_at: 2026-06-16T09:47:58+00:00
   updated_at: 2026-08-30T13:08:15+00:00
   labels: [my-diary]
-  url: https://github.com/bingdu748/Dr_Wunderkammer/issues/28
+  url: https://github.com/volatile-Quartz/Dr_Wunderkammer/issues/28
 -->
 
-# [「Diary」2026](https://github.com/bingdu748/Dr_Wunderkammer/issues/28)
+# [「Diary」2026](https://github.com/volatile-Quartz/Dr_Wunderkammer/issues/28)
 
 ## 文档说明
 
