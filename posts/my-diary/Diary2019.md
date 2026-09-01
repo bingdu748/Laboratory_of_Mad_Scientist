@@ -2,7 +2,7 @@
   issue_number: 21
   state: open
   created_at: 2026-06-16T09:38:25+00:00
-  updated_at: 2026-08-28T06:07:11+00:00
+  updated_at: 2026-09-01T06:08:53+00:00
   labels: [my-diary]
   url: https://github.com/volatile-Quartz/Dr_Wunderkammer/issues/21
 -->
@@ -12,7 +12,7 @@
 ## 文档说明
 
 存放2019年的日记。
-待整理..
+整理中..
 
 ## 1月、2月、3月、4月（2019.01.01 - 2019.04.30）
 
