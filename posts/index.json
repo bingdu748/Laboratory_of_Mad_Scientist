@@ -1,24 +1,6 @@
 {
-  "generated_at": "2026-08-31T20:05:49.159295+00:00",
+  "generated_at": "2026-09-01T02:57:48.500870+00:00",
   "entries": [
-    {
-      "path": "the-lore/About.Calculations.md",
-      "title": "About.Calculations.md",
-      "label": "the-lore",
-      "word_count": 113,
-      "image_count": 0,
-      "file_size": 647,
-      "sha256_short": "e6e9bf67b8d6ee7a"
-    },
-    {
-      "path": "the-lore/About.Diary.md",
-      "title": "About.Diary.md",
-      "label": "the-lore",
-      "word_count": 57,
-      "image_count": 0,
-      "file_size": 547,
-      "sha256_short": "9920cfc1d898b1bf"
-    },
     {
       "path": "no-label/Bump.actions-checkout.from.6.to.7.in.the.github-actions.group.md",
       "title": "Bump.actions-checkout.from.6.to.7.in.the.github-actions.group.md",
@@ -162,6 +144,24 @@
       "image_count": 1,
       "file_size": 239121,
       "sha256_short": "4c4c40aaa20ad6c2"
+    },
+    {
+      "path": "the-lore/About.Calculations.md",
+      "title": "About.Calculations.md",
+      "label": "the-lore",
+      "word_count": 113,
+      "image_count": 0,
+      "file_size": 647,
+      "sha256_short": "e6e9bf67b8d6ee7a"
+    },
+    {
+      "path": "the-lore/About.Diary.md",
+      "title": "About.Diary.md",
+      "label": "the-lore",
+      "word_count": 57,
+      "image_count": 0,
+      "file_size": 547,
+      "sha256_short": "9920cfc1d898b1bf"
     }
   ],
   "total_files": 18

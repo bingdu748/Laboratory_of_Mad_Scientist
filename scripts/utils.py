@@ -58,32 +58,61 @@ def _normalize_line_endings(text):
     return text.replace('\r\n', '\n').replace('\r', '\n')
 
 
+def _dedupe(items):
+    """去重且保持原有顺序"""
+    seen = set()
+    result = []
+    for item in items:
+        if item and item not in seen:
+            seen.add(item)
+            result.append(item)
+    return result
+
+
 def get_me(user):
-    """获取当前用户信息"""
+    """获取当前用户信息（返回登录名候选列表，兼容账号改名场景）
+
+    账号改名后：issue 作者显示改后的新用户名，而 GITHUB_ACTOR（尤其
+    schedule 自动触发）可能仍返回旧名，单字符串严格比较会全部失配，
+    导致 README 文章列表/统计被清空。因此返回多候选：
+    - GITHUB_REPOSITORY 的所有者：跟随仓库改名，恒为当前用户名，最可靠
+    - GITHUB_ACTOR：触发事件的具体用户，作为补充（过滤机器人账号 [bot]）
+    - 本地运行：token 对应的当前登录用户
+    任一候选命中即视为本人（is_me 支持列表）。
+    """
     try:
         if os.getenv("GITHUB_ACTIONS") == "true":
-            # GITHUB_ACTOR 是触发 action 的用户名，比 GITHUB_REPOSITORY 更准确
-            actor = os.getenv("GITHUB_ACTOR", "")
-            if actor:
-                logger.info(f"在GitHub Actions环境中，使用 GITHUB_ACTOR: {actor}")
-                return actor
+            candidates = []
+            # 仓库所有者跟随账号改名，恒为当前用户名，比 GITHUB_ACTOR 更可靠
             repo_name = os.getenv("GITHUB_REPOSITORY", "")
             if repo_name and '/' in repo_name:
                 owner = repo_name.split('/')[0]
+                candidates.append(owner)
                 logger.info(f"在GitHub Actions环境中，使用仓库所有者: {owner}")
-                return owner
+            # GITHUB_ACTOR 是触发 action 的用户名，作为补充（排除机器人账号）
+            actor = os.getenv("GITHUB_ACTOR", "")
+            if actor and not actor.endswith("[bot]"):
+                candidates.append(actor)
+                logger.info(f"在GitHub Actions环境中，使用 GITHUB_ACTOR: {actor}")
+            if candidates:
+                return _dedupe(candidates)
             logger.info("在GitHub Actions环境中，使用默认用户名")
-            return "github-actions"
-        return user.get_user().login
+            return ["github-actions"]
+        login_name = user.get_user().login
+        logger.info(f"本地运行，使用当前登录用户: {login_name}")
+        return [login_name]
     except Exception as e:
         logger.warning(f"获取当前用户信息失败，使用默认值: {str(e)}")
-        return "unknown_user"
+        return ["unknown_user"]
 
 
 def is_me(issue_or_comment, me):
-    """判断issue或评论是否属于自己"""
+    """判断issue或评论是否属于自己（me 支持单个登录名或候选列表）"""
     try:
-        return issue_or_comment.user.login == me
+        user_login = issue_or_comment.user.login
+        if isinstance(me, (list, tuple, set)):
+            return user_login in me
+        return user_login == me
     except Exception as e:
         logger.error(f"判断用户身份失败: {str(e)}")
         return False
