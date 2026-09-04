@@ -2,7 +2,7 @@
   issue_number: 28
   state: open
   created_at: 2026-06-16T09:47:58+00:00
-  updated_at: 2026-09-02T06:09:54+00:00
+  updated_at: 2026-09-04T07:02:02+00:00
   labels: [my-diary]
   url: https://github.com/volatile-Quartz/Dr_Wunderkammer/issues/28
 -->
@@ -598,7 +598,7 @@ With its constant rhythm, it measures the 文明的进程 and sustains the 精�
 - I have successfully collected the "笼鸟[^笼鸟]" on Moka.
 - I drew a card of "立夏", and then gradually it came to feel like summer.
 - I drank a 500mL bottle of 菊花柚子水饮料.
-- In the limited-time challenge "神秘海域19·幽冥之礁[^幽冥之礁限时]" of Ant Forest·Fantastic Ocean.
+- In the limited-time challenge "神秘海域19·幽冥之礁"[^幽冥之礁限时] of Ant Forest·Fantastic Ocean.
 - There are 78k scrobbles on lastFM, but no screenshot.
 - In the early evening, I found some corn cobs cooked back in March in the fridge. I reheated them and had 200 grams of yogurt for dinner.
 - Progress on practicing 曹全碑：109/170
@@ -613,7 +613,7 @@ With its constant rhythm, it measures the 文明的进程 and sustains the 精�
 - The event was originally supposed to end today, but I still didn't have enough cards to exchange. Later, I checked the group chat and discovered that another set, "传奇场面[^传奇场面]", shares the same face value as this one. What's more, my alternate account luckily had some cards that my main account was missing. In the end, I was just one card away from completing "宠物[^宠物]". Fortunately, with the help of a friend from the group chat, I managed to trade for the final piece and complete the set. "宠物" had 12 cards in total, each with a face value of 249. As for "传奇场面", which I'd already collected on December 7, 2025, it also consists of 10 cards of the same 249 face value.
 - I bought a tea set to make tea, but the delivery hasn't arrived yet. Luckily, there was a store promotion today, so I picked up two bottles of tea. I drank a 970mL bottle of 玫瑰花味红茶饮品.
 - On my way home this afternoon, I dropped by a Halal restaurant and ordered 鱼香肉丝 over rice. What I got was the Halal version of this dish, which was quite different from the traditional style. It was probably my first time having it. I figured it would still be okay despite the differences, but I was completely wrong. 总之，我的评价是——一点也不好吃。
-- Yesterday, I noted down the handful of partners from the limited-time challenge of "神秘海域19·幽冥之礁[^幽冥之礁]" in Ant Forest·Fantastic Ocean.
+- Yesterday, I noted down the handful of partners from the limited-time challenge of "神秘海域19·幽冥之礁"[^幽冥之礁] in Ant Forest·Fantastic Ocean.
 - Daily 曹全碑 Practice Check-in：114/170
 [^皮衣诱惑]: This set has already been removed from the shelves, but I still managed to complete it through other means with a total of 36 cards —<br>face value 10：复古美鞋、华艳项链、娇媚手套、韩潮围巾、黑炫腰带、瑰丽皮包、帅酷帽子<br>face value 40：复古美搭、惊艳潮秀、简约格调、俏皮情调、紫醉弥漫、百变潮人<br>face value 80：酷辣扮靓、最爱美搭、经典再现、迷人姿态、经典情怀、酷感型男<br>face value 160：靓丽色彩、时髦抢镜、时尚演绎、质感着装、简洁帅气<br>face value 340：皮衣风潮、别具风格、潮流趋势、潮款抢鲜、酷炫造型<br>face value 480：魅力专属、豹纹元素、大牌风范、气质贵族、低调奢华<br>face value 1180：妩媚女王、魅力出众
 [^宠物]: 喜马拉雅猫、波斯猫、美国短毛猫、苏格兰折耳猫、缅因猫、黄金猎犬、米格鲁犬、拉布拉多犬、边境牧羊犬、哈士奇犬、暹罗猫、圣伯纳犬
@@ -624,7 +624,7 @@ With its constant rhythm, it measures the 文明的进程 and sustains the 精�
 - After using virtual locations to check in for a few days, I've returned to my real location. It just felt like the right thing to do — for a number of reasons. Plus, I realized I wanted to document all the nearby places I've actually been to, including ones I visited before but never checked in at. I've also replaced my previous virtual check‑ins with real local spots.
 - It didn't rain during my morning commute, but it poured heavily near lunchtime. This reminded me of the saying, "It never rains but it pours." I wasn't sure whether it meant "不鸣则已一鸣惊人" or "屋漏偏逢连夜雨". After checking with multiple sources, I learned that the correct meaning is the latter. My colleague and I went to a 兰州拉面馆 with umbrellas. I had a plate of 大盘鸡拌面. It was far too salty. Did the chef raid the salt shop? In the afternoon, I drank a 970mL bottle of 茉莉花味龙井茶饮品. It kept raining after work, so I put on my poncho and went back.
 - I have completed a full set of "太极扇谱[^太极扇谱]". 太极扇是风格独特的武术健身项目，融合了太极拳、各类武术与舞蹈招式。它将太极身法与舞扇动作融为一体，刚柔兼备，兼具飘逸洒脱的气韵与武术刚健的气场，是一项兼具观赏性与艺术性的健身运动。By the way, I collected another card set of the "太极拳法[^太极拳法]" on March 19, 2026. 太极拳以中国传统儒、道哲学中的太极、阴阳辩证理念为核心思想，集颐养性情、强身健体、技击对抗等多种功能于一体，是一门内外兼修、动作柔和舒缓、轻灵自然、刚柔相济的中国传统拳术。
-- I'd like to make a note today about the sea area "神秘海域18·丝路遗珠[^丝路遗珠]" from Ant Forest·Fantastic Ocean, which I finished restoring a while back.
+- I'd like to make a note today about the sea area "神秘海域18·丝路遗珠"[^丝路遗珠] from Ant Forest·Fantastic Ocean, which I finished restoring a while back.
 - 曹全碑临摹进度：119/170
 [^太极扇谱]: 共36张卡片 —<br>denomination of 10：四维雄风、扑步端扇、白鹤亮翅、风扫秋叶、大地春色、彩蝶翻飞、收势<br>denomination of 40：转身击扇、舞袖翻花、插花盖顶、金瓶倒水、回身看花、霸王举鼎、神扇穿雾<br>denomination of 80：掩手挑帘、乌龙倒卷、叉步撩击、振臂看花、随风摆柳、迎风掸尘、推波助澜<br>denomination of 160：神龙反首、叶底采莲、云燕南飞、昭君扑蝶、转身抛接、回首展臂<br>denomination of 340：顺水推舟、华佗垂帘、黄莺落架、凤凰旋舞、乌龙摆尾、翻身打虎<br>denomination of 1230：起势、怀中抱月、燕子抄水
 [^太极拳法]: 共36张卡片 —<br>10-point card：献头势、雀地龙、上步七星、退步跨虎、转身摆莲、当头炮、左金刚捣碓、收势<br>40-point card：披身捶、背折靠、青龙出水、白猿献果、左六封四闭、右单鞭、双震脚、玉女穿梭<br>120-point card：右野马分鬃、左金鸡独立、右六封四闭、左单鞭、云手、高探马、右左擦脚、蹬一根<br>320-point card：前摚、掩手肱捶、双摊手、肘底捶、倒卷肱、退步压肘<br>610-point card：揽扎衣、白鹤展翅、斜行拗步、提收<br>1880-point card：起势、右金刚捣碓
@@ -635,7 +635,7 @@ With its constant rhythm, it measures the 文明的进程 and sustains the 精�
 - It didn’t rain today — starting gloomy but brightening by afternoon. As the gentle wind brushed my cheeks on my commute, it brought a coolness almost chilly, making it hard to believe summer has arrived. But this is nothing like what summer should be like. Even though it's summer, the weather has been trapped in a constant back-and-forth between 晴天 and 雨天 — I caught a faint whiff of 夏日的气息 last week before being thrown right back into 连绵的雨天. According to 天气预报, the coming days will see a relentless sequence of 中雨、大雨、暴雨 sweeping the area, a pattern driven by 高原槽东移配合低层切变. Throughout this extended rainfall, 气温 will stay much lower than usual, accompanied by winds around Force 4 with occasional gusts to Force 5 or 6 locally. 由于天气影响, both 王顺山景区 and 辋川溶洞景区 have issued temporary closure notices, and I secretly wish this pleasantly cool weather will stick around through July and August.
 - Today I brewed 甜韵普洱熟茶, using 7克. It's made from 云南大叶种晒青毛茶. The liquor is warm and rich, smooth and mellow, with outstanding sweetness. The sticky rice aroma blends well with the ripe tea aroma. The tea feels smooth yet full-bodied, with a gentle, lingering sweet aftertaste. Its mellow flavor is long-lasting, bringing a warm and comforting sensation.
 - I have collected my first full set of "魔法学院[^魔法学院]". Within a day, I have collected my second card set, "杏林春满[^杏林春满]". I have since collected my third set of cards, "阁[^阁]".
-- I'm so glad to have finished cataloging all the companions for another sea area today — "神秘海域17·海市崖港[^海市崖港]" from Ant Forest·Fantastic Ocean.
+- I'm so glad to have finished cataloging all the companions for another sea area today — "神秘海域17·海市崖港"[^海市崖港] from Ant Forest·Fantastic Ocean.
 - Daily practice progress of 曹全碑：124/170
 [^魔法学院]: 共 18 张卡片 —<br>10面值：分院帽、光轮2000、魔法书、魔法信、魔法炉、魔法水<br>40面值：眼镜、金飞贼、猪尾巴、猫头鹰、魔法教育<br>150面值：罗根、赫莉、钥匙保管员、恶魔、教授<br>540面值：瑞格·哈特、校长
 [^杏林春满]: 共 22 张卡片 —<br>10面值：肘后备急方、洗冤集录、中西温热串解、中国针灸治疗学、中国医学源流论、中国新本草图志<br>40面值：医宗金鉴、针灸甲乙经、脉经、刘涓子鬼遗方、本草纲目<br>80面值：难经、神农本草经、小儿药证直诀、针灸学、医林改错案<br>130面值：濒湖脉诀、伤寒杂病论、医学三字经、四圣心源<br>510面值：黄帝内经、金匮要略
@@ -647,8 +647,8 @@ With its constant rhythm, it measures the 文明的进程 and sustains the 精�
 - Starting today, I finally have two monitors all to myself!
 - When I got back from lunch, I tried a 100g bottle of AD钙奶饮料. It wasn't half bad — but the serving size was laughably small. I barely got a couple of sips in before it was gone.
 - We gave the entire office a thorough cleaning today. We even wiped down all the computer monitors and window screens until they were spotless. While I was tidying up, I put my phone in a desk drawer and completely forgot to grab it when we left. I didn't realize I'd left it behind until I got home. My God!
-- 魔卡入册一套《西域古国》[^西域古国]；Just remembered a set of "文明古国[^文明古国]" cards that I added to my set on November 30, 2025.
-- Had brought back all 23 partners in "神秘海域16·鲸鲨漫游地[^鲸鲨漫游地]".
+- 魔卡入册一套《西域古国》[^西域古国]；Just remembered a set of "文明古国"[^文明古国] cards that I added to my set on November 30, 2025.
+- Had brought back all 23 partners in "神秘海域16·鲸鲨漫游地"[^鲸鲨漫游地].
 - I didn't do my 曹全碑 calligraphy practice today.
 [^西域古国]: 共 10 张 518 面值的卡片 — 车师、高昌、姑墨、龟兹、精绝、楼兰、疏勒、乌孙、焉耆、于阗
 [^文明古国]: 共 6 张 666 面值的卡片 — 埃及、希腊、中国、巴比伦、印度、玛雅
@@ -660,7 +660,7 @@ With its constant rhythm, it measures the 文明的进程 and sustains the 精�
 - 关注的某位画师直播玩"Geometry Dash"，十年前我也玩过，有些怀念~
 - 魔卡入册一套《西子湖畔》[^西子湖畔]
 - 魔卡又入册一套《十二花信之四月牡丹》[^十二花信之四月牡丹]
-- I had brought back all 23 partners in "神秘海域15·沙漠间的海洋[^沙漠间的海洋]".
+- I had brought back all 23 partners in "神秘海域15·沙漠间的海洋"[^沙漠间的海洋].
 - 临曹全碑进度：133/170
 [^西子湖畔]: 共 36 张卡片 —<br>10面值：杭州古城墙陈列馆、胡雪岩故居、中国丝绸博物馆、中国扇博物馆、西湖博览会博物馆、中国美术学院、少年宫<br>40面值：小营巷、耶稣堂弄、梅家坞村、虎跑泉、法喜讲寺、城站、大井巷<br>80面值：西溪国家湿地公园、六公园、吴山广场、西湖文化广场、运河文化广场、武林广场、杨公堤<br>160面值：八卦田、清照亭、药王庙、涌金池、风波亭、拱宸桥<br>340面值：宝石山、城隍山、五云山、北高峰、玉皇山、南屏山<br>1230面值：断桥、孤山、长桥
 [^十二花信之四月牡丹]: 共 8 张 536 面值的卡片 — 倾国名花冠首强、芳菲魅影拂清香、雍容大度成团簇、富贵和谐帝上彰、紫气萦天承雨露、姚黄戴日沐春光、文人墨客多佳作、众掷豪情醉不狂
@@ -670,7 +670,7 @@ With its constant rhythm, it measures the 文明的进程 and sustains the 精�
 - It rained nonstop all day. I was in no mood to go out or do anything, so I settled for takeout. I also stepped on the scale, and surprisingly, my weight is roughly 0.837 times that of 斯普特尼克1号卫星.
 - Recently, I've seen a lot of news about 汉坦病毒 and 安第斯病毒, and it got me thinking about a hypothesis involving viruses.<br>For a long time, I believed evolution worked just as Darwin described: traits are passed down through 纵向基因遗传, and species change gradually over generations. But that classic view has always had one big puzzle — the 寒武纪生命大爆发. During that period, countless new species appeared in a geologically short time, way too fast for gradual evolution to account for.<br>This is where the 病毒优先假说 comes in. Proposed by evolutionary biologist Eugene V. Koonin and his colleagues in 2006, it fills in the gaps of classic evolutionary theory. Its core premise is that viruses didn't just emerge alongside or after cells — they actually predated cellular life. In the distant past, viruses weren't merely pathogens; they were key drivers of evolution. Acting as tiny gene carriers, they moved between different primitive organisms, transferring genetic material as they went.<br>This wasn't the usual vertical, parent-to-child inheritance. Instead, it was 水平基因转移 — genes jumping directly between completely different species. That meant an organism could acquire entirely new and complex traits in one go, rather than waiting millions of years for small mutations to add up. This enabled 跳跃式进化, which perfectly explains how life could suddenly burst into such a dazzling array of new forms during that ancient period.<br>Now it makes perfect sense why viruses have had such a huge impact on life's history. They didn't just make us sick — they helped shape who we are today, adding a whole new layer to our understanding of evolution.
 - 魔卡入册一套《格力高魔法棒》[^格力高魔法棒]，疑似当年的联动遗留的套卡，不过已经下架了。
-- I had finally brought back all 23 partners in "神秘海域14·纯净秘境[^纯净秘境]".
+- I had finally brought back all 23 partners in "神秘海域14·纯净秘境"[^纯净秘境].
 - 临曹全碑进度：138/170
 [^格力高魔法棒]: 共 18 张卡片 —<br>10面值：魔法水晶、润滑红酒、新鲜草莓、醇厚牛奶、香浓抹茶、美味芝士蛋糕、浓郁巧克力酱、格力高魔法棒<br>40面值：香滑牛奶棒、芳醇红酒棒、微苦抹茶棒、清甜草莓棒、浓郁芝士棒、纯正巧克力棒<br>150面值：魔法穿越、魔法梦幻、魔法休闲<br>540面值：美满时刻
 [^纯净秘境]: 条纹蛸、二色异齿鳚、黑带光鳃鱼、尾斑柱颌针鱼、齿颌眶棘鲈、黑斑绯鲤、波氏燕鱼(群)、瓜氏鹦嘴鱼、金色海猪鱼、绿海龟、豆娘鱼(群)、希氏矶塘鳢、鲸鲨、金䱵、钻嘴鱼、勒氏笛鲷、凹吻篮子鱼、驼峰大鹦嘴鱼(群)、环尾鹦天竺鲷、尾斑棘鳞鱼、八重山岛异齿鳚、纵带刺尾鱼、绿颌鹦嘴鱼
@@ -697,7 +697,8 @@ With its constant rhythm, it measures the 文明的进程 and sustains the 精�
 - 魔卡入册套卡《十二月令》[^十二月令]《奶奶的钮扣》[^奶奶的钮扣]共2套，吐槽一下，不知道是不是官方打错了字，每张卡片上印着“纽扣”，套卡的名字却是“钮扣”。
 - The full set of 23 partners in "神秘海域13·燕窝之岛"[^燕窝之岛] had been brought back.
 - 临曹全碑进度：148/170
-[^十二月令]: 共 12 张 302 面值的卡片 — 暑月、仲夏、新秋、冰月、初冬、梅月、杏月、畅月、霜月、阳春、仲秋、 月<br>[^奶奶的钮扣]: 共 22 张卡片 —<br>10面值：玻璃纽扣、橄榄纽扣、牛角纽扣、树脂纽扣、塑料纽扣< r40面值：布包纽扣、玫瑰纽扣、木头纽扣、水晶纽扣、珍珠纽扣<br><br>120面值：葫芦结纽扣、苹果结纽扣、七珠结纽扣、五叶结纽扣、一字结纽扣< r320面值：凤尾结纽扣、蝴蝶结纽扣、琵琶结纽扣、三轮结纽扣、树叶结纽扣<br><br>610面值：吉祥结纽扣、菊花结纽扣
+[^十二月令]: 共 12 张 302 面值的卡片 — 暑月、仲夏、新秋、冰月、初冬、梅月、杏月、畅月、霜月、阳春、仲秋、正月
+[^奶奶的钮扣]: 共 22 张卡片 —<br>10面值：玻璃纽扣、橄榄纽扣、牛角纽扣、树脂纽扣、塑料纽扣<br>40面值：布包纽扣、玫瑰纽扣、木头纽扣、水晶纽扣、珍珠纽扣<br>120面值：葫芦结纽扣、苹果结纽扣、七珠结纽扣、五叶结纽扣、一字结纽扣<br>320面值：凤尾结纽扣、蝴蝶结纽扣、琵琶结纽扣、三轮结纽扣、树叶结纽扣<br>610面值：吉祥结纽扣、菊花结纽扣
 [^燕窝之岛]: 白边银口天竺鲷、双带凡塘鳢、蓝线鮗、遁形长臂蟹、龙宽海蛾鱼、纵带刺尾鱼、印度副绯鲤、斑条魣、布氏石斑鱼、玳瑁石斑鱼、黑尾刺尾鱼、横带贝唇鱼、三带项鳍鱼、弓月蝴蝶鱼、环尾鹦天竺鲷、尾斑棘鳞鱼、横带刺尾鱼、圆燕鱼、橙色叶虾虎鱼、弱棘狸天竺鲷(群)、古氏双边鱼(群)、中线鹅天竺鲷(群)、克氏双锯鱼
 
 ### 2026.5.20.水
@@ -709,14 +710,14 @@ With its constant rhythm, it measures the 文明的进程 and sustains the 精�
 - I had managed to bring back all 23 partners in "神秘海域12·险海礁盆"[^险海礁盆].
 - 魔卡入册套卡《喜结良缘》[^喜结良缘]《中国文学》[^中国文学]《森马放肆百变》[^森马放肆百变]《奇石世界》[^奇石世界]《创意羊毛毡》[^创意羊毛毡]《珠光宝气》[^珠光宝气]《京华旧梦》[^京华旧梦]《月饼家族》[^月饼家族]共8套.
 - 临曹全碑进度：153/170
-[^喜结良缘]: 共 30 张卡片 —<br>10面值：纸婚、布婚、皮婚、丝婚、木婚、 婚<br>40面值：铜婚、电器婚、陶器婚、锡婚、钢婚、 婚<br>120面值：花边婚、象牙婚、水晶婚、蓝宝石婚、玫瑰婚、绿松 婚<br>320面值：印花婚、瓷婚、银婚、珍珠婚、珊瑚婚、红宝 婚<br>610面值：朱红婚、金婚、绿宝石婚、钻 婚<br>1880面值：白金婚、橡树婚
-[^中国文学]: 共 33 张卡片 —<br>10面值：史记、论语、离骚、吕氏春秋、诗经、春秋、 子<br>40面值：诗品、汉书、文选、新书、燕歌行、国语、文心 龙<br>120面值：穆天子传、资治通鉴、世说新语、原君、徐霞客游记、梦溪笔谈、山 经<br>320面值：金瓶梅、聊斋志异、西厢记、孔雀东南飞、搜神记、官场现形记、儒林 史<br>610面值：三国演义、红楼梦、西游记、水 传<br>1880面值：中国文学
-[^森马放肆百变]: 共 16 张卡片 —<br>10面值：轻盈动感、拼拼彩控、时尚多彩、多彩炫酷、运动休闲、潮流 资<br>40面值：hold住米、傲娇黑、给力红、神 绿<br>150面值：魅力夜店、活力校园、舒适居家、型动 外<br>540面值：森马、放肆百变
-[^奇石世界]: 共 29 张卡片 —<br>10面值：生肖羊、生肖狗、生肖猪、生肖马、生肖鸡、生 猴<br>40面值：生肖兔、生肖鼠、生肖蛇、生肖虎、生肖龙、生 牛<br>120面值：赤壁之战、南海仙翁、苍松迎客、苍山暮色、西游记、天宫 桃<br>320面值：天狗逐月、天外飞仙、雪山之巅、屈原投江、盘古开天、江山 娇<br>610面值：绘月、射日、天池、 门<br>1880面值：飞龙在天
-[^创意羊毛毡]: 共 29 张卡片 —<br>10面值：相机、土拨鼠、小刺猬、小猴子、海豹、甜甜圈、 蛙<br>40面值：熊猫、草莓、金鱼、企鹅、长颈鹿、蛋糕、独 兽<br>120面值：面包、麋鹿、小猪、西红柿、小绵羊、 懒<br>320面值：小松鼠、变色龙、大象、北极熊、梅 鹿<br>610面值：猫咪、蘑菇、胡 卜<br>1880面值：兔子
-[^珠光宝气]: 共 32 张卡片 —<br>10面值：翠玉、琥珀、珊瑚、铂金、黄金、白银、 珠<br>40面值：太湖石、寿山石、松花石、雨花石、鸡血石、菊花石、长 石<br>120面值：欧泊、冰彩玉髓、星光宝石、猫眼石、夜光石、碧玺、 晶<br>320面值：金刚石、坦桑石、沙弗莱石、摩根石、莫桑石、托 石<br>610面值：光明之海、梵天之眼、希望之星、光明 山<br>1880面值：非洲之星
-[^京华旧梦]: 共 28 张卡片 —<br>10面值：彩塑泥人张、玻璃葡萄常、京剧脸谱、兔爷泥塑、玉雕、 雕<br>40面值：吹糖人、空竹、虎布鞋、京燕风筝、绢人偶、 猴<br>120面值：柳泉居、戴月轩、全聚德、同仁堂、吴裕泰、正 斋<br>320面值：颐和慧海、太液秋风、长城叠翠、龙潭漱玉、琼岛春阴、香山 叶<br>610面值：天安丽日、圜丘清音、紫禁 晖<br>1880面值：京华旧梦
-[^月饼家族]: 共 28 张卡片 —<br>10面值：小纠结、大兵、我最美、doge、疑问、 奈<br>40面值：发呆、流泪、得意、撇嘴、害羞 晕<br>120面值：鼓掌、托腮、擦汗、斜眼笑、卖萌、 亲<br>320面值：难过、呲牙、委屈、可怜、笑哭、 险<br>610面值：微笑、偷笑、 爱<br>1880面值：坏笑
+[^喜结良缘]: 共 30 张卡片 —<br>10面值：纸婚、布婚、皮婚、丝婚、木婚、铁婚<br>40面值：铜婚、电器婚、陶器婚、锡婚、钢婚、麻婚<br>120面值：花边婚、象牙婚、水晶婚、蓝宝石婚、玫瑰婚、绿松石婚<br>320面值：印花婚、瓷婚、银婚、珍珠婚、珊瑚婚、红宝石婚<br>610面值：朱红婚、金婚、绿宝石婚、钻石婚<br>1880面值：白金婚、橡树婚
+[^中国文学]: 共 33 张卡片 —<br>10面值：史记、论语、离骚、吕氏春秋、诗经、春秋、老子<br>40面值：诗品、汉书、文选、新书、燕歌行、国语、文心雕龙<br>120面值：穆天子传、资治通鉴、世说新语、原君、徐霞客游记、梦溪笔谈、山海经<br>320面值：金瓶梅、聊斋志异、西厢记、孔雀东南飞、搜神记、官场现形记、儒林外史<br>610面值：三国演义、红楼梦、西游记、水浒传<br>1880面值：中国文学
+[^森马放肆百变]: 共 16 张卡片 —<br>10面值：轻盈动感、拼拼彩控、时尚多彩、多彩炫酷、运动休闲、潮流小资<br>40面值：hold住米、傲娇黑、给力红、神马绿<br>150面值：魅力夜店、活力校园、舒适居家、型动户外<br>540面值：森马、放肆百变
+[^奇石世界]: 共 29 张卡片 —<br>10面值：生肖羊、生肖狗、生肖猪、生肖马、生肖鸡、生肖猴<br>40面值：生肖兔、生肖鼠、生肖蛇、生肖虎、生肖龙、生肖牛<br>120面值：赤壁之战、南海仙翁、苍松迎客、苍山暮色、西游记、天宫蟠桃<br>320面值：天狗逐月、天外飞仙、雪山之巅、屈原投江、盘古开天、江山多娇<br>610面值：绘月、射日、天池、天门<br>1880面值：飞龙在天
+[^创意羊毛毡]: 共 29 张卡片 —<br>10面值：相机、土拨鼠、小刺猬、小猴子、海豹、甜甜圈、青蛙<br>40面值：熊猫、草莓、金鱼、企鹅、长颈鹿、蛋糕、独角兽<br>120面值：面包、麋鹿、小猪、西红柿、小绵羊、树懒<br>320面值：小松鼠、变色龙、大象、北极熊、梅花鹿<br>610面值：猫咪、蘑菇、胡萝卜<br>1880面值：兔子
+[^珠光宝气]: 共 32 张卡片 —<br>10面值：翠玉、琥珀、珊瑚、铂金、黄金、白银、珍珠<br>40面值：太湖石、寿山石、松花石、雨花石、鸡血石、菊花石、长白石<br>120面值：欧泊、冰彩玉髓、星光宝石、猫眼石、夜光石、碧玺、水晶<br>320面值：金刚石、坦桑石、沙弗莱石、摩根石、莫桑石、托帕石<br>610面值：光明之海、梵天之眼、希望之星、光明之山<br>1880面值：非洲之星
+[^京华旧梦]: 共 28 张卡片 —<br>10面值：彩塑泥人张、玻璃葡萄常、京剧脸谱、兔爷泥塑、玉雕、牙雕<br>40面值：吹糖人、空竹、虎布鞋、京燕风筝、绢人偶、毛猴<br>120面值：柳泉居、戴月轩、全聚德、同仁堂、吴裕泰、正明斋<br>320面值：颐和慧海、太液秋风、长城叠翠、龙潭漱玉、琼岛春阴、香山红叶<br>610面值：天安丽日、圜丘清音、紫禁余晖<br>1880面值：京华旧梦
+[^月饼家族]: 共 28 张卡片 —<br>10面值：小纠结、大兵、我最美、doge、疑问、无奈<br>40面值：发呆、流泪、得意、撇嘴、害羞、晕<br>120面值：鼓掌、托腮、擦汗、斜眼笑、卖萌、亲亲<br>320面值：难过、呲牙、委屈、可怜、笑哭、阴险<br>610面值：微笑、偷笑、可爱<br>1880面值：坏笑
 [^险海礁盆]: 三斑宅泥鱼、马夫鱼、丝蝴蝶鱼、翱翔蓑鲉、红斑瓢蟹、粒突箱鲀、双带鳞鳍梅鲷(群)、蓝鳍石斑鱼、黑边角鳞鲀、豹纹鳃棘鲈、驼峰大鹦嘴鱼(群)、弓月蝴蝶鱼、带尾美鳍鱼、紫红奇唇鱼(群)、隆背笛鲷、许氏鹦嘴鱼、须拟鲉、鳃斑盔鱼、无纹普提鱼、蓝斑条尾魟、短吻弱棘鱼、无斑拟羊鱼、异牙单列齿鲷
 
 ### 2026.5.21.木（小满）
