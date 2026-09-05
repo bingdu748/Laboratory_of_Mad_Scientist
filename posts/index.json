@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-04T07:02:32.959393+00:00",
+  "generated_at": "2026-09-05T14:59:46.468122+00:00",
   "entries": [
     {
       "path": "my-diary/Diary2002..2003.md",
@@ -122,10 +122,10 @@
       "path": "my-diary/Diary2026.md",
       "title": "Diary2026.md",
       "label": "my-diary",
-      "word_count": 81077,
+      "word_count": 92207,
       "image_count": 1,
-      "file_size": 304981,
-      "sha256_short": "3a8858b06fdf4d0c"
+      "file_size": 345199,
+      "sha256_short": "ade4c5a07fc04633"
     },
     {
       "path": "the-lore/About.Calculations.md",
